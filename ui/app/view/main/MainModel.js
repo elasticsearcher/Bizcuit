@@ -8,7 +8,7 @@ Ext.define('Bizcuit.view.main.MainModel', {
 
     data: {
         name: 'Bizcuit',
-        title: "Bizcuit - like cookies, but for business"
+        title: "Bizcuit"
     }
 
     //TODO - add data, formulas and/or methods to support your view

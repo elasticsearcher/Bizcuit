@@ -1213,4 +1213,5 @@ $relative-image-path-for-uis: $ext-theme-neptune-resource-path;
 $bizcuit-theme-resource-path: 'images' !default;
 $relative-image-path-for-uis: $bizcuit-theme-resource-path;
 @import '../../../../../packages/bizcuit-theme/sass/src/panel/Panel';
+@import '../../../../../packages/bizcuit-theme/sass/src/button/Button';
 @import '../../../../../packages/bizcuit-theme/sass/src/tab/Panel';

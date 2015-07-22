@@ -28,7 +28,7 @@ Ext.define("Bizcuit.view.clients.SearchBox",{
       type: 'hbox'
     },
 
-    padding: '0 0 10 0',
+    padding: '10 0 10 0',
 
     items: [
       {
@@ -42,7 +42,9 @@ Ext.define("Bizcuit.view.clients.SearchBox",{
       },
       {
         xtype: 'button',
+        ui: 'search-button',
         glyph: 'xf002@FontAwesome',
+        scale: 'small',
         width: 30
       }
     ]

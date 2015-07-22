@@ -3,9 +3,3 @@
   $ui-body-background-color: '#ffffff',
   $ui-body-color: '#ffffff'
 );
-
-@include extjs-panel-ui(
-  $ui: 'clients-panel',
-  $ui-body-background-color: 'red',
-  $ui-body-color: 'red'
-);

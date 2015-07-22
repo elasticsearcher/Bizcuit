@@ -3174,300 +3174,464 @@
   border-color: #f5f5f5 !important;
   border-width: 1px !important; }
 
-/* line 256, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-clients-panel {
-  border-color: #f5f5f5;
-  padding: 0; }
+/* line 187, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  padding: 3px 3px 3px 3px;
+  border-width: 1px;
+  border-style: solid;
+  background-color: #3892d3; }
 
-/* line 262, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel {
-  font-size: 15px;
-  border: 1px solid #f5f5f5; }
-  /* line 269, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-clients-panel .x-tool-img {
-    background-color: #f5f5f5; }
+/* line 237, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-mc {
+  background-color: #3892d3; }
 
-/* line 282, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-horizontal {
-  padding: 9px 9px 10px 9px; }
-  /* line 286, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-clients-panel-horizontal .x-panel-header-clients-panel-tab-bar {
-    margin-top: -9px;
-    margin-bottom: -10px; }
+/* line 264, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-nbr .x-btn-search-button-small {
+  padding: 0 !important;
+  border-width: 0 !important;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  background-color: transparent !important;
+  box-shadow: none !important; }
 
-/* line 294, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-horizontal.x-header-noborder {
-  padding: 10px 10px 10px 10px; }
-  /* line 298, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-clients-panel-horizontal.x-header-noborder .x-panel-header-clients-panel-tab-bar {
-    margin-top: -10px;
-    margin-bottom: -10px; }
+/* line 281, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-frameInfo {
+  font-family: th-1-1-1-1-1-1-1-1-3-3-3-3; }
 
-/* line 306, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-vertical {
-  padding: 9px 9px 9px 10px; }
-  /* line 310, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-clients-panel-vertical .x-panel-header-clients-panel-tab-bar {
-    margin-right: -9px;
-    margin-left: -10px; }
+/* line 347, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-tl {
+  background-position: 0 -2px; }
 
-/* line 318, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-vertical.x-header-noborder {
-  padding: 10px 10px 10px 10px; }
-  /* line 322, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-clients-panel-vertical.x-header-noborder .x-panel-header-clients-panel-tab-bar {
-    margin-right: -10px;
-    margin-left: -10px; }
+/* line 351, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-tr {
+  background-position: right -3px; }
 
-/* line 331, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-rtl.x-panel-header-clients-panel-vertical {
-  padding: 9px 10px 9px 9px; }
-  /* line 335, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-rtl.x-panel-header-clients-panel-vertical .x-panel-header-clients-panel-tab-bar {
-    margin-left: -9px;
-    margin-right: -10px; }
+/* line 355, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-bl {
+  background-position: 0 -4px; }
 
-/* line 343, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-rtl.x-panel-header-clients-panel-vertical.x-header-noborder {
-  padding: 10px 10px 10px 10px; }
-  /* line 347, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-rtl.x-panel-header-clients-panel-vertical.x-header-noborder .x-panel-header-clients-panel-tab-bar {
-    margin-left: -10px;
-    margin-right: -10px; }
+/* line 359, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-br {
+  background-position: right -5px; }
 
-/* line 356, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-clients-panel {
-  color: #157fcc;
-  font-size: 15px;
-  font-weight: 300;
-  font-family: helvetica, arial, verdana, sans-serif;
-  line-height: 16px; }
-  /* line 369, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-title-clients-panel > .x-title-text-clients-panel {
-    text-transform: none;
-    padding: 0; }
-  /* line 412, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel.x-title-icon-top {
-    height: 22px;
-    padding-bottom: 6px; }
-  /* line 417, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel.x-title-icon-right {
-    width: 22px;
-    padding-left: 6px; }
-    /* line 422, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-    .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel.x-title-icon-right.x-rtl {
-      padding-left: 0;
-      padding-right: 6px; }
-  /* line 429, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel.x-title-icon-bottom {
-    height: 22px;
-    padding-top: 6px; }
-  /* line 434, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel.x-title-icon-left {
-    width: 22px;
-    padding-right: 6px; }
-    /* line 439, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-    .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel.x-title-icon-left.x-rtl {
-      padding-right: 0;
-      padding-left: 6px; }
-  /* line 446, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel > .x-title-icon-clients-panel {
-    width: 16px;
-    height: 16px;
-    background-position: center center; }
-  /* line 452, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-  .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel > .x-title-glyph {
-    color: #157fcc;
+/* line 363, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-ml {
+  background-position: 0 top; }
+
+/* line 371, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-mr {
+  background-position: right top; }
+
+/* line 379, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-tc {
+  background-position: 0 0; }
+
+/* line 383, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-bc {
+  background-position: 0 -1px; }
+
+/* line 390, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-tr,
+.x-btn-search-button-small-br,
+.x-btn-search-button-small-mr {
+  padding-right: 1px; }
+
+/* line 396, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-tl,
+.x-btn-search-button-small-bl,
+.x-btn-search-button-small-ml {
+  padding-left: 1px; }
+
+/* line 400, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-tc {
+  height: 1px; }
+
+/* line 403, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-bc {
+  height: 1px; }
+
+/* line 414, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-tl,
+.x-btn-search-button-small-bl,
+.x-btn-search-button-small-tr,
+.x-btn-search-button-small-br,
+.x-btn-search-button-small-tc,
+.x-btn-search-button-small-bc,
+.x-btn-search-button-small-ml,
+.x-btn-search-button-small-mr {
+  background-image: url(images/btn/btn-search-button-small-corners.gif); }
+
+/* line 454, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-ml,
+.x-btn-search-button-small-mr {
+  background-image: url(images/btn/btn-search-button-small-sides.gif);
+  background-repeat: repeat-y; }
+
+/* line 464, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-search-button-small-mc {
+  padding: 3px 3px 3px 3px; }
+
+/* */
+/* line 423, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-search-button-small {
+  border-color: #157fcc; }
+
+/* line 430, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-button-search-button-small {
+  height: 16px; }
+
+/* line 435, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-inner-search-button-small {
+  font: 300 12px/16px helvetica, arial, verdana, sans-serif;
+  color: white;
+  padding: 0 5px;
+  max-width: 100%; }
+  /* line 446, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-btn-icon-right > .x-btn-inner-search-button-small, .x-btn-icon-left > .x-btn-inner-search-button-small {
+    max-width: calc(100% - 16px); }
+
+/* line 453, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-el-search-button-small {
+  height: 16px; }
+  /* line 457, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-btn-icon-left > .x-btn-icon-el-search-button-small, .x-btn-icon-right > .x-btn-icon-el-search-button-small {
+    width: 16px; }
+  /* line 462, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-btn-icon-top > .x-btn-icon-el-search-button-small, .x-btn-icon-bottom > .x-btn-icon-el-search-button-small {
+    min-width: 16px; }
+  /* line 466, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-btn-icon-el-search-button-small.x-btn-glyph {
     font-size: 16px;
     line-height: 16px;
+    color: white;
     opacity: 0.5; }
-    /* line 469, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-    .x-ie8 .x-panel-header-title-clients-panel > .x-title-icon-wrap-clients-panel > .x-title-glyph {
-      color: #85bae0; }
+    /* line 486, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+    .x-ie8 .x-btn-icon-el-search-button-small.x-btn-glyph {
+      color: #9bc8e9; }
+  /* line 493, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-btn-text.x-btn-icon-left > .x-btn-icon-el-search-button-small {
+    margin-right: 0px; }
+    /* line 497, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+    .x-btn-text.x-btn-icon-left > .x-btn-icon-el-search-button-small.x-rtl {
+      margin-right: 0;
+      margin-left: 0px; }
+  /* line 504, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-btn-text.x-btn-icon-right > .x-btn-icon-el-search-button-small {
+    margin-left: 0px; }
+    /* line 508, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+    .x-btn-text.x-btn-icon-right > .x-btn-icon-el-search-button-small.x-rtl {
+      margin-left: 0;
+      margin-right: 0px; }
+  /* line 515, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-btn-text.x-btn-icon-top > .x-btn-icon-el-search-button-small {
+    margin-bottom: 5px; }
+  /* line 519, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-btn-text.x-btn-icon-bottom > .x-btn-icon-el-search-button-small {
+    margin-top: 5px; }
 
-/* line 479, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-body-clients-panel {
-  background: "red";
-  border-color: #cecece;
-  color: "red";
-  font-size: 13px;
-  font-weight: 300;
-  font-family: helvetica, arial, verdana, sans-serif;
+/* line 525, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-right > .x-btn-icon.x-btn-no-text.x-btn-button-search-button-small {
+  padding-right: 5px; }
+/* line 528, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-search-button-small {
+  margin-right: 5px; }
+
+/* line 535, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-bottom > .x-btn-button-search-button-small,
+.x-btn-split-bottom > .x-btn-button-search-button-small {
+  padding-bottom: 3px; }
+
+/* line 541, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-search-button-small.x-btn-arrow-right:after {
+  width: 16px;
+  padding-right: 16px;
+  background-image: url(images/button/search-button-small-arrow.png); }
+/* line 554, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-search-button-small.x-rtl.x-btn-arrow-right:after {
+  background-image: url(images/button/search-button-small-arrow-rtl.png); }
+/* line 563, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-search-button-small.x-btn-arrow-bottom:after {
+  height: 13px;
+  background-image: url(images/button/search-button-small-arrow.png); }
+
+/* line 583, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-search-button-small.x-btn-split-right:after {
+  width: 20px;
+  padding-right: 20px;
+  background-image: url(images/button/search-button-small-s-arrow.png); }
+/* line 592, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-search-button-small.x-rtl.x-btn-split-right:after {
+  background-image: url(images/button/search-button-small-s-arrow-rtl.png); }
+/* line 597, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-search-button-small.x-btn-split-bottom:after {
+  height: 15px;
+  background-image: url(images/button/search-button-small-s-arrow-b.png); }
+
+/* line 624, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-split-right > .x-btn-icon.x-btn-no-text.x-btn-button-search-button-small {
+  padding-right: 5px; }
+/* line 627, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-split-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-search-button-small {
+  margin-right: 5px; }
+
+/* line 632, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-search-button-small {
+  background-image: none;
+  background-color: #3892d3;
+  -webkit-box-shadow: #d7e9f6 0 1px 0px 0 inset, #d7e9f6 0 -1px 0px 0 inset, #d7e9f6 -1px 0 0px 0 inset, #d7e9f6 1px 0 0px 0 inset;
+  -moz-box-shadow: #d7e9f6 0 1px 0px 0 inset, #d7e9f6 0 -1px 0px 0 inset, #d7e9f6 -1px 0 0px 0 inset, #d7e9f6 1px 0 0px 0 inset;
+  box-shadow: #d7e9f6 0 1px 0px 0 inset, #d7e9f6 0 -1px 0px 0 inset, #d7e9f6 -1px 0 0px 0 inset, #d7e9f6 1px 0 0px 0 inset; }
+
+/* line 667, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over.x-btn-search-button-small {
+  border-color: #1374bb;
+  background-image: none;
+  background-color: #3386c2; }
+
+/* line 694, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over.x-btn-search-button-small {
+  -webkit-box-shadow: #d6e6f2 0 1px 0px 0 inset, #d6e6f2 0 -1px 0px 0 inset, #d6e6f2 -1px 0 0px 0 inset, #d6e6f2 1px 0 0px 0 inset;
+  -moz-box-shadow: #d6e6f2 0 1px 0px 0 inset, #d6e6f2 0 -1px 0px 0 inset, #d6e6f2 -1px 0 0px 0 inset, #d6e6f2 1px 0 0px 0 inset;
+  box-shadow: #d6e6f2 0 1px 0px 0 inset, #d6e6f2 0 -1px 0px 0 inset, #d6e6f2 -1px 0 0px 0 inset, #d6e6f2 1px 0 0px 0 inset; }
+
+/* line 723, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active.x-btn-search-button-small,
+.x-btn.x-btn-pressed.x-btn-search-button-small {
+  border-color: #0f5f99;
+  background-image: none;
+  background-color: #2a6d9e; }
+
+/* line 751, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active.x-btn-search-button-small,
+.x-btn-focus.x-btn-pressed.x-btn-search-button-small {
+  -webkit-box-shadow: #d4e1eb 0 1px 0px 0 inset, #d4e1eb 0 -1px 0px 0 inset, #d4e1eb -1px 0 0px 0 inset, #d4e1eb 1px 0 0px 0 inset;
+  -moz-box-shadow: #d4e1eb 0 1px 0px 0 inset, #d4e1eb 0 -1px 0px 0 inset, #d4e1eb -1px 0 0px 0 inset, #d4e1eb 1px 0 0px 0 inset;
+  box-shadow: #d4e1eb 0 1px 0px 0 inset, #d4e1eb 0 -1px 0px 0 inset, #d4e1eb -1px 0 0px 0 inset, #d4e1eb 1px 0 0px 0 inset; }
+
+/* line 779, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled.x-btn-search-button-small {
+  background-image: none;
+  background-color: #3892d3; }
+
+/* line 816, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-search-button-small-tl,
+.x-btn-focus .x-btn-search-button-small-bl,
+.x-btn-focus .x-btn-search-button-small-tr,
+.x-btn-focus .x-btn-search-button-small-br,
+.x-btn-focus .x-btn-search-button-small-tc,
+.x-btn-focus .x-btn-search-button-small-bc {
+  background-image: url(images/btn/btn-search-button-small-focus-corners.gif); }
+/* line 820, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-search-button-small-ml,
+.x-btn-focus .x-btn-search-button-small-mr {
+  background-image: url(images/btn/btn-search-button-small-focus-sides.gif); }
+/* line 823, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-search-button-small-mc {
+  background-color: #3892d3; }
+
+/* line 840, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-search-button-small-tl,
+.x-btn-over .x-btn-search-button-small-bl,
+.x-btn-over .x-btn-search-button-small-tr,
+.x-btn-over .x-btn-search-button-small-br,
+.x-btn-over .x-btn-search-button-small-tc,
+.x-btn-over .x-btn-search-button-small-bc {
+  background-image: url(images/btn/btn-search-button-small-over-corners.gif); }
+/* line 844, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-search-button-small-ml,
+.x-btn-over .x-btn-search-button-small-mr {
+  background-image: url(images/btn/btn-search-button-small-over-sides.gif); }
+/* line 847, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-search-button-small-mc {
+  background-color: #3386c2; }
+
+/* line 864, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-search-button-small-tl,
+.x-btn-focus.x-btn-over .x-btn-search-button-small-bl,
+.x-btn-focus.x-btn-over .x-btn-search-button-small-tr,
+.x-btn-focus.x-btn-over .x-btn-search-button-small-br,
+.x-btn-focus.x-btn-over .x-btn-search-button-small-tc,
+.x-btn-focus.x-btn-over .x-btn-search-button-small-bc {
+  background-image: url(images/btn/btn-search-button-small-focus-over-corners.gif); }
+/* line 868, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-search-button-small-ml,
+.x-btn-focus.x-btn-over .x-btn-search-button-small-mr {
+  background-image: url(images/btn/btn-search-button-small-focus-over-sides.gif); }
+/* line 871, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-search-button-small-mc {
+  background-color: #3386c2; }
+
+/* line 890, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-search-button-small-tl,
+.x-btn.x-btn-menu-active .x-btn-search-button-small-bl,
+.x-btn.x-btn-menu-active .x-btn-search-button-small-tr,
+.x-btn.x-btn-menu-active .x-btn-search-button-small-br,
+.x-btn.x-btn-menu-active .x-btn-search-button-small-tc,
+.x-btn.x-btn-menu-active .x-btn-search-button-small-bc,
+.x-btn.x-btn-pressed .x-btn-search-button-small-tl,
+.x-btn.x-btn-pressed .x-btn-search-button-small-bl,
+.x-btn.x-btn-pressed .x-btn-search-button-small-tr,
+.x-btn.x-btn-pressed .x-btn-search-button-small-br,
+.x-btn.x-btn-pressed .x-btn-search-button-small-tc,
+.x-btn.x-btn-pressed .x-btn-search-button-small-bc {
+  background-image: url(images/btn/btn-search-button-small-pressed-corners.gif); }
+/* line 894, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-search-button-small-ml,
+.x-btn.x-btn-menu-active .x-btn-search-button-small-mr,
+.x-btn.x-btn-pressed .x-btn-search-button-small-ml,
+.x-btn.x-btn-pressed .x-btn-search-button-small-mr {
+  background-image: url(images/btn/btn-search-button-small-pressed-sides.gif); }
+/* line 897, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-search-button-small-mc,
+.x-btn.x-btn-pressed .x-btn-search-button-small-mc {
+  background-color: #2a6d9e; }
+
+/* line 915, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-tl,
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-bl,
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-tr,
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-br,
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-tc,
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-bc,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-tl,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-bl,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-tr,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-br,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-tc,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-bc {
+  background-image: url(images/btn/btn-search-button-small-focus-pressed-corners.gif); }
+/* line 919, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-ml,
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-mr,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-ml,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-mr {
+  background-image: url(images/btn/btn-search-button-small-focus-pressed-sides.gif); }
+/* line 922, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-search-button-small-mc,
+.x-btn-focus.x-btn-pressed .x-btn-search-button-small-mc {
+  background-color: #2a6d9e; }
+
+/* line 940, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-search-button-small-tl,
+.x-btn.x-btn-disabled .x-btn-search-button-small-bl,
+.x-btn.x-btn-disabled .x-btn-search-button-small-tr,
+.x-btn.x-btn-disabled .x-btn-search-button-small-br,
+.x-btn.x-btn-disabled .x-btn-search-button-small-tc,
+.x-btn.x-btn-disabled .x-btn-search-button-small-bc {
+  background-image: url(images/btn/btn-search-button-small-disabled-corners.gif); }
+/* line 944, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-search-button-small-ml,
+.x-btn.x-btn-disabled .x-btn-search-button-small-mr {
+  background-image: url(images/btn/btn-search-button-small-disabled-sides.gif); }
+/* line 947, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-search-button-small-mc {
+  background-color: #3892d3; }
+
+/* line 957, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-btn-search-button-small {
+  background-image: none; }
+
+/* line 963, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-disabled.x-btn-search-button-small {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5; }
+
+/* line 982, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-horizontal.x-btn-search-button-small.x-segmented-button-first {
+  border-right-width: 1px !important; }
+  /* line 984, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-nbr .x-segmented-button-item-horizontal.x-btn-search-button-small.x-segmented-button-first .x-btn-search-button-small-mc {
+    padding-right: 3px !important; }
+/* line 988, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-horizontal.x-btn-search-button-small.x-segmented-button-middle {
+  border-right-width: 1px !important; }
+  /* line 990, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-nbr .x-segmented-button-item-horizontal.x-btn-search-button-small.x-segmented-button-middle .x-btn-search-button-small-mc {
+    padding-right: 3px !important;
+    padding-left: 3px !important; }
+/* line 996, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-horizontal.x-btn-search-button-small.x-segmented-button-last .x-btn-search-button-small-mc {
+  padding-left: 3px !important; }
+/* line 1003, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-vertical.x-btn-search-button-small.x-segmented-button-first {
+  border-bottom-width: 1px !important; }
+  /* line 1005, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-nbr .x-segmented-button-item-vertical.x-btn-search-button-small.x-segmented-button-first .x-btn-search-button-small-mc {
+    padding-bottom: 3px !important; }
+/* line 1009, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-vertical.x-btn-search-button-small.x-segmented-button-middle {
+  border-bottom-width: 1px !important; }
+  /* line 1011, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-nbr .x-segmented-button-item-vertical.x-btn-search-button-small.x-segmented-button-middle .x-btn-search-button-small-mc {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important; }
+/* line 1017, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-vertical.x-btn-search-button-small.x-segmented-button-last .x-btn-search-button-small-mc {
+  padding-top: 3px !important; }
+/* line 1023, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item.x-btn-search-button-small:after {
+  content: ' ';
+  border-style: solid;
+  border-width: 0;
+  position: absolute; }
+/* line 1041, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-horizontal.x-btn-search-button-small:after {
+  top: 1px;
+  right: 0;
+  bottom: 1px;
+  left: 0; }
+/* line 1047, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-horizontal.x-btn-search-button-small.x-segmented-button-first:after {
+  left: 1px; }
+/* line 1050, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-horizontal.x-btn-search-button-small.x-segmented-button-last:after {
+  right: 1px; }
+/* line 1056, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-vertical.x-btn-search-button-small:after {
+  top: 0;
+  right: 1px;
+  bottom: 0;
+  left: 1px; }
+/* line 1062, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-vertical.x-btn-search-button-small.x-segmented-button-first:after {
+  top: 1px; }
+/* line 1065, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item-vertical.x-btn-search-button-small.x-segmented-button-last:after {
+  bottom: 1px; }
+/* line 1072, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item.x-btn-focus.x-btn-search-button-small:after {
   border-width: 1px;
-  border-style: solid; }
-
-/* line 643, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel {
-  background-image: none;
-  background-color: #f5f5f5; }
-
-/* line 647, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-vertical {
-  background-image: none;
-  background-color: #f5f5f5; }
-
-/* line 652, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-rtl.x-panel-header-clients-panel-vertical {
-  background-image: none;
-  background-color: #f5f5f5; }
-
-/* line 705, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel .x-panel-header-clients-panel-collapsed-border-top {
-  border-bottom-width: 1px !important; }
-/* line 709, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel .x-panel-header-clients-panel-collapsed-border-right {
-  border-left-width: 1px !important; }
-/* line 713, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel .x-panel-header-clients-panel-collapsed-border-bottom {
-  border-top-width: 1px !important; }
-/* line 717, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel .x-panel-header-clients-panel-collapsed-border-left {
-  border-right-width: 1px !important; }
+  border-color: #d7e9f6; }
+/* line 1086, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item.x-btn-focus.x-btn-over.x-btn-search-button-small:after {
+  border-width: 1px;
+  border-color: #d6e6f2; }
+/* line 1102, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-segmented-button-item.x-btn-focus.x-btn-menu-active.x-btn-search-button-small:after, .x-nbr .x-segmented-button-item.x-btn-focus.x-btn-pressed.x-btn-search-button-small:after {
+  border-width: 1px;
+  border-color: #d4e1eb; }
 
 /* */
 /* */
 /* */
 /* */
-/* line 753, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-horizontal .x-tool-after-title {
-  margin: 0 0 0 6px; }
-/* line 758, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-horizontal .x-rtl.x-tool-after-title {
-  margin: 0 6px 0 0; }
-/* line 763, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-horizontal .x-tool-before-title {
-  margin: 0 6px 0 0; }
-/* line 768, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-horizontal .x-rtl.x-tool-before-title {
-  margin: 0 0 0 6px; }
-
-/* line 775, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-vertical .x-tool-after-title {
-  margin: 6px 0 0 0; }
-/* line 780, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-vertical .x-rtl.x-tool-after-title {
-  margin: 6px 0 0 0; }
-/* line 785, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-vertical .x-tool-before-title {
-  margin: 0 0 6px 0; }
-/* line 790, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-clients-panel-vertical .x-rtl.x-tool-before-title {
-  margin: 0 0 6px 0; }
-
-/* line 798, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-rtl.x-panel-header-clients-panel-collapsed-border-right {
-  border-right-width: 1px !important; }
-/* line 801, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-rtl.x-panel-header-clients-panel-collapsed-border-left {
-  border-left-width: 1px !important; }
-
-/* line 815, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-clients-panel-resizable .x-panel-handle {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0; }
-
-/* line 2, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-l {
-  border-left-color: #f5f5f5 !important;
-  border-left-width: 1px !important; }
-
-/* line 6, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-b {
-  border-bottom-color: #f5f5f5 !important;
-  border-bottom-width: 1px !important; }
-
-/* line 10, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-bl {
-  border-bottom-color: #f5f5f5 !important;
-  border-bottom-width: 1px !important;
-  border-left-color: #f5f5f5 !important;
-  border-left-width: 1px !important; }
-
-/* line 16, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-r {
-  border-right-color: #f5f5f5 !important;
-  border-right-width: 1px !important; }
-
-/* line 20, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-rl {
-  border-right-color: #f5f5f5 !important;
-  border-right-width: 1px !important;
-  border-left-color: #f5f5f5 !important;
-  border-left-width: 1px !important; }
-
-/* line 26, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-rb {
-  border-right-color: #f5f5f5 !important;
-  border-right-width: 1px !important;
-  border-bottom-color: #f5f5f5 !important;
-  border-bottom-width: 1px !important; }
-
-/* line 32, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-rbl {
-  border-right-color: #f5f5f5 !important;
-  border-right-width: 1px !important;
-  border-bottom-color: #f5f5f5 !important;
-  border-bottom-width: 1px !important;
-  border-left-color: #f5f5f5 !important;
-  border-left-width: 1px !important; }
-
-/* line 40, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-t {
-  border-top-color: #f5f5f5 !important;
-  border-top-width: 1px !important; }
-
-/* line 44, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-tl {
-  border-top-color: #f5f5f5 !important;
-  border-top-width: 1px !important;
-  border-left-color: #f5f5f5 !important;
-  border-left-width: 1px !important; }
-
-/* line 50, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-tb {
-  border-top-color: #f5f5f5 !important;
-  border-top-width: 1px !important;
-  border-bottom-color: #f5f5f5 !important;
-  border-bottom-width: 1px !important; }
-
-/* line 56, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-tbl {
-  border-top-color: #f5f5f5 !important;
-  border-top-width: 1px !important;
-  border-bottom-color: #f5f5f5 !important;
-  border-bottom-width: 1px !important;
-  border-left-color: #f5f5f5 !important;
-  border-left-width: 1px !important; }
-
-/* line 64, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-tr {
-  border-top-color: #f5f5f5 !important;
-  border-top-width: 1px !important;
-  border-right-color: #f5f5f5 !important;
-  border-right-width: 1px !important; }
-
-/* line 70, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-trl {
-  border-top-color: #f5f5f5 !important;
-  border-top-width: 1px !important;
-  border-right-color: #f5f5f5 !important;
-  border-right-width: 1px !important;
-  border-left-color: #f5f5f5 !important;
-  border-left-width: 1px !important; }
-
-/* line 78, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-trb {
-  border-top-color: #f5f5f5 !important;
-  border-top-width: 1px !important;
-  border-right-color: #f5f5f5 !important;
-  border-right-width: 1px !important;
-  border-bottom-color: #f5f5f5 !important;
-  border-bottom-width: 1px !important; }
-
-/* line 86, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-clients-panel-outer-border-trbl {
-  border-color: #f5f5f5 !important;
-  border-width: 1px !important; }
+/* */
+/* */
+/* line 1128, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-search-button-small-cell > .x-grid-cell-inner {
+  padding-top: 0px;
+  padding-bottom: 0px; }
+  /* line 1133, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+  .x-button-search-button-small-cell > .x-grid-cell-inner > .x-btn-search-button-small {
+    vertical-align: top; }
 
 /* line 187, c:/Users/apak/elasticsearcher/Bizcuit/ui/build/temp/development/Bizcuit/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-tab-navigation-top {
