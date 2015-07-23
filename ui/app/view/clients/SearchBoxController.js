@@ -5,6 +5,13 @@ Ext.define('Bizcuit.view.clients.SearchBoxController', {
     onSearchTextFieldKeydown: function(textfield, e, eOpts) {
       if(e.getKey() == e.ENTER) {
         var query = textfield.getValue();
+
+        var emptySearch = {
+          "query": {
+            "match_all": {}
+          }
+        };
+
         var searchTpl = {
           "query": {
             "multi_match": {
@@ -44,9 +51,11 @@ Ext.define('Bizcuit.view.clients.SearchBoxController', {
           }
         };
 
+        var params = query.trim() ? searchTpl : emptySearch;
+
         var store = this.view.getClientsStore();
         var proxy = store.getProxy();
-        proxy.setExtraParams(searchTpl);
+        proxy.setExtraParams(params);
         store.load();
       }
     }
