@@ -9,6 +9,7 @@ Ext.define('Bizcuit.view.clients.PanelModel', {
       Clients: {
         model: 'Bizcuit.model.Client',
         autoLoad: true,
+        autoSync: true,
         proxy: {
           extraParams: {},
           paramsAsJson: true,
@@ -17,7 +18,8 @@ Ext.define('Bizcuit.view.clients.PanelModel', {
           startParam: 'from',
           type: 'rest',
           api: {
-            read: 'http://localhost:9200/bizcuit/client/_search'
+            read: 'http://localhost:9200/bizcuit/client/_search',
+            create: '/clients'
           },
           actionMethods: {
             read: 'POST'

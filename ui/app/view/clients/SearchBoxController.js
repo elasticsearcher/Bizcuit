@@ -53,7 +53,7 @@ Ext.define('Bizcuit.view.clients.SearchBoxController', {
 
         var params = query.trim() ? searchTpl : emptySearch;
 
-        var store = this.view.getClientsStore();
+        var store = this.getView().getClientsStore();
         var proxy = store.getProxy();
         proxy.setExtraParams(params);
         store.load();
