@@ -18,13 +18,22 @@ Ext.define('Bizcuit.view.clients.SearchBoxController', {
               "query": query,
               "fields": [
                 {
-                  "name": {}
+                  "first_name*": {}
                 },
                 {
-                  "email": {}
+                  "last_name*": {}
+                },
+                {
+                  "email*": {}
                 },
                 {
                   "note": {}
+                },
+                {
+                  "note.edge_ngram": {}
+                },
+                {
+                  "note.language_stemmer": {}
                 }
               ]
             }
@@ -33,7 +42,12 @@ Ext.define('Bizcuit.view.clients.SearchBoxController', {
             "num_fragments": 0,
             "fields": [
               {
-                "name": {
+                "first_name": {
+                  "number_of_fragments": 0
+                }
+              },
+              {
+                "last_name": {
                   "number_of_fragments": 0
                 }
               },
@@ -44,6 +58,16 @@ Ext.define('Bizcuit.view.clients.SearchBoxController', {
               },
               {
                 "note": {
+                  "number_of_fragments": 0
+                }
+              },
+              {
+                "note.edge_ngram": {
+                  "number_of_fragments": 0
+                }
+              },
+              {
+                "note.language_stemmer": {
                   "number_of_fragments": 0
                 }
               }

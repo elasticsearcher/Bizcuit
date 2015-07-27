@@ -62,7 +62,7 @@ Ext.define("Bizcuit.view.clients.Panel",{
         xtype: 'container',
         layout: 'fit',
         region: 'center',
-        overflowY: 'scroll',
+        overflowY: 'auto',
         items: [
           {
             xtype: 'clients-dataview'
