@@ -21,6 +21,7 @@ Ext.define("Bizcuit.view.clients.SearchBox",{
     },
 
     config: {
+      width: 600,
       clientsStore: null
     },
 

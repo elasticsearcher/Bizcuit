@@ -35,6 +35,10 @@
 
     "theme": "bizcuit-theme",
 
+    "loader": {
+      "cache": false
+    },
+
     /**
      * The list of required packages (with optional versions; default is "latest").
      *

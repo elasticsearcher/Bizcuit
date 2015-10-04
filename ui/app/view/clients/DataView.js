@@ -16,7 +16,7 @@ Ext.define("Bizcuit.view.clients.DataView",{
 
     tpl: [
         '<tpl for=".">',
-            '<div class="">',
+            '<div class="client-tile">',
                 '<b>{[this.getHighlightedValue(values, "first_name")]} \
                 {[this.getHighlightedValue(values, "last_name")]}</b> <br />',
                 'Email: {[this.getHighlightedValue(values, "email")]} <br />',
@@ -34,19 +34,16 @@ Ext.define("Bizcuit.view.clients.DataView",{
                 '{[this.getHighlightedValue(values, "address_postal_code")]}',
                 '<br />',
                 '{[this.getHighlightedValue(values, "address_country")]}',
-                '<br />',
-                '<br />',
             '</div>',
         '</tpl>',
         {
           getHighlightedValue: function(data, field) {
             var value = data[field],
-                highlight = data.highlight;
+                highlight = data.highlight || {},
+                edgeNGram = Ext.String.format('{0}.edge_ngram', field)
+                highlightedValue = highlight[field] || highlight[edgeNGram];
 
-            if(highlight && highlight[field]) {
-              value = highlight[field];
-            }
-            return value;
+            return highlightedValue || value;
           }
         }
     ],

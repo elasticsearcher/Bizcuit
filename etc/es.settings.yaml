@@ -1,7 +1,44 @@
 # curl -XPUT 'http://localhost:9200/bizcuit/' -d '
-index:
-  number_of_shards: 5
-  number_of_replicas: 1
+settings:
+  index:
+    number_of_shards: 5
+    number_of_replicas: 1
+    analysis:
+      analyzer:
+        bizcuit_standard:
+          tokenizer: standard
+          filter:
+          - standard
+          - lowercase
+          - word_delimiter
+          - asciifolding
+        bizcuit_language_stemmer:
+          tokenizer: standard
+          filter:
+          - standard
+          - lowercase
+          - word_delimiter
+          - asciifolding
+          - english_stemmer
+        bizcuit_edge_ngram:
+          tokenizer: standard
+          filter:
+          - standard
+          - lowercase
+          - word_delimiter
+          - asciifolding
+          - edge_ngram
+      filter:
+        english_stemmer:
+          type: stemmer
+          language: english
+        edge_ngram:
+          type: edgeNGram
+          min_gram: 2
+          max_gram: 8
+          token_chars:
+          - letter
+          - digit
 mappings:
   client:
     dynamic: strict
@@ -13,6 +50,7 @@ mappings:
         fields:
           edge_ngram:
             type: string
+            index: analyzed
             search_analyzer: bizcuit_standard
             index_analyzer: bizcuit_edge_ngram
       last_name:
@@ -104,39 +142,3 @@ mappings:
       created:
         type: date
         index: not_analyzed
-analysis:
-  analyzer:
-    bizcuit_standard:
-      tokenizer: standard
-      filter:
-      - standard
-      - lowercase
-      - word_delimiter
-      - asciifolding
-    bizcuit_language_stemmer:
-      tokenizer: standard
-      filter:
-      - standard
-      - lowercase
-      - word_delimiter
-      - asciifolding
-      - english_stemmer
-    bizcuit_edge_ngram:
-      tokenizer: standard
-      filter:
-      - standard
-      - lowercase
-      - word_delimiter
-      - asciifolding
-      - edge_ngram
-  filter:
-    english_stemmer:
-      type: stemmer
-      language: english
-    edge_ngram:
-      type: edgeNGram
-      min_gram: 2
-      max_gram: 8
-      token_chars:
-      - letter
-      - digit

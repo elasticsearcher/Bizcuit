@@ -18,13 +18,13 @@ Ext.define('Bizcuit.view.clients.SearchBoxController', {
               "query": query,
               "fields": [
                 {
-                  "first_name*": {}
+                  "first_name.edge_ngram": {}
                 },
                 {
-                  "last_name*": {}
+                  "last_name.edge_ngram": {}
                 },
                 {
-                  "email*": {}
+                  "email.edge_ngram": {}
                 },
                 {
                   "note": {}
@@ -42,17 +42,17 @@ Ext.define('Bizcuit.view.clients.SearchBoxController', {
             "num_fragments": 0,
             "fields": [
               {
-                "first_name": {
+                "first_name.edge_ngram": {
                   "number_of_fragments": 0
                 }
               },
               {
-                "last_name": {
+                "last_name.edge_ngram": {
                   "number_of_fragments": 0
                 }
               },
               {
-                "email": {
+                "email.edge_ngram": {
                   "number_of_fragments": 0
                 }
               },
