@@ -7,7 +7,7 @@ from flask import Flask, request, send_from_directory
 
 
 # ui is the root directory for static files
-app = Flask(__name__, static_url_path='', static_folder='../ui')
+app = Flask(__name__, static_url_path='', static_folder='ui')
 
 
 @app.route('/')
