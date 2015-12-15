@@ -1,5 +1,4 @@
-
-Ext.define("Bizcuit.view.clients.NewClientFormPanel",{
+Ext.define("Bizcuit.view.clients.NewClientFormPanel", {
     extend: "Ext.form.Panel",
 
     xtype: 'clients.new-client-form',

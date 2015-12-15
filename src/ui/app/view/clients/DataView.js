@@ -1,5 +1,4 @@
-
-Ext.define("Bizcuit.view.clients.DataView",{
+Ext.define("Bizcuit.view.clients.DataView", {
     extend: "Ext.view.View",
 
     requires: [
@@ -14,9 +13,11 @@ Ext.define("Bizcuit.view.clients.DataView",{
         type: "clients-dataview"
     },
 
+    cls: 'dataview-container',
+
     tpl: [
         '<tpl for=".">',
-            '<div class="client-tile">',
+            '<div class="shadow-panel client-tile">',
                 '<b>{[this.getHighlightedValue(values, "first_name")]} \
                 {[this.getHighlightedValue(values, "last_name")]}</b> <br />',
                 'Email: {[this.getHighlightedValue(values, "email")]} <br />',

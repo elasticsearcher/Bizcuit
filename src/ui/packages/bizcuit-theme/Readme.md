@@ -1,2 +1,0 @@
-# bizcuit-theme - Read Me
-

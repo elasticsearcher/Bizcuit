@@ -1,2 +1,2 @@
 // @tag full-page
-// @require c:\Users\apak\elasticsearcher\Bizcuit\ui\app.js
+// @require C:\Users\apak\elasticsearcher\Bizcuit\src\ui\app.js
