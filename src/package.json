@@ -1,0 +1,35 @@
+{
+  "name": "Bizcuit",
+  "version": "1.0.0",
+  "description": "Bizcuit (from 'business kit') is an open source web application that's meant to help small business owners manage their business. It utilizes the power of Elasticsearch to make all business-related information available at lightning speed via full-text, natural language search capabilities and the UI is powered by the versatile ExtJS framework in order to deliver a familiar, desktop-like user experience in the browser.",
+  "main": "bizcuit.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elasticsearcher/Bizcuit.git"
+  },
+  "keywords": [
+    "bizcuit",
+    "small",
+    "business",
+    "management",
+    "services",
+    "products"
+  ],
+  "author": "Andrew Pak",
+  "license": "GPL v3",
+  "bugs": {
+    "url": "https://github.com/elasticsearcher/Bizcuit/issues"
+  },
+  "homepage": "https://github.com/elasticsearcher/Bizcuit",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "express-handlebars": "^2.0.1",
+    "express-logger": "0.0.3",
+    "morgan": "^1.6.1",
+    "restler": "^3.4.0"
+  }
+}

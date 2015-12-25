@@ -34,16 +34,13 @@ Ext.define("Bizcuit.view.clients.NewClientFormPanel", {
         name: 'note'
       },
       {
-        fieldLabel: 'Street Number',
-        name: 'address_number'
+        fieldLabel: 'Address',
+        name: 'address_address1'
       },
       {
-        fieldLabel: 'Street',
-        name: 'address_street'
-      },
-      {
-        fieldLabel: 'Suite',
-        name: 'address_suite'
+        fieldLabel: ' ',
+        labelSeparator: '',
+        name: 'address_address2'
       },
       {
         fieldLabel: 'City',

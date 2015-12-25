@@ -19,14 +19,14 @@ Ext.define('Bizcuit.store.NavigationTree', {
                 iconCls: 'right-icon new-icon x-fa fa-desktop',
                 routeId: 'dashboard'
             },
-            {
-                text:   'Notifications',
-                view:   'notifications.Notifications',
-                iconCls: 'right-icon hot-icon x-fa fa-send ',
-                leaf:   true,
-                routeId: 'notifications'
-
-            },
+            // {
+            //     text:   'Notifications',
+            //     view:   'notifications.Notifications',
+            //     iconCls: 'right-icon hot-icon x-fa fa-send ',
+            //     leaf:   true,
+            //     routeId: 'notifications'
+            //
+            // },
             {
                 text:   'Clients',
                 view:   'clients.Clients',
