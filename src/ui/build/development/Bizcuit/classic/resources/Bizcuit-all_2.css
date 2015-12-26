@@ -6884,7 +6884,7 @@ em {
 /* http://localhost:1841/sass/src/view/clients/DataView.scss:6 */
 .client-tile {
     width: 300px;
-    height: 200px;
+    min-height: 200px;
     background-color: #fff;
     float: left;
     margin: 5px 5px;
@@ -7110,7 +7110,7 @@ em {
     opacity: 0.9;
     margin-left: 16px;
     margin-right: 14px;
-    top: 10px;
+    top: 9px;
     position: relative;
 }
 /* http://localhost:1841/sass/src/view/main/Viewport.scss:71 */

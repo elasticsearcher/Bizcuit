@@ -25,8 +25,7 @@ Ext.define('Bizcuit.model.Service', {
         actionMethods: {
         },
         reader: {
-          type: 'json',
-          rootProperty: '_source'
+          type: 'json'
         },
         writer: {
         	type: 'json',

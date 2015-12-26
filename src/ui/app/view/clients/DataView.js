@@ -33,7 +33,8 @@ Ext.define("Bizcuit.view.clients.DataView", {
                 '{[this.getHighlightedValue(values, "address_city")]} ',
                 '{[this.getHighlightedValue(values, "address_postal_code")]}',
                 '<br />',
-                '{[this.getHighlightedValue(values, "address_country")]}',
+                '{[this.getHighlightedValue(values, "address_country")]} <br />',
+                '<span><a href="#clients/{id}">edit</a></span>',
             '</div>',
         '</tpl>',
         {

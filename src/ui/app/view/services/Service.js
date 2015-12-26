@@ -14,14 +14,6 @@ Ext.define("Bizcuit.view.services.Service",{
 
     title: 'Service',
 
-    bind: {
-      record: '{record}'
-    },
-
-    config: {
-      record: null
-    },
-
     layout: 'form',
 
     items: [

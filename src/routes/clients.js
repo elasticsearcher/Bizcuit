@@ -38,8 +38,14 @@ function getClients(req, res) {
     esClient.searchDocuments('client', res);
 }
 
+function getClientById(req, res) {
+    var id = req.params.id;
+    esClient.getDocumentById('client', id, res);
+}
+
 module.exports = function(app) {
     app.post('/api/clients', upsertClient);
     app.put('/api/clients/:id', upsertClient);
     app.get('/api/clients', getClients);
+    app.get('/api/clients/:id', getClientById);
 };

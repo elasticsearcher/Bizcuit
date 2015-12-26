@@ -8,6 +8,21 @@ module.exports = function(settings) {
         ES_SCHEMA_SETTINGS = require('../etc/es-schema-settings'),
         MAPPINGS = ES_SCHEMA_SETTINGS.mappings;
 
+        var omittedFields = [
+            '_source',
+            '_index',
+            '_id',
+            '_type',
+            '_version',
+            'found'
+        ];
+
+        function removeOmittedFields(doc) {
+            omittedFields.forEach(function(field) {
+                delete doc[field];
+            });
+        }
+
     return {
         deleteIndex: function() {
             console.log(util.format('DELETE index %s', INDEX));
@@ -114,6 +129,7 @@ module.exports = function(settings) {
         },
 
         updateDocument: function(mapping, id, doc, res) {
+            removeOmittedFields(doc);
             restler.put(util.format('%s/%s/%s?refresh=true', INDEX_URL, mapping, id), { data: JSON.stringify(doc)})
                 .on('success', function(result, response) {
                     res.status(200).json({ success: true });
