@@ -15,11 +15,10 @@ Ext.define('Bizcuit.store.SearchResults', {
       type: 'rest',
       noCache: false,
       api: {
-        read: 'http://localhost:9200/bizcuit/client/_search',
-        create: '/clients'
+        read: '/api/clients'
       },
       actionMethods: {
-        read: 'POST'
+        //read: 'POST'
       },
       reader: {
         type: 'json',

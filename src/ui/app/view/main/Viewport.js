@@ -39,7 +39,7 @@ Ext.define("Bizcuit.view.main.Viewport",{
                     xtype: 'component',
                     reference: 'bizcuitLogo',
                     cls: 'bizcuit-logo',
-                    html: '<div class="main-logo"><img src="resources/images/bizcuit-logo.png">Bizcuit</div>',
+                    html: '<div class="main-logo"><img src="resources/images/logo-small-3.png">Bizcuit</div>',
                     width: 250
                 },
                 {
@@ -60,21 +60,10 @@ Ext.define("Bizcuit.view.main.Viewport",{
                 },
                 {
                     cls: 'delete-focus-bg',
-                    iconCls:'x-fa fa-envelope',
-                    href: '#email',
-                    hrefTarget: '_self',
-                    tooltip: 'Check your email'
-                },
-                {
-                    cls: 'delete-focus-bg',
-                    iconCls:'x-fa fa-bell'
-                },
-                {
-                    cls: 'delete-focus-bg',
                     iconCls:'x-fa fa-th-large',
                     href: '#profile',
                     hrefTarget: '_self',
-                    tooltip: 'See your profile'
+                    tooltip: 'Not implemented'
                 }
             ]
         },

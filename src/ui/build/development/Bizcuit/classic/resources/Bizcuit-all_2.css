@@ -1,3 +1,7 @@
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:466 */
+.x-rtl.x-menu-item-text-default.x-menu-item-indent-right-icon {
+    margin-left: 40px;
+}
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:470 */
 .x-rtl.x-menu-item-text-default.x-menu-item-indent-right-arrow {
     margin-left: 29px;
@@ -7103,12 +7107,13 @@ em {
 }
 /* http://localhost:1841/sass/src/view/main/Viewport.scss:61 */
 .bizcuit-logo .main-logo img {
-    margin-left: 22px;
-    margin-right: 22px;
-    top: 8px;
+    opacity: 0.9;
+    margin-left: 16px;
+    margin-right: 14px;
+    top: 10px;
     position: relative;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:70 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:71 */
 .sencha-dash-dash-headerbar {
     padding: 0 30px 0 0;
     position: fixed;
@@ -7116,45 +7121,49 @@ em {
     z-index: 10;
     border: none;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:76 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:77 */
 .sencha-dash-dash-headerbar .header-right-profile-image {
     border-radius: 20px;
 }
 /* http://localhost:1841/sass/src/view/main/Viewport.scss:81 */
+.sencha-dash-right-main-container {
+    background-color: transparent;
+}
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:85 */
 .top-english-button .x-btn-icon-el {
     width: 21px;
     height: 14px;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:88 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:92 */
 .collapsed .hot-icon:after,
 .collapsed .new-icon:after {
     display: none;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:92 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:96 */
 .collapsed .x-tree-elbow-img {
     display: none;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:96 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:100 */
 .collapsed .x-tree-node-text {
     display: none;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:100 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:104 */
 .x-grid-cell {
     position: relative;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:104 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:108 */
 .hot-icon.hot-icon:after,
 .new-icon.hot-icon:after {
     content: "HOT";
     background: #e3495a;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:108 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:112 */
 .hot-icon.new-icon:after,
 .new-icon.new-icon:after {
     content: "NEW";
     background: #5fa2dd;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:112 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:116 */
 .hot-icon:after,
 .new-icon:after {
     height: 18px;
@@ -7169,32 +7178,32 @@ em {
     font-size: 10px;
     line-height: 18px;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:127 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:131 */
 .x-treelist-item-tool {
     height: 64px;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:129 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:133 */
 .x-treelist-item-tool.hot-icon:after,
 .x-treelist-item-tool.new-icon:after {
     background: #5fa2dd;
     content: '';
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:135 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:139 */
 .toolbar-btn-shadow {
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:137 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:141 */
 .toolbar-btn-shadow .x-btn-over {
     background-color: #efefef;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:143 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:147 */
 .x-html-editor-input {
     border: 1px solid #ccc;
 }
-/* http://localhost:1841/sass/src/view/main/Viewport.scss:148 */
+/* http://localhost:1841/sass/src/view/main/Viewport.scss:152 */
 .delete-focus-bg:focus,
 .delete-focus-bg:hover {
     background: none;
@@ -14343,9 +14352,5 @@ em {
 }
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:400 */
 .x-btn-gray-small-tc {
-    height: 1px;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:403 */
-.x-btn-gray-small-bc {
     height: 1px;
 }

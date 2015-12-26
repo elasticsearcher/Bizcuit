@@ -33,39 +33,57 @@ module.exports = function(settings) {
         },
 
         populateTestData: function() {
-            var clients = [{
-                'first_name': 'John',
-                'last_name': 'Doe',
-                'email': 'john.doe@bizcuit.com',
-                'phone': '555-555-5555',
-                'note': 'Return customer.',
-                'address': {
-                    'address1': '100 Anonymous St.',
-                    'address2': 'Suite 1',
-                    'city': 'Metropolis',
-                    'province': 'XX'
-                }
-            },
-            {
-                'first_name': 'Jane',
-                'last_name': 'Doe',
-                'email': 'jane.doe@bizcuit.com',
-                'phone': '555-555-5555',
-                'note': 'Return customer.',
-                'address': {
-                    'address1': '100 Anonymous St.',
-                    'address2': 'Suite 1',
-                    'city': 'Metropolis',
-                    'province': 'XX'
-                }
-            }]
+            var testData = {
+                client: [{
+                    'first_name': 'John',
+                    'last_name': 'Doe',
+                    'email': 'john.doe@bizcuit.com',
+                    'phone': '555-555-5555',
+                    'note': 'Return customer.',
+                    'address': {
+                        'address1': '100 Anonymous St.',
+                        'address2': 'Suite 1',
+                        'city': 'Metropolis',
+                        'province': 'XX'
+                    }
+                },
+                {
+                    'first_name': 'Jane',
+                    'last_name': 'Doe',
+                    'email': 'jane.doe@bizcuit.com',
+                    'phone': '555-555-5555',
+                    'note': 'Return customer.',
+                    'address': {
+                        'address1': '100 Anonymous St.',
+                        'address2': 'Suite 1',
+                        'city': 'Metropolis',
+                        'province': 'XX'
+                    }
+                }],
 
-            clients.forEach(function(client) {
-                restler.post(util.format('%s/client/', INDEX_URL), { data: JSON.stringify(client)})
-                    .on('complete', function(result, response) {
-                        console.log(util.format('POST client %s %s %s', client.email, util.inspect(result, false, null), response));
-                    })
-            });
+                service: [
+                    {
+                        name: 'Service 1',
+                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        price: 100
+                    },
+                    {
+                        name: 'Service 2',
+                        description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
+                        price: 200
+                    }
+                ]
+            };
+
+            for(mapping in testData) {
+                var data = testData[mapping];
+                data.forEach(function(d) {
+                    restler.post(util.format('%s/%s/', INDEX_URL, mapping), { data: JSON.stringify(d)})
+                        .on('complete', function(result, response) {
+                            console.log(util.format('POST %s %s %s', mapping, util.inspect(result, false, null), response));
+                        })
+                });
+            }
         },
 
         reset: function() {
@@ -86,9 +104,39 @@ module.exports = function(settings) {
         },
 
         postDocument: function(mapping, doc, res) {
-            restler.post(util.format('%s/%s', INDEX_URL, mapping), { data: JSON.stringify(doc)})
+            restler.post(util.format('%s/%s?refresh=true', INDEX_URL, mapping), { data: JSON.stringify(doc)})
                 .on('success', function(result, response) {
                     res.status(201).json({ success: true });
+                })
+                .on('fail', function(result, response) {
+                    res.status(result.status).json({ error: result });
+                });
+        },
+
+        updateDocument: function(mapping, id, doc, res) {
+            restler.put(util.format('%s/%s/%s?refresh=true', INDEX_URL, mapping, id), { data: JSON.stringify(doc)})
+                .on('success', function(result, response) {
+                    res.status(200).json({ success: true });
+                })
+                .on('fail', function(result, response) {
+                    res.status(result.status).json({ error: result });
+                });
+        },
+
+        searchDocuments: function(mapping, res) {
+            restler.post(util.format('%s/%s/_search', INDEX_URL, mapping))
+                .on('success', function(result, response) {
+                    res.status(200).json(result);
+                })
+                .on('fail', function(result, response) {
+                    res.status(result.status).json({ error: result });
+                });
+        },
+
+        getDocumentById: function(mapping, id, res) {
+            restler.get(util.format('%s/%s/%s', INDEX_URL, mapping, id))
+                .on('success', function(result, response) {
+                    res.status(200).json(result);
                 })
                 .on('fail', function(result, response) {
                     res.status(result.status).json({ error: result });

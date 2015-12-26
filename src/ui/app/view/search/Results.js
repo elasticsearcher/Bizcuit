@@ -20,8 +20,11 @@ Ext.define("Bizcuit.view.search.Results",{
     items: [
       {
         xtype: 'container',
+        flex: 1,
+        width: '100%',
         layout: 'fit',
         overflowY: 'auto',
+        flex: 1,
         items: [
           {
             xtype: 'search-dataview'

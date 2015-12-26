@@ -155,6 +155,51 @@ module.exports = {
                 }
             },
             "dynamic": "strict"
+        },
+        "service": {
+            "properties": {
+                "name": {
+                    "index": "analyzed",
+                    "fields": {
+                        "edge_ngram": {
+                            "index_analyzer": "bizcuit_edge_ngram",
+                            "search_analyzer": "bizcuit_standard",
+                            "type": "string"
+                        },
+                        "language_stemmer": {
+                            "type": "string",
+                            "analyzer": "bizcuit_language_stemmer"
+                        }
+                    },
+                    "type": "string",
+                    "analyzer": "bizcuit_standard"
+                },
+                "description": {
+                    "index": "analyzed",
+                    "fields": {
+                        "edge_ngram": {
+                            "index_analyzer": "bizcuit_edge_ngram",
+                            "search_analyzer": "bizcuit_standard",
+                            "type": "string"
+                        },
+                        "language_stemmer": {
+                            "type": "string",
+                            "analyzer": "bizcuit_language_stemmer"
+                        }
+                    },
+                    "type": "string",
+                    "analyzer": "bizcuit_standard"
+                },
+                "price": {
+                    "index": "not_analyzed",
+                    "type": "double"
+                },
+                "created": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                }
+            },
+            "dynamic": "strict"
         }
     },
     "settings": {

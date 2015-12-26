@@ -2393,6 +2393,10 @@
 .boldFont {
     font-weight: bold;
 }
+/* http://localhost:1841/sass/etc/all.scss:64 */
+body > .x-mask {
+    background-color: rgba(200, 200, 200, 0.5) !important;
+}
 /* http://localhost:1841/ext/packages/core/sass/src/util/SizeMonitor.scss:5 */
 .x-size-monitored {
     /**
@@ -16017,8 +16021,4 @@ a.x-color-picker-item:hover {
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:462 */
 .x-rtl.x-menu-item-text-default.x-menu-item-indent-no-separator {
     margin-right: 36px;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:466 */
-.x-rtl.x-menu-item-text-default.x-menu-item-indent-right-icon {
-    margin-left: 40px;
 }

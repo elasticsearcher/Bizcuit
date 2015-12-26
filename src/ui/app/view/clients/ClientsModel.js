@@ -19,11 +19,11 @@ Ext.define('Bizcuit.view.clients.ClientsModel', {
           type: 'rest',
           noCache: false,
           api: {
-            read: 'http://localhost:9200/bizcuit/client/_search',
+            read: '/api/clients',
             create: '/api/clients'
           },
           actionMethods: {
-            read: 'POST'
+            //read: 'POST'
           },
           reader: {
             type: 'json',

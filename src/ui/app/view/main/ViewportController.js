@@ -2,6 +2,11 @@ Ext.define('Bizcuit.view.main.ViewportController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.main-viewport',
 
+    requires: [
+        'Bizcuit.model.Client',
+        'Bizcuit.model.Service'
+    ],
+
     listen : {
         controller : {
             '#' : {
@@ -11,10 +16,12 @@ Ext.define('Bizcuit.view.main.ViewportController', {
     },
 
     routes: {
-        ':node': 'onRouteChange'
+        ':node': 'onRouteChange',
+        'clients/:id': 'onClientId',
+        'services/:id': 'onServiceId'
     },
 
-    setCurrentView: function(hashTag) {
+    setCurrentView: function(hashTag, viewName, config) {
         hashTag = (hashTag || '').toLowerCase();
 
         var me = this,
@@ -26,7 +33,7 @@ Ext.define('Bizcuit.view.main.ViewportController', {
             vmData = viewModel.getData(),
             store = navigationList.getStore(),
             node = store.findNode('routeId', hashTag),
-            view = node ? node.get('view') : null,
+            view = node ? node.get('view') : (viewName ? viewName : null),
             lastView = vmData.currentView,
             existingItem = mainCard.child('component[routeId=' + hashTag + ']'),
             newView;
@@ -39,10 +46,14 @@ Ext.define('Bizcuit.view.main.ViewportController', {
         lastView = mainLayout.getActiveItem();
 
         if (!existingItem) {
-            newView = Ext.create('Bizcuit.view.' + (view || 'pages.Error404Window'), {
-                    hideMode: 'offsets',
-                    routeId: hashTag
-                });
+            newView = Ext.create('Bizcuit.view.' + (view || 'pages.Error404Window'), Ext.apply({
+                hideMode: 'offsets',
+                routeId: hashTag
+            }));
+        } else {
+            if(config) {
+                existingItem.setConfig(config);
+            }
         }
 
         if (!newView || !newView.isWindow) {
@@ -71,6 +82,7 @@ Ext.define('Bizcuit.view.main.ViewportController', {
         }
 
         vmData.currentView = newView;
+        return newView;
     },
 
     onNavigationTreeSelectionChange: function (tree, node) {
@@ -147,5 +159,33 @@ Ext.define('Bizcuit.view.main.ViewportController', {
 
     onEmailRouteChange: function () {
         this.setCurrentView('email');
+    },
+
+    onClientId: function(id) {
+
+    },
+
+    onServiceId: function(id) {
+        var viewName = 'services.Service',
+            record = null,
+            me = this,
+            view = null;
+
+        if(id == 'new') {
+            record = Ext.create('Bizcuit.model.Service', {
+                id: id
+            });
+
+            view = this.setCurrentView(viewName, viewName);
+            view.loadRecord(record);
+        } else {
+            Bizcuit.model.Service.load(id, {
+                success: function(record) {
+                    view = me.setCurrentView(viewName, viewName);
+                    view.loadRecord(record);
+                }
+            })
+        }
     }
+
 });

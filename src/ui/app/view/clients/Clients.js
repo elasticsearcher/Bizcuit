@@ -43,6 +43,8 @@ Ext.define("Bizcuit.view.clients.Clients",{
       },
       {
         xtype: 'container',
+        flex: 1,
+        width: '100%',
         layout: 'fit',
         overflowY: 'auto',
         items: [

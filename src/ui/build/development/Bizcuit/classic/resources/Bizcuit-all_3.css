@@ -1,3 +1,7 @@
+/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:403 */
+.x-btn-gray-small-bc {
+    height: 1px;
+}
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:407 */
 .x-btn-gray-small-tl,
 .x-btn-gray-small-bl,
@@ -4038,4 +4042,22 @@
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/button/Button.scss:1251 */
 .x-button-blue-toolbar-small-cell > .x-grid-cell-inner >.x-btn-blue-toolbar-small {
     vertical-align: top;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:2 */
+.service-tile {
+    width: calc(100% - 10px);
+    min-height: 50px;
+    background-color: #fff;
+    float: left;
+    margin: 5px 5px;
+    padding: 10px 10px;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:11 */
+.x-view-item-focused {
+    outline: 1px solid #5fa2dd !important;
+    outline-offset: -1px;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:16 */
+.dataview-container {
+    padding: 5px 5px;
 }

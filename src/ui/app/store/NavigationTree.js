@@ -49,13 +49,13 @@ Ext.define('Bizcuit.store.NavigationTree', {
                 routeId : 'products-services',
                 id:       'products-services',
                 children: [
-                    {
-                        text: 'Categories',
-                        view: 'categories.Categories',
-                        leaf: true,
-                        iconCls: 'x-fa fa-tag',
-                        routeId:'categories'
-                    },
+                    // {
+                    //     text: 'Categories',
+                    //     view: 'categories.Categories',
+                    //     leaf: true,
+                    //     iconCls: 'x-fa fa-tag',
+                    //     routeId:'categories'
+                    // },
                     {
                         text: 'Products',
                         view: 'products.Products',
