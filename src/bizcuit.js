@@ -17,7 +17,8 @@ app.use(require('body-parser')());
 var admin = require('./routes/admin')(app),
     clients = require('./routes/clients')(app),
     services = require('./routes/services')(app),
-    orders = require('./routes/orders')(app);
+    orders = require('./routes/orders')(app),
+    search = require('./routes/search')(app);
 
 // Disable the x-powered-by header to hide the implementation details
 app.disable('x-powered-by');

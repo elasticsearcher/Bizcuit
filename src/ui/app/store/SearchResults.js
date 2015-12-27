@@ -15,7 +15,7 @@ Ext.define('Bizcuit.store.SearchResults', {
       type: 'rest',
       noCache: false,
       api: {
-        read: 'http://localhost:9200/bizcuit/_search'
+        read: 'api/search'
       },
       actionMethods: {
         read: 'POST'

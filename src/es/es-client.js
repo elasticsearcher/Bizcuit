@@ -173,6 +173,21 @@ module.exports = function(settings) {
                 });
         },
 
+        searchIndex: function(query, res) {
+            query.from = 0;
+            query.size = 10000;
+            restler.post(util.format('%s/_search', INDEX_URL), 
+                {
+                    data: JSON.stringify(query)
+                })
+                .on('success', function(result, response) {
+                    res.status(200).json(result);
+                })
+                .on('fail', function(result, response) {
+                    res.status(result.status).json({ error: result });
+                });
+        },
+
         searchDocuments: function(mapping, res) {
             restler.post(util.format('%s/%s/_search', INDEX_URL, mapping), 
                 {
