@@ -7,7 +7,7 @@ Ext.define("Bizcuit.view.main.MainContainerWrap",{
         'Ext.layout.container.HBox'
     ],
 
-    scrollable: 'y',
+    //scrollable: 'y',
 
     layout: {
         type: 'hbox',

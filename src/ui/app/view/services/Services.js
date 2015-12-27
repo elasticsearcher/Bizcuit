@@ -16,15 +16,7 @@ Ext.define("Bizcuit.view.services.Services",{
     layout: {
       type: 'vbox'
     },
-
-    bind: {
-      clientsStore: '{Services}'
-    },
-
-    config: {
-      clientsStore: null
-    },
-
+    
     items: [
       {
         xtype: 'toolbar',

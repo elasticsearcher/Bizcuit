@@ -11,6 +11,6 @@ Ext.define('Bizcuit.view.clients.DataViewController', {
         global: {
             'clientUpdated': 'onClientUpdated'
         }
-    },
+    }
     
 });

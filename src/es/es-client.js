@@ -50,6 +50,7 @@ module.exports = function(settings) {
         populateTestData: function() {
             var testData = {
                 client: [{
+                    'id': 'AVHcoyET0BQ7Qcq9ISBP',
                     'first_name': 'John',
                     'last_name': 'Doe',
                     'email': 'john.doe@bizcuit.com',
@@ -63,6 +64,7 @@ module.exports = function(settings) {
                     }
                 },
                 {
+                    'id': 'AVHaZbTo1RmTTqkz6Y08',
                     'first_name': 'Jane',
                     'last_name': 'Doe',
                     'email': 'jane.doe@bizcuit.com',
@@ -78,24 +80,54 @@ module.exports = function(settings) {
 
                 service: [
                     {
+                        id: 'AVHaZbTo1RmTTqkz6Y07',
                         name: 'Service 1',
                         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
                         price: 100
                     },
                     {
+                        id: 'AVHaZbTo1RmTTqkz6Y08',
                         name: 'Service 2',
                         description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
                         price: 200
                     }
+                ],
+
+                order: [
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y08',
+                        client_id: 'AVHcoyET0BQ7Qcq9ISBP',
+                        note: 'Delivery date to be confirmed.',
+                        created: '2015-12-25',
+                        items: [
+                            {
+                                sku_type: 'service',
+                                sku_id: 'AVHaZbTo1RmTTqkz6Y07' ,
+                                quantity: 1,
+                                unit_price: 77,
+                                scheduled_delivery_date: '2016-01-10'
+                            },
+                            {
+                                sku_type: 'service',
+                                sku_id: 'AVHaZbTo1RmTTqkz6Y08' ,
+                                quantity: 2,
+                                unit_price: 88,
+                                scheduled_delivery_date: '2016-01-12'
+                            }
+                        ]
+                    }
+
                 ]
             };
 
             for(mapping in testData) {
                 var data = testData[mapping];
                 data.forEach(function(d) {
-                    restler.post(util.format('%s/%s/', INDEX_URL, mapping), { data: JSON.stringify(d)})
+                    var id = d.id;
+                    delete d.id;
+                    restler.put(util.format('%s/%s/%s', INDEX_URL, mapping, id), { data: JSON.stringify(d)})
                         .on('complete', function(result, response) {
-                            console.log(util.format('POST %s %s %s', mapping, util.inspect(result, false, null), response));
+                            console.log(util.format('PUT %s %s %s', mapping, util.inspect(result, false, null), response));
                         })
                 });
             }
@@ -119,6 +151,7 @@ module.exports = function(settings) {
         },
 
         postDocument: function(mapping, doc, res) {
+            doc.updated = Date.now();
             restler.post(util.format('%s/%s?refresh=true', INDEX_URL, mapping), { data: JSON.stringify(doc)})
                 .on('success', function(result, response) {
                     res.status(201).json({ success: true });
@@ -129,6 +162,7 @@ module.exports = function(settings) {
         },
 
         updateDocument: function(mapping, id, doc, res) {
+            doc.updated = Date.now();
             removeOmittedFields(doc);
             restler.put(util.format('%s/%s/%s?refresh=true', INDEX_URL, mapping, id), { data: JSON.stringify(doc)})
                 .on('success', function(result, response) {
@@ -140,7 +174,19 @@ module.exports = function(settings) {
         },
 
         searchDocuments: function(mapping, res) {
-            restler.post(util.format('%s/%s/_search', INDEX_URL, mapping))
+            restler.post(util.format('%s/%s/_search', INDEX_URL, mapping), 
+                {
+                    data: JSON.stringify({
+                        // TODO: get from/size from the query string
+                        from: 0,
+                        size: 10000,
+                        sort: {
+                            'updated': {
+                                order: 'desc'
+                            }
+                        }
+                    })
+                })
                 .on('success', function(result, response) {
                     res.status(200).json(result);
                 })

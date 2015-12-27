@@ -10,7 +10,9 @@ Ext.define('Bizcuit.Application', {
 
     stores: [
         'NavigationTree',
-        'SearchResults'
+        'SearchResults',
+        'ClientsDirectory',
+        'ServicesCatalog'
     ],
 
     launch: function () {

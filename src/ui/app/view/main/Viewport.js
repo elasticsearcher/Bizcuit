@@ -8,7 +8,10 @@ Ext.define("Bizcuit.view.main.Viewport",{
         "Bizcuit.view.main.ViewportController",
         "Bizcuit.view.main.ViewportModel",
         'Ext.list.Tree',
-        'Bizcuit.view.search.SearchBox'
+        'Bizcuit.view.search.SearchBox',
+        'Bizcuit.store.ServicesCatalog',
+        'Bizcuit.view.orders.Order',
+        'Bizcuit.view.orders.Orders'
     ],
 
     controller: "main-viewport",
@@ -57,14 +60,15 @@ Ext.define("Bizcuit.view.main.Viewport",{
                     xtype: 'tbtext',
                     text: 'Good to see you, boss!',
                     cls: 'top-user-name'
-                },
-                {
-                    cls: 'delete-focus-bg',
-                    iconCls:'x-fa fa-th-large',
-                    href: '#profile',
-                    hrefTarget: '_self',
-                    tooltip: 'Not implemented'
                 }
+                // ,
+                // {
+                //     cls: 'delete-focus-bg',
+                //     iconCls:'x-fa fa-th-large',
+                //     href: '#profile',
+                //     hrefTarget: '_self',
+                //     tooltip: 'Not implemented'
+                // }
             ]
         },
         {

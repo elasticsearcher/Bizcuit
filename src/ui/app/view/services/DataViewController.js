@@ -11,6 +11,6 @@ Ext.define('Bizcuit.view.services.DataViewController', {
         global: {
             'serviceUpdated': 'onServiceUpdated'
         }
-    },
+    }
     
 });

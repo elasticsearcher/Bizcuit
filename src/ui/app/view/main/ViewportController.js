@@ -18,7 +18,10 @@ Ext.define('Bizcuit.view.main.ViewportController', {
     routes: {
         ':node': 'onRouteChange',
         'clients/:id': 'onClientId',
+        'orders/:id': 'onOrderId',
+        'products/:id': 'onProductId',
         'services/:id': 'onServiceId'
+
     },
 
     setCurrentView: function(hashTag, viewName, config) {
@@ -145,7 +148,7 @@ Ext.define('Bizcuit.view.main.ViewportController', {
 
     onMainViewRender:function() {
         if (!window.location.hash) {
-            this.redirectTo("dashboard");
+            this.redirectTo("orders");
         }
     },
 
@@ -225,6 +228,64 @@ Ext.define('Bizcuit.view.main.ViewportController', {
                 }
             })
         }
+    },
+
+    callWhenStoresLoaded: function (stores, cb, cbContext, cbArgs) {
+        var numLoaded = 0,
+            numStores = stores.length;
+
+        function checkLoaded() {
+            if(numLoaded == numStores) {
+                cb.apply(cbContext, cbArgs);
+            }
+        }
+
+        function onLoad() {
+            numLoaded++;
+            checkLoaded();
+        }
+
+        stores.forEach(function(store) {
+            if(store.hasPendingLoad()) {
+                store.on('load', onLoad, null, { single: true });
+            } else {
+                onLoad();
+            }
+        });
+    },
+
+    onOrderId: function(id) {
+        function onStoresLoaded() {
+            var viewName = 'orders.Order',
+                record = null,
+                me = this,
+                view = null;
+
+            if(id == 'new') {
+                record = Ext.create('Bizcuit.model.Order', {
+                    id: id
+                });
+
+                view = this.setCurrentView(viewName, viewName);
+                view.loadRecord(record);
+                view.setOrder(record);
+                Ext.getBody().unmask();
+            } else {
+                Bizcuit.model.Order.load(id, {
+                    success: function(record) {
+                        view = me.setCurrentView(viewName, viewName);
+                        view.loadRecord(record);
+                        view.setOrder(record);
+                        Ext.getBody().unmask();
+                    }
+                })
+            }
+        }
+
+        var stores = [Ext.getStore('ServicesCatalog'), Ext.getStore('ClientsDirectory')];
+        Ext.getBody().mask('Loading...');
+
+        this.callWhenStoresLoaded(stores, onStoresLoaded, this);
     }
 
 });

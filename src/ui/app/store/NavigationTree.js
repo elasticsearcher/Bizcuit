@@ -12,13 +12,13 @@ Ext.define('Bizcuit.store.NavigationTree', {
                 iconCls: 'x-fa fa-search',
                 routeId: 'search'
             },
-            {
-                text:   'Dashboard',
-                view:   'dashboard.Dashboard',
-                leaf:   true,
-                iconCls: 'right-icon new-icon x-fa fa-desktop',
-                routeId: 'dashboard'
-            },
+            // {
+            //     text:   'Dashboard',
+            //     view:   'dashboard.Dashboard',
+            //     leaf:   true,
+            //     iconCls: 'right-icon new-icon x-fa fa-desktop',
+            //     routeId: 'dashboard'
+            // },
             // {
             //     text:   'Notifications',
             //     view:   'notifications.Notifications',
@@ -41,14 +41,14 @@ Ext.define('Bizcuit.store.NavigationTree', {
                 iconCls: 'x-fa fa-edit',
                 routeId:'orders'
             },
-            {
-                text: 'Products & Services',
-                expanded: true,
-                selectable: false,
-                iconCls: 'x-fa fa-leanpub',
-                routeId : 'products-services',
-                id:       'products-services',
-                children: [
+            // {
+            //     text: 'Products & Services',
+            //     expanded: true,
+            //     selectable: false,
+            //     iconCls: 'x-fa fa-leanpub',
+            //     routeId : 'products-services',
+            //     id:       'products-services',
+            //     children: [
                     // {
                     //     text: 'Categories',
                     //     view: 'categories.Categories',
@@ -56,13 +56,13 @@ Ext.define('Bizcuit.store.NavigationTree', {
                     //     iconCls: 'x-fa fa-tag',
                     //     routeId:'categories'
                     // },
-                    {
-                        text: 'Products',
-                        view: 'products.Products',
-                        leaf: true,
-                        iconCls: 'x-fa fa-rocket',
-                        routeId:'products'
-                    },
+                    // {
+                    //     text: 'Products',
+                    //     view: 'products.Products',
+                    //     leaf: true,
+                    //     iconCls: 'x-fa fa-rocket',
+                    //     routeId:'products'
+                    // },
                     {
                         text: 'Services',
                         view: 'services.Services',
@@ -70,8 +70,8 @@ Ext.define('Bizcuit.store.NavigationTree', {
                         iconCls: 'x-fa fa-wrench',
                         routeId:'services'
                     }
-                ]
-            }
+            //     ]
+            // }
         ]
     },
     fields: [

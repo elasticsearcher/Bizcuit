@@ -2,6 +2,10 @@ module.exports = {
     "mappings": {
         "client": {
             "properties": {
+                "updated": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                },
                 "phone": {
                     "index": "analyzed",
                     "type": "string",
@@ -158,6 +162,10 @@ module.exports = {
         },
         "service": {
             "properties": {
+                "updated": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                },
                 "name": {
                     "index": "analyzed",
                     "fields": {
@@ -193,6 +201,64 @@ module.exports = {
                 "price": {
                     "index": "not_analyzed",
                     "type": "double"
+                },
+                "created": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                }
+            },
+            "dynamic": "strict"
+        },
+        "order": {
+            "properties": {
+                "updated": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                },
+                "client_id": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "note": {
+                    "index": "analyzed",
+                    "fields": {
+                        "edge_ngram": {
+                            "index_analyzer": "bizcuit_edge_ngram",
+                            "search_analyzer": "bizcuit_standard",
+                            "type": "string"
+                        },
+                        "language_stemmer": {
+                            "type": "string",
+                            "analyzer": "bizcuit_language_stemmer"
+                        }
+                    },
+                    "type": "string",
+                    "analyzer": "bizcuit_standard"
+                },
+                "items": {
+                    "type": "nested",
+                    "properties": {
+                        "sku_type": {
+                            "index": "not_analyzed",
+                            "type": "string"
+                        },
+                        "sku_id": {
+                            "index": "not_analyzed",
+                            "type": "string"
+                        },
+                        "quantity": {
+                            "index": "not_analyzed",
+                            "type": "integer"
+                        },
+                        "unit_price": {
+                            "index": "not_analyzed",
+                            "type": "double"
+                        },
+                        "scheduled_delivery_date": {
+                            "index": "not_analyzed",
+                            "type": "date"
+                        }
+                    }
                 },
                 "created": {
                     "index": "not_analyzed",

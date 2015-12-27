@@ -22,7 +22,9 @@ Ext.define("Bizcuit.view.search.Results",{
         xtype: 'container',
         flex: 1,
         width: '100%',
-        layout: 'fit',
+        layout: {
+            type: 'fit'
+        },
         overflowY: 'auto',
         flex: 1,
         items: [

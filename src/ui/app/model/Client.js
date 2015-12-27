@@ -13,7 +13,10 @@ Ext.define('Bizcuit.model.Client', {
         { name: 'address_city', type: 'string', mapping: '_source.address.city' },
         { name: 'address_province', type: 'string', mapping: '_source.address.province' },
         { name: 'address_postal_code', type: 'string', mapping: '_source.address.postal_code' },
-        { name: 'address_country', type: 'string', mapping: '_source.address.country' }
+        { name: 'address_country', type: 'string', mapping: '_source.address.country' },
+        { name: 'full_name', type: 'string', persist: false, convert: function(v, record) {
+            return record.get('first_name') + ' ' + record.get('last_name');
+        }}
     ],
 
     proxy: {

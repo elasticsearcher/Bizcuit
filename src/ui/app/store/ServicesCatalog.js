@@ -1,8 +1,9 @@
-Ext.define('Bizcuit.store.SearchResults', {
+
+Ext.define('Bizcuit.store.ServicesCatalog', {
     extend: 'Ext.data.Store',
 
-    storeId: 'SearchResults',
-    //model: 'Bizcuit.model.SearchResult',
+    storeId: 'ServicesCatalog',
+    model: 'Bizcuit.model.Service',
     autoLoad: true,
     autoSync: true,
 
@@ -15,10 +16,7 @@ Ext.define('Bizcuit.store.SearchResults', {
       type: 'rest',
       noCache: false,
       api: {
-        read: 'http://localhost:9200/bizcuit/_search'
-      },
-      actionMethods: {
-        read: 'POST'
+        read: '/api/services'
       },
       reader: {
         type: 'json',

@@ -17,6 +17,7 @@ Ext.define('Bizcuit.view.services.ServiceController', {
     		success: function(record) {
     			me.redirectTo('services');
     			Ext.GlobalEvents.fireEvent('serviceUpdated', record);
+                Ext.getStore('ServicesCatalog').reload();
     		},
 
     		failure: function(err) {
