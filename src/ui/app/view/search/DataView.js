@@ -59,7 +59,7 @@ Ext.define("Bizcuit.view.search.DataView",{
                         '<td>{quantity}</td>',
                         '<td class="number">{[this.formatCurrency(values.unit_price)]}</td>',
                         '<td class="number">{[this.formatCurrency(values.unit_price * values.quantity)]}</td>',
-                        '<td>{scheduled_delivery_date}</td>',
+                        '<td>{scheduled_delivery_date:date("Y-m-d")}</td>',
                         '</tr>',
                     '</tpl>',
                     '<tfoot>',

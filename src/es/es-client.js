@@ -176,6 +176,7 @@ module.exports = function(settings) {
         searchIndex: function(query, res) {
             query.from = 0;
             query.size = 10000;
+            
             restler.post(util.format('%s/_search', INDEX_URL), 
                 {
                     data: JSON.stringify(query)

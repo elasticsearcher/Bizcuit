@@ -1,17 +1,56 @@
 var express = require('express'),
     app = express(),
+    http = require('http'),
+    https = require('https'),
+    fs = require('fs'),
     handlebars = require('express-handlebars')
         .create({
             defaultLayout: 'main',
             extname: '.hbs',
-            helpers: {}
-        });
+            helpers: {
+              navClass: function(navPath) {
+                  return this.req.path == navPath ? 'active' : '';
+              }
+          }
+        }),
+    passport = require('passport'),
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+    settings = require('./etc/settings');
+
+// Disable the x-powered-by header to hide the implementation details
+app.disable('x-powered-by');
+
+app.use(require('cookie-parser')(settings.session.cookieSecret));
+app.use(require('express-session')({
+    key: 'bizcuit.sid',
+    cookie: {
+        secure: true,
+        httpOnly: true,
+        signed: true,
+        maxAge: settings.session.maxAge
+    }
+}));
 
 // Logging
 app.use(require('morgan')('dev'));
 
 // body-parser
 app.use(require('body-parser')());
+
+var users = {};
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    done(null, users[id]);
+});
+
+var passOptions = {
+    successRedirect: '/bizcuit',
+    failureRedirect: '/bizcuit/login'
+};
 
 // Routes
 var admin = require('./routes/admin')(app),
@@ -20,15 +59,81 @@ var admin = require('./routes/admin')(app),
     orders = require('./routes/orders')(app),
     search = require('./routes/search')(app);
 
-// Disable the x-powered-by header to hide the implementation details
-app.disable('x-powered-by');
-
 // Set handlebars as the view engine
 app.engine('hbs', handlebars.engine);
 app.engine('html', handlebars.engine);
 app.set('view engine', 'hbs');
 
+if(settings.auth.enabled) {
+    var auth = {
+        init: function() {
+            var auth = settings.auth.google;
+
+            passport.use(new GoogleStrategy({
+                callbackURL: auth.callbackUrl,
+                clientID: auth.clientId,
+                clientSecret: auth.clientSecret
+            },
+            function(accessToken, refreshToken, profile, done) {
+                var authId = 'google:' + profile.id;
+                if(authId in users) {
+                    return done(null, users[authId]);
+                } else {
+                    users[authId] = { id: authId, name: profile.displayName, created: Date.now() };
+                    console.log('User logged in:', authId, profile.displayName, Date.now());
+                    return done(null, users[authId]);
+                }
+            }));
+            app.use(passport.initialize());
+            app.use(passport.session());
+        },
+
+        registerRoutes: function() {
+            app.get('/api/auth/google', function(req, res, next) {
+                passport.authenticate('google', {
+    //                callbackURL: '/api/auth/google/callback?redirect=' + encodeURIComponent(req.query.redirect),
+                    scope: [ 'https://www.googleapis.com/auth/userinfo.profile' ]
+                })(req, res, next);
+            });
+            
+            app.get('/api/auth/google/callback',
+                    passport.authenticate('google', { failureRedirect: passOptions.failureRedirect }),
+                    function(req, res) {
+                        res.redirect(303, req.query.redirect || passOptions.successRedirect);
+                    }
+            );
+        }
+    };
+
+    auth.init();
+    auth.registerRoutes();
+
+    app.get('/bizcuit/login', function(req, res) {
+        res.render('bizcuit/login', {
+            layout: null
+        });
+    });
+
+    app.use(function(req, res, next) {
+        if(!req.session.passport || !req.session.passport.user) {
+            return res.redirect(303, '/bizcuit/login');
+        }
+
+        if(settings.auth.google.authorizedUsers.indexOf(req.session.passport.user)) {
+            next();
+        } else {
+            console.log(req.session.passport.user, 'is not authorized.');
+            return res.redirect(303, '/bizcuit/login?reason=not_authorized');
+        }
+    });
+}
+
 app.use(express.static(__dirname + '/public'));
+
+app.use(function(req, res, next){
+    res.locals.req = req;
+    next();
+});
 
 app.get('/', function(req, res) {
     res.render('home');
@@ -57,8 +162,8 @@ app.get('/api/test', function(req, res) {
 
 // 404 page
 app.use(function(req, res) {
+    res.type('text/plain');
     res.status(404);
-    //res.render('404');
     res.send('404 Not Found');
 });
 
@@ -67,12 +172,30 @@ app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.type('text/plain');
     res.status(500);
-    //res.render('500');
     res.send('500 Internal Error');
 });
 
-app.set('port', (process.env.PORT || 5000));
+if(settings.https.enabled) {
+    app.set('port', 443);
 
-var server = app.listen(app.get('port'), function() {
-    console.log('Node app is running on port', app.get('port'));
-});
+    var options = {
+            key: fs.readFileSync(settings.https.keyPath),
+            cert: fs.readFileSync(settings.https.certPath)
+        };
+
+    var secureServer = https.createServer(options, app).listen(app.get('port'), function() {
+        console.log('App running on port', app.get('port'));
+    });
+
+    // Redirect all HTTP requests to HTTPS
+    var server = http.createServer(function(req, res) {
+        res.writeHead(301, { 'Location': 'https://' + req.headers['host'] + req.url });
+        res.end();
+    }).listen(80);
+} else {
+    app.set('port', (process.env.PORT || 5000));
+
+    var server = app.listen(app.get('port'), function() {
+        console.log('Node app is running on port', app.get('port'));
+    });
+}

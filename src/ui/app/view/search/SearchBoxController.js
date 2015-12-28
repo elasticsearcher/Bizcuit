@@ -9,6 +9,12 @@ Ext.define('Bizcuit.view.search.SearchBoxController', {
         var emptySearch = {
           "query": {
             "match_all": {}
+          },
+
+          "sort": {
+              'updated': {
+                  "order": 'desc'
+              }
           }
         };
 

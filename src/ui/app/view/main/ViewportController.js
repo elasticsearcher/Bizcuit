@@ -153,7 +153,14 @@ Ext.define('Bizcuit.view.main.ViewportController', {
     },
 
     onRouteChange: function(id){
-        this.setCurrentView(id);
+        function onStoresLoaded() {
+            this.setCurrentView(id);
+            Ext.getBody().unmask();
+        }
+
+        var stores = [Ext.getStore('ServicesCatalog'), Ext.getStore('ClientsDirectory')];
+        Ext.getBody().mask('Loading...');
+        this.callWhenStoresLoaded(stores, onStoresLoaded, this);        
     },
 
     onSearchRouteChange: function () {

@@ -1,4 +1,7 @@
 *.pyc
 *.log
 src/node_modules
-
+src/certs
+*.pem
+*.crt
+src/etc/overrides.js
