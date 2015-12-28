@@ -148,10 +148,21 @@ app.get('/bizcuit', function(req, res) {
     res.sendFile(__dirname + '/ui/index.html');
 });
 
-// TODO: Once the ExtJS build process is automated, the 'ui/' directory should
-// only be served in development, and an actual build of the ui should be
-// generated under 'public/' and served from there in production
-app.use(express.static(__dirname + '/ui'));
+switch(app.get('env')) {
+    case 'development':
+        app.use(require('morgan')('dev'));
+        // TODO: Once the ExtJS build process is automated, the 'ui/' directory should
+        // only be served in development, and an actual build of the ui should be
+        // generated under 'public/' and served from there in production
+        app.use(express.static(__dirname + '/ui'));
+        break;
+    case 'production':
+        app.use(require('express-logger')({
+            path: __dirname + '/log/requests.log'
+        }));
+        app.use(express.static(__dirname + '/ui/build/production/Bizcuit'));
+        break;
+}
 
 // All Bizcuit API resources are mounted at /api/*
 app.get('/api/test', function(req, res) {
