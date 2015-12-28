@@ -67,12 +67,12 @@ app.set('view engine', 'hbs');
 if(settings.auth.enabled) {
     var auth = {
         init: function() {
-            var auth = settings.auth.google;
+            var google = settings.auth.google;
 
             passport.use(new GoogleStrategy({
-                callbackURL: auth.callbackUrl,
-                clientID: auth.clientId,
-                clientSecret: auth.clientSecret
+                callbackURL: google.callbackUrl,
+                clientID: google.clientId,
+                clientSecret: google.clientSecret
             },
             function(accessToken, refreshToken, profile, done) {
                 var authId = 'google:' + profile.id;
