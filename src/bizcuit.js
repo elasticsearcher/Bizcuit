@@ -64,6 +64,8 @@ app.engine('hbs', handlebars.engine);
 app.engine('html', handlebars.engine);
 app.set('view engine', 'hbs');
 
+app.use(express.static(__dirname + '/public'));
+
 if(settings.auth.enabled) {
     var auth = {
         init: function() {
@@ -127,8 +129,6 @@ if(settings.auth.enabled) {
         }
     });
 }
-
-app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next){
     res.locals.req = req;
