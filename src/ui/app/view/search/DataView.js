@@ -147,5 +147,5 @@ Ext.define("Bizcuit.view.search.DataView",{
 
     itemSelector: 'div.tile',
 
-    store: Ext.getStore('SearchResults')
+    store: 'SearchResults'
 });

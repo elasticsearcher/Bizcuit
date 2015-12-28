@@ -4,26 +4,6 @@ em {
   font-style: inherit;
 }
 
-
-.service-tile {
-  width: calc(100% - 10px);
-  min-height: 50px;
-  background-color: #fff;
-  float: left;
-  margin: 5px 5px;
-  padding: 10px 10px;
-}
-
-.client-tile {
-  width: 300px;
-  height: 225px;
-  background-color: #fff;
-  float: left;
-  margin: 5px 5px;
-  padding: 10px 10px;
-  overflow-y: auto;
-}
-
 .order-tile {
   width: calc(100% - 10px);
   min-height: 50px;

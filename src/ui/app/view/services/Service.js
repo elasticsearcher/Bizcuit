@@ -4,7 +4,8 @@ Ext.define("Bizcuit.view.services.Service",{
 
     requires: [
         "Bizcuit.view.services.ServiceController",
-        "Bizcuit.view.services.ServiceModel"
+        "Bizcuit.view.services.ServiceModel",
+        "Ext.layout.container.Form"
     ],
 
     controller: "services-service",

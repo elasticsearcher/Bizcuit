@@ -5,6 +5,7 @@ Ext.define('Bizcuit.view.clients.DataViewController', {
     onClientUpdated: function(record) {
     	var store = this.getView().getStore();
     	store.reload();
+        Ext.getStore('ClientsDirectory').reload();
     },
 
     listen: {

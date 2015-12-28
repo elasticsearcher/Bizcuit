@@ -158,7 +158,9 @@ Ext.define('Bizcuit.view.main.ViewportController', {
             Ext.getBody().unmask();
         }
 
-        var stores = [Ext.getStore('ServicesCatalog'), Ext.getStore('ClientsDirectory')];
+        var stores = [Ext.getStore('ServicesCatalog'),
+                      Ext.getStore('ClientsDirectory'),
+                      Ext.getStore('SearchResults')];
         Ext.getBody().mask('Loading...');
         this.callWhenStoresLoaded(stores, onStoresLoaded, this);        
     },

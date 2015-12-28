@@ -4,7 +4,8 @@ Ext.define("Bizcuit.view.clients.Clients",{
 
     requires: [
         "Bizcuit.view.clients.ClientsController",
-        "Bizcuit.view.clients.ClientsModel"
+        "Bizcuit.view.clients.ClientsModel",
+        "Bizcuit.view.clients.DataView"
     ],
 
     controller: "clients-clients",

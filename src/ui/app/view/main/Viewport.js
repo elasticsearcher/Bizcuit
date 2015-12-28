@@ -11,7 +11,13 @@ Ext.define("Bizcuit.view.main.Viewport",{
         'Bizcuit.view.search.SearchBox',
         'Bizcuit.store.ServicesCatalog',
         'Bizcuit.view.orders.Order',
-        'Bizcuit.view.orders.Orders'
+        'Bizcuit.view.orders.Orders',
+        'Bizcuit.view.clients.Clients',
+        'Bizcuit.view.clients.Client',
+        'Bizcuit.view.services.Services',
+        'Bizcuit.view.services.Service',
+        'Bizcuit.view.search.Results',
+        'Bizcuit.view.search.DataView'
     ],
 
     controller: "main-viewport",

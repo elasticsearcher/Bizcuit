@@ -1401,6 +1401,6 @@ $current-resource-root: $Bizcuit-resource-root;
 $relative-image-path-for-uis: $Bizcuit-resource-path;
 @import '../../../../../sass/src/view/clients/DataView';
 @import '../../../../../sass/src/view/orders/DataView';
-@import '../../../../../sass/src/view/main/Viewport';
-@import '../../../../../sass/src/view/search/DataView';
 @import '../../../../../sass/src/view/services/DataView';
+@import '../../../../../sass/src/view/search/DataView';
+@import '../../../../../sass/src/view/main/Viewport';
