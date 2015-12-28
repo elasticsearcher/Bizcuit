@@ -121,7 +121,7 @@ if(settings.auth.enabled) {
             return res.redirect(303, '/bizcuit/login');
         }
 
-        if(settings.auth.google.authorizedUsers.indexOf(req.session.passport.user)) {
+        if(settings.auth.google.authorizedUsers.indexOf(req.session.passport.user) != -1) {
             next();
         } else {
             console.log(req.session.passport.user, 'is not authorized.');
