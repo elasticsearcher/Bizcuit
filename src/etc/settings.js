@@ -23,7 +23,7 @@ var defaultSettings = {
             callbackURL: 'https://localhost/api/auth/google/callback',
             clientID: '',
             clientSercret: '',
-            authorizedUsers = []
+            authorizedUsers: []
         }
     }
 },
