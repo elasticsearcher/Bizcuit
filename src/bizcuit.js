@@ -140,46 +140,34 @@ app.get('/', function(req, res) {
 });
 
 
-switch(app.get('env')) {
+var env = app.get('env'),
+    buildDir;
+
+switch(env) {
     case 'development':
+        buildDir = __dirname + '/ui';
         app.use(require('morgan')('dev'));
-        app.get('/bizcuit', function(req, res) {
-            // Bizcuit the "app" is mounted at /bizcuit and not at the root,
-            // because the root is reserved for a client-facing site, whose
-            // content is managed by Bizcuit
-            res.type('text/html');
-            res.status(200);
-            res.sendFile(__dirname + '/ui/index.html');
-        });
-        // TODO: Once the ExtJS build process is automated, the 'ui/' directory should
-        // only be served in development, and an actual build of the ui should be
-        // generated under 'public/' and served from there in production
-        app.use(express.static(__dirname + '/ui'));
         console.log('DEV MODE');
         break;
     case 'production':
+        buildDir = __dirname + '/ui/build/' + env + '/Bizcuit';
         app.use(require('express-logger')({
             path: __dirname + '/log/requests.log'
         }));
-        app.get('/bizcuit', function(req, res) {
-            // Bizcuit the "app" is mounted at /bizcuit and not at the root,
-            // because the root is reserved for a client-facing site, whose
-            // content is managed by Bizcuit
-            res.type('text/html');
-            res.status(200);
-            res.sendFile(__dirname + '/ui/build/production/Bizcuit/index.html');
-        });
-        app.use(express.static(__dirname + '/ui/build/production/Bizcuit'));
         console.log('PROD MODE');
         break;
 }
 
-// All Bizcuit API resources are mounted at /api/*
-app.get('/api/test', function(req, res) {
+app.get('/bizcuit', function(req, res) {
+    // Bizcuit the "app" is mounted at /bizcuit and not at the root,
+    // because the root is reserved for a client-facing site, whose
+    // content is managed by Bizcuit
+    res.type('text/html');
     res.status(200);
-    res.type('text/plain');
-    res.send('API :D');
+    res.sendFile(buildDir + '/index.html');
 });
+
+app.use(express.static(buildDir));
 
 // 404 page
 app.use(function(req, res) {
