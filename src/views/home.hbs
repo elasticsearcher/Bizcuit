@@ -1,4 +1,10 @@
-<h1>Bizcuit-managed website's home page</h1>
+
+<div class='page-header'>
+	<h1>Welcome to {{brandName}}</h1>
+	<p class='lead'>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet finibus eros. Phasellus congue risus vel enim hendrerit malesuada. Sed id tristique odio. Fusce imperdiet ullamcorper aliquet. Cras porttitor efficitur sagittis. Integer commodo augue sit amet velit egestas, vel congue nulla imperdiet. Sed mauris nibh, maximus in tincidunt sit amet, gravida sit amet arcu.
+	</p>
+</div>
 
 <section>
 
@@ -6,16 +12,9 @@
 		<h3>Our Services</h3>
 		<ul class='list-group'>
 			{{#each services}}
-				<li class='list-group-item'><a href='.'>{{name}}</a></li>
-			{{/each}}
-		</ul>
-	</div>
-
-	<div id='products' class='col-xs-6'>
-		<h3>Our Products</h3>
-		<ul class='list-group'>
-			{{#each products}}
-				<li class='list-group-item'><a href='.'>{{name}}</a></li>
+				<li class='list-group-item'>
+					<a href='.'>{{name}}</a>
+				</li>
 			{{/each}}
 		</ul>
 	</div>

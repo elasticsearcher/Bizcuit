@@ -1,2 +1,103 @@
 
-<h2>Contact Us</h2>
+<h1>Contact Us</h1>
+
+<div>
+	<form class='form-horizontal' method='POST'>
+		<div class='form-group'>
+			<label for='firstName' class='control-label col-sm-2'>First Name</label>
+			<div class='col-sm-10'>
+				<input type='text'
+					   name='firstName'
+					   class='form-control'
+					   placeholder='E.g. John' />
+			</div>
+		</div>
+
+		<div class='form-group'>
+			<label for='lastName' class='control-label col-sm-2'>Last Name</label>
+			<div class='col-sm-10'>
+				<input type='text'
+					   name='lastName'
+					   class='form-control'
+					   placeholder='E.g. Smith' />
+			</div>
+		</div>
+
+		<div class='form-group'>
+			<label for='email' class='control-label col-sm-2'>Email</label>
+			<div class='col-sm-10'>
+				<input type='email'
+					   name='email'
+					   class='form-control'
+					   placeholder='E.g. john.smith@example.com'
+					   pattern='/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/' />
+			</div>
+		</div>
+
+		<div class='form-group'>
+			<label for='subject' class='control-label col-sm-2'>Subject</label>
+			<div class='col-sm-10'>
+				<select name='subject'
+					   class='form-control'>
+					<option value='' selected>Choose one</option>
+					<option value='other'>Other</option>
+			   	</select>
+			</div>
+		</div>
+
+		<div class='form-group'>
+			<label for='message' class='control-label col-sm-2'>Message</label>
+			<div class='col-sm-10'>
+				<textarea name='message'
+					   class='form-control'
+					   placeholder='Please describe your needs.'
+					   rows=5
+					   maxlength=1000></textarea>
+			</div>
+		</div>
+
+		<div class='col-sm-offset-2'>
+			<button type='submit' class='btn btn-success'>Submit</button>
+		</div>
+
+	</form>
+
+</div>
+
+<script>
+$(function() {
+	$('form').validate({
+		rules: {
+			firstName: {
+				required: true,
+				maxlength: 30
+			},
+			lastName: {
+				required: true,
+				maxlength: 30
+			},
+			email: {
+				required: true,
+				email: true,
+				maxlength: 30
+			},
+			subject: {
+				required: false
+			},
+			message: {
+				required: true,
+				maxlength: 1000
+			}
+		},
+
+		highlight: function(el, errorClass) {
+			$(el).closest('.form-group').addClass('has-error');
+		},
+
+		unhighlight: function(el, errorClass) {
+			$(el).closest('.form-group').removeClass('has-error');
+		}
+
+	});
+});
+</script>

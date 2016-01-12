@@ -50,6 +50,11 @@ module.exports = function(app) {
 	    res.render('contact');
 	});
 
+	app.post('/contact', function(req, res) {
+		console.log('Contact form submitted with', req.body);
+	    res.render('contact');
+	});
+
 	app.get('/about', function(req, res) {
 	    res.render('about');
 	});

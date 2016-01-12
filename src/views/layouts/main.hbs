@@ -5,16 +5,17 @@
 <head>
     <title>{{title}}</title>
     <script src='lib/jquery/jquery-2.1.4.js' type='text/javascript'></script>
+    <script src='lib/jquery-validation-1.14.0/jquery.validate.min.js' type='text/javascript'></script>
     <script src='lib/bootstrap-3.3.5-dist/js/bootstrap.min.js' type='text/javascript'></script>
     <link href='lib/bootstrap-3.3.5-dist/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
-    <link href='lib/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css' rel='stylesheet' type='text/css' />
-    <!-- <link href='lib/bootstrap-3.3.5-dist/css/flatly-bootstrap.min.css' rel='stylesheet' type='text/css' /> -->
+    <!-- <link href='lib/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css' rel='stylesheet' type='text/css' /> -->
+    <link href='lib/bootstrap-3.3.5-dist/css/flatly-bootstrap.min.css' rel='stylesheet' type='text/css' />
 </head>
 
 <body>
 
 <div id='page'>
-	<div class='container'>
+	<header class='container'>
 		<div role='navigation' class='navbar navbar-default'>
 		    <!-- <div class='container-fluid'> -->
 	        <div class='navbar-header'>
@@ -33,27 +34,26 @@
 	            <ul class='nav navbar-nav'>
 	                <li class='{{ navClass "/" }}'><a href='/'>Home</a></li>
 	                <li class='{{ navClass "/services" }}'><a href='/services'>Services</a></li>
-	                <li class='{{ navClass "/products" }}'><a href='/products'>Services</a></li>
-	                <li class='{{ navClass "/faq" }}'><a href='/faq'>FAQ</a></li>
 	                <li class='{{ navClass "/contact" }}'><a href='/contact'>Contact Us</a></li>
+	                <li class='{{ navClass "/faq" }}'><a href='/faq'>FAQ</a></li>
 	                <li class='{{ navClass "/about" }}'><a href='/about'>About</a></li>
 	            </ul>
 	        </div>
 		    <!-- </div> -->
 		</div>
-	</div> <!-- container -->
+	</header>
 
-	<div class='container'>
+	<section class='container'>
 		{{{body}}}
-	</div>
+	</section>
 
 	<hr />
 
-	<div class='container'>
+	<section class='container'>
 		<span id='footer'>
     		©{{year}} {{brandName}}, all rights reserved.
 		</span>
-	</div>
+	</section>
 
 </div>
 
