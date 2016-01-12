@@ -1,4 +1,23 @@
 <h1>Bizcuit-managed website's home page</h1>
-<p>
-    Coming soon...
-</p>
+
+<section>
+
+	<div id='services' class='col-xs-6'>
+		<h3>Our Services</h3>
+		<ul class='list-group'>
+			{{#each services}}
+				<li class='list-group-item'><a href='.'>{{name}}</a></li>
+			{{/each}}
+		</ul>
+	</div>
+
+	<div id='products' class='col-xs-6'>
+		<h3>Our Products</h3>
+		<ul class='list-group'>
+			{{#each products}}
+				<li class='list-group-item'><a href='.'>{{name}}</a></li>
+			{{/each}}
+		</ul>
+	</div>
+
+</section>

@@ -1,6 +1,11 @@
 var extend = require('util')._extend;
 
 var defaultSettings = {
+
+    template: {
+        brandName: 'Bizcuit Store'
+    },
+
     elasticsearch: {
         url: 'http://localhost:9200',
         index: 'bizcuit'

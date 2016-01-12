@@ -57,7 +57,8 @@ var admin = require('./routes/admin')(app),
     clients = require('./routes/clients')(app),
     services = require('./routes/services')(app),
     orders = require('./routes/orders')(app),
-    search = require('./routes/search')(app);
+    search = require('./routes/search')(app),
+    pages = require('./routes/pages')(app);
 
 // Set handlebars as the view engine
 app.engine('hbs', handlebars.engine);
@@ -130,15 +131,6 @@ if(settings.auth.enabled) {
     });
 }
 
-app.use(function(req, res, next){
-    res.locals.req = req;
-    next();
-});
-
-app.get('/', function(req, res) {
-    res.render('home');
-});
-
 
 var env = app.get('env'),
     buildDir;
@@ -158,6 +150,7 @@ switch(env) {
         break;
 }
 
+
 app.get('/bizcuit', function(req, res) {
     // Bizcuit the "app" is mounted at /bizcuit and not at the root,
     // because the root is reserved for a client-facing site, whose
@@ -167,7 +160,9 @@ app.get('/bizcuit', function(req, res) {
     res.sendFile(buildDir + '/index.html');
 });
 
+
 app.use(express.static(buildDir));
+
 
 // 404 page
 app.use(function(req, res) {
@@ -176,6 +171,7 @@ app.use(function(req, res) {
     res.send('404 Not Found');
 });
 
+
 // 500 page
 app.use(function(err, req, res, next) {
     console.error(err.stack);
@@ -183,6 +179,7 @@ app.use(function(err, req, res, next) {
     res.status(500);
     res.send('500 Internal Error');
 });
+
 
 if(settings.https.enabled) {
     app.set('port', 443);
