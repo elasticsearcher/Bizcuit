@@ -1,11 +1,6 @@
 
-var settings = require('../etc/settings'),
-    esClient = require('../es/es-client')(settings.elasticsearch);
-
-function search(req, res) {
-    esClient.searchIndex(req.body, res);
-}
+var esReq = require('./helpers/es-request')();
 
 module.exports = function(app) {
-    app.post('/api/search', search);
+    app.post('/api/search', esReq.search);
 };

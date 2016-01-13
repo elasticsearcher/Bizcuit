@@ -1,15 +1,10 @@
 
 var settings = require('../etc/settings'),
-    esClient = require('../es/es-client')(settings.elasticsearch);
+    esClient = require('../es/es-client')(settings.elasticsearch),
+    esReq = require('./helpers/es-request')('client');
 
 function upsertClient(req, res) {
     var data = req.body;
-
-    // FIXME: why does ExtJS submit an ID for new records?
-    // Need to manually remove it right now, because Elasticsearch,
-    // will automatically assign a unique ID (within a given mapping type).
-    var id = data.id;
-    delete data.id;
 
     // Process flat address fields
     addressFields = {};
@@ -27,25 +22,12 @@ function upsertClient(req, res) {
         delete data[key];
     }
 
-    if(id == 'new') {
-        esClient.postDocument('client', data, res);
-    } else {
-        esClient.updateDocument('client', id, data, res);
-    }
-}
-
-function getClients(req, res) {
-    esClient.searchDocuments('client', res);
-}
-
-function getClientById(req, res) {
-    var id = req.params.id;
-    esClient.getDocumentById('client', id, res);
+    esReq.upsert(req, res);
 }
 
 module.exports = function(app) {
     app.post('/api/clients', upsertClient);
     app.put('/api/clients/:id', upsertClient);
-    app.get('/api/clients', getClients);
-    app.get('/api/clients/:id', getClientById);
+    app.get('/api/clients', esReq.get);
+    app.get('/api/clients/:id', esReq.get);
 };

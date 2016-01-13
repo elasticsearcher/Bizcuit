@@ -1,6 +1,15 @@
 var restler = require('restler'),
     util = require('util');
 
+function addPromiseCallbacks(restlerReq, resolve, reject) {
+    restlerReq.on('success', function(result, response) {
+        resolve([result, response]);
+    })
+    .on('fail', function(result, response) {
+        reject([result, response]);
+    });
+}
+
 module.exports = function(settings) {
     var ES_URL = settings.url,
         INDEX = settings.index,
@@ -35,7 +44,6 @@ module.exports = function(settings) {
         },
 
         putMappings: function() {
-            console.log('PUT MAPPING DERP TEH DERP');
             var last = null;
 
             for(var name in MAPPINGS) {
@@ -150,47 +158,47 @@ module.exports = function(settings) {
             });
         },
 
-        postDocument: function(mapping, doc, res) {
+        postDocument: function(mapping, doc) {
             doc.updated = Date.now();
-            restler.post(util.format('%s/%s?refresh=true', INDEX_URL, mapping), { data: JSON.stringify(doc)})
-                .on('success', function(result, response) {
-                    res.status(201).json({ success: true });
-                })
-                .on('fail', function(result, response) {
-                    res.status(result.status).json({ error: result });
-                });
+
+            var promise = new Promise(function(resolve, reject) {
+                var req = restler.post(util.format('%s/%s?refresh=true', INDEX_URL, mapping), { data: JSON.stringify(doc)});
+                addPromiseCallbacks(req, resolve, reject);
+            });
+
+            return promise;
         },
 
-        updateDocument: function(mapping, id, doc, res) {
+        updateDocument: function(mapping, id, doc) {
             doc.updated = Date.now();
             removeOmittedFields(doc);
-            restler.put(util.format('%s/%s/%s?refresh=true', INDEX_URL, mapping, id), { data: JSON.stringify(doc)})
-                .on('success', function(result, response) {
-                    res.status(200).json({ success: true });
-                })
-                .on('fail', function(result, response) {
-                    res.status(result.status).json({ error: result });
-                });
+
+            var promise = new Promise(function(resolve, reject) {
+                var req = restler.put(util.format('%s/%s/%s?refresh=true', INDEX_URL, mapping, id), { data: JSON.stringify(doc)});
+                addPromiseCallbacks(req, resolve, reject);
+            });
+
+            return promise;
         },
 
-        searchIndex: function(query, res) {
+        searchIndex: function(query) {
             query.from = 0;
             query.size = 10000;
             
-            restler.post(util.format('%s/_search', INDEX_URL), 
-                {
-                    data: JSON.stringify(query)
-                })
-                .on('success', function(result, response) {
-                    res.status(200).json(result);
-                })
-                .on('fail', function(result, response) {
-                    res.status(result.status).json({ error: result });
-                });
+            var promise = new Promise(function(resolve, reject) {
+                var req = restler.post(util.format('%s/_search', INDEX_URL), 
+                    {
+                        data: JSON.stringify(query)
+                    });
+                addPromiseCallbacks(req, resolve, reject);
+            });
+
+            return promise;
         },
 
-        searchDocuments: function(mapping, res) {
-            restler.post(util.format('%s/%s/_search', INDEX_URL, mapping), 
+        searchDocuments: function(mapping) {
+            var promise = new Promise(function(resolve, reject) {
+                var req = restler.post(util.format('%s/%s/_search', INDEX_URL, mapping), 
                 {
                     data: JSON.stringify({
                         // TODO: get from/size from the query string
@@ -202,23 +210,21 @@ module.exports = function(settings) {
                             }
                         }
                     })
-                })
-                .on('success', function(result, response) {
-                    res.status(200).json(result);
-                })
-                .on('fail', function(result, response) {
-                    res.status(result.status).json({ error: result });
                 });
+
+                addPromiseCallbacks(req, resolve, reject);
+            });
+
+            return promise;
         },
 
-        getDocumentById: function(mapping, id, res) {
-            restler.get(util.format('%s/%s/%s', INDEX_URL, mapping, id))
-                .on('success', function(result, response) {
-                    res.status(200).json(result);
-                })
-                .on('fail', function(result, response) {
-                    res.status(result.status).json({ error: result });
-                });
+        getDocumentById: function(mapping, id) {
+            var promise = new Promise(function(resolve, reject) {
+                var req = restler.get(util.format('%s/%s/%s', INDEX_URL, mapping, id));
+                addPromiseCallbacks(req, resolve, reject);
+            });
+
+            return promise;
         }
     };
 }
