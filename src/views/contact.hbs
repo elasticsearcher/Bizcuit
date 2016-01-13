@@ -45,6 +45,9 @@
 				<select name='subject'
 					   class='form-control'>
 					<option value='' selected>Choose one</option>
+					{{#each services}}
+						<option value='{{id}}'>{{name}}</option>
+					{{/each}}
 					<option value='other'>Other</option>
 			   	</select>
 			</div>

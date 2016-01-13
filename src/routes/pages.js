@@ -1,6 +1,14 @@
 
 var settings = require('../etc/settings'),
-	esClient = require('../es/es-client')(settings.elasticsearch);
+	esClient = require('../es/es-client')(settings.elasticsearch),
+	services = require('./helpers/es-request')('service');
+
+function mapEsResult(result) {
+	return result.hits.hits.map(function(hit) {
+		hit._source.id = hit._id;
+		return hit._source;
+	});
+}
 
 module.exports = function(app) {
 	// Define the template variables that should be available
@@ -18,25 +26,11 @@ module.exports = function(app) {
 	});
 
 	app.get('/', function(req, res) {
-	    res.render('home', {
-	    	services: [{
-	    		name: 'Service 1'
-	    	}, {
-	    		name: 'Service 2'
-	    	}, {
-	    		name: 'Service 3'
-	    	}, {
-	    		name: 'Service 4'
-	    	}],
-
-	    	products: [{
-	    		name: 'Product 1'
-	    	}, {
-	    		name: 'Product 2'
-	    	}, {
-	    		name: 'Product 3'
-	    	}]
-	    });
+		services.get(req).then(function(result) {
+			res.render('home', {
+		    	services: mapEsResult(result)
+		    });
+		});
 	});
 
 	app.get('/services', function(req, res) {
@@ -48,7 +42,11 @@ module.exports = function(app) {
 	});
 
 	app.get('/contact', function(req, res) {
-	    res.render('contact');
+		services.get(req).then(function(result) {
+			res.render('contact', {
+		    	services: mapEsResult(result)
+		    });
+		});
 	});
 
 	app.post('/contact', function(req, res) {

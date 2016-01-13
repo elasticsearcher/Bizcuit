@@ -9,10 +9,21 @@ module.exports = function(mapping) {
 		return promise.then(function(result) {
 			var restlerRes = result[1],
 				result = result[0];
-			// result.success = true;
-	        res.status(restlerRes.statusCode).json(result);
+
+			// If a response object is provided, write the JSON to it
+			if(res) {
+				// result.success = true;
+	        	res.status(restlerRes.statusCode).json(result);
+			} else {
+				return result;
+			}
 	    }).catch(function(result) {
-	        res.status(restlerRes.statusCode).json({ error: result });
+	    	result = { error: result };
+	    	if(res) {
+		        res.status(restlerRes.statusCode).json(result);
+		    } else {
+		    	return result;
+		    }
 	    });
 	}
 
