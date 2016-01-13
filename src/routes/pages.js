@@ -1,5 +1,6 @@
 
-var settings = require('../etc/settings');
+var settings = require('../etc/settings'),
+	esClient = require('../es/es-client')(settings.elasticsearch);
 
 module.exports = function(app) {
 	// Define the template variables that should be available
