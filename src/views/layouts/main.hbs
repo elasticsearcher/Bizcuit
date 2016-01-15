@@ -30,19 +30,27 @@
 		            </button>
 		            <a class='navbar-brand' href='.'>{{brandName}}</a>
 		        </div>
-
 		        <div class='collapse navbar-collapse' id='navbar-collapse'>
 		            <ul class='nav navbar-nav navbar-right'>
-		                <li class='{{ navClass "/" }}'><a href='/'>Home</a></li>
-		                <li class='{{ navClass "/services" }}'><a href='/services'>Services</a></li>
-		                <li class='{{ navClass "/contact" }}'><a href='/contact'>Contact Us</a></li>
-		                <li class='{{ navClass "/faq" }}'><a href='/faq'>FAQ</a></li>
-		                <li class='{{ navClass "/about" }}'><a href='/about'>About</a></li>
+		                <li class='{{ navClass "/" }}'><a href='/'>{{l20n.values.navHome}}</a></li>
+		                <li class='{{ navClass "/services" }}'><a href='/services'>{{l20n.values.navServices}}</a></li>
+		                <li class='{{ navClass "/contact" }}'><a href='/contact'>{{l20n.values.navContact}}</a></li>
+		                <li class='{{ navClass "/faq" }}'><a href='/faq'>{{l20n.values.navFaq}}</a></li>
+		                <li class='{{ navClass "/about" }}'><a href='/about'>{{l20n.values.navAbout}}</a></li>
 		            </ul>
 		        </div>
 		    </div>
 		</div>
 	</header>
+
+	<section class='container'>
+        <small>
+	        <ul class='list-unstyled list-inline pull-right'>
+				<li><a href='/en'>English</a></li>
+				<li><a href='/fr'>Français</a></li>
+			</ul>
+		</small>
+	</section>
 
 	<section class='container'>
 		{{{body}}}

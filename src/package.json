@@ -19,7 +19,7 @@
     "products"
   ],
   "author": "Andrew Pak",
-  "license": "GPL v3",
+  "license": "GPL-3",
   "bugs": {
     "url": "https://github.com/elasticsearcher/Bizcuit/issues"
   },
@@ -31,9 +31,12 @@
     "express-handlebars": "^2.0.1",
     "express-logger": "0.0.3",
     "express-session": "^1.12.1",
+    "l20n": "^3.5.0",
     "morgan": "^1.6.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^0.2.0",
-    "restler": "^3.4.0"
+    "restler": "^3.4.0",
+    "string.prototype.endswith": "^0.2.0",
+    "string.prototype.startswith": "^0.2.0"
   }
 }

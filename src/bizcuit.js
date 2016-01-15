@@ -24,12 +24,15 @@ app.use(require('cookie-parser')(settings.session.cookieSecret));
 app.use(require('express-session')({
     key: 'bizcuit.sid',
     cookie: {
-        secure: true,
+        secure: settings.https.enabled,
         httpOnly: true,
         signed: true,
         maxAge: settings.session.maxAge
     }
 }));
+
+// Set up l20n
+app.use(require('./l20n-middleware')(app));
 
 // Logging
 app.use(require('morgan')('dev'));
