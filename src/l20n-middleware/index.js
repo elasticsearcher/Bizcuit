@@ -18,7 +18,11 @@ function setLang(req, res, lang) {
     
     session.l20n = {
         ctx: ctx,
-        values: {}
+        values: {},
+        is: {
+            enCA: lang === 'en-CA',
+            frCA: lang === 'fr-CA'
+        }
     };
 
     session.lang = lang;
@@ -28,7 +32,8 @@ function setLang(req, res, lang) {
         'navServices',
         'navContact',
         'navFaq',
-        'navAbout'
+        'navAbout',
+        'allRightsReserved'
     ];
 
     // Translate values common to all pages

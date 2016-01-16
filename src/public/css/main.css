@@ -1,7 +1,17 @@
 body {
-	margin-top: 50px;
+	margin-top: 78px;
 }
 
-.lang-selector {
-	background-color: inherit;
+div.lang-selector {
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding-right: 0;
+	background-color: #E8E8E8;
+	width: 100%;
+	padding: 5px 5px;
+}
+
+.navbar {
+	top: 28px;
 }

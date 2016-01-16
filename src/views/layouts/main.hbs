@@ -14,7 +14,27 @@
 </head>
 
 <body>
-
+<div class='lang-selector'>
+    <small>
+        <ul class='lang-selector list-unstyled list-inline pull-right'>
+			<li>
+				{{#if l20n.is.enCA}}
+					<span><img src='img/flags/Canada.png' /> English</span>
+				{{else}}
+					<a href='/en'><img src='img/flags/Canada.png' /> English</a>
+				{{/if}}
+			</li>
+			|
+			<li>
+				{{#if l20n.is.frCA}}
+					<span><img src='img/flags/Canada.png' /> Français</span>
+				{{else}}
+					<a href='/fr'><img src='img/flags/Canada.png' /> Français</a>
+				{{/if}}
+			</li>
+		</ul>
+	</small>
+</div>
 <div id='page'>
 	<header>
 		<div role='navigation' class='navbar navbar-default navbar-fixed-top'>
@@ -44,15 +64,6 @@
 	</header>
 
 	<section class='container'>
-        <small>
-	        <ul class='list-unstyled list-inline pull-right'>
-				<li><a href='/en'>English</a></li>
-				<li><a href='/fr'>Français</a></li>
-			</ul>
-		</small>
-	</section>
-
-	<section class='container'>
 		{{{body}}}
 	</section>
 
@@ -60,7 +71,7 @@
 
 	<section class='container'>
 		<span id='footer'>
-    		©{{year}} {{brandName}}, all rights reserved.
+    		©{{year}} {{brandName}}, {{l20n.values.allRightsReserved}}.
 		</span>
 		<br />
 		<br />
