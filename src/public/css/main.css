@@ -1,17 +1,17 @@
 body {
-	margin-top: 78px;
+	margin-top: 70px;
 }
 
 div.lang-selector {
+	background-color: #E8E8E8;
 	position: fixed;
 	top: 0;
 	right: 0;
 	padding-right: 0;
-	background-color: #E8E8E8;
 	width: 100%;
-	padding: 5px 5px;
+	padding: 1px 5px;
 }
 
 .navbar {
-	top: 28px;
+	top: 20px;
 }

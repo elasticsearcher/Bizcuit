@@ -1,5 +1,13 @@
 Ext.define('Bizcuit.view.services.ServiceModel', {
-    extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.services-service'
+    extend: 'Bizcuit.view.base.ModelViewModel',
+    alias: 'viewmodel.services-service',
+
+    requires: [
+    	'Bizcuit.store.Categories'
+    ],
+
+    stores: {
+    	Categories: Ext.create('Bizcuit.store.Categories')
+    }
 
 });

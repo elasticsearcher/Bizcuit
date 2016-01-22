@@ -3,6 +3,7 @@ Ext.define('Bizcuit.model.Service', {
 
     fields: [
         { name: 'id', type: 'string', mapping: '_id' },
+        { name: 'category_id', type: 'string', mapping: '_source.category_id' },
         { name: 'name', type: 'string', mapping: '_source.name' },
         { name: 'description', type: 'string', mapping: '_source.description' },
         { name: 'price', type: 'number', mapping: '_source.price' },

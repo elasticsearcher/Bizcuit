@@ -1,3 +1,11 @@
+/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:379 */
+.x-btn-gray-small-tc {
+    background-position: 0 0;
+}
+/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:383 */
+.x-btn-gray-small-bc {
+    background-position: 0 -1px;
+}
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:388 */
 .x-btn-gray-small-tr,
 .x-btn-gray-small-br,
@@ -4158,22 +4166,4 @@ table tr:hover td {
 /* http://localhost:1841/sass/src/view/orders/DataView.scss:127 */
 td.number {
     text-align: right;
-}
-/* http://localhost:1841/sass/src/view/services/DataView.scss:2 */
-.service-tile {
-    width: calc(100% - 10px);
-    min-height: 50px;
-    background-color: #fff;
-    float: left;
-    margin: 5px 5px;
-    padding: 10px 10px;
-}
-/* http://localhost:1841/sass/src/view/services/DataView.scss:11 */
-.x-view-item-focused {
-    outline: 1px solid #5fa2dd !important;
-    outline-offset: -1px;
-}
-/* http://localhost:1841/sass/src/view/services/DataView.scss:16 */
-.dataview-container {
-    padding: 5px 30px 5px 5px;
 }

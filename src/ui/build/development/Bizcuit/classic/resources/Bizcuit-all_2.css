@@ -6927,6 +6927,34 @@ em {
 .dataview-container {
     padding: 5px 30px 5px 5px;
 }
+/* http://localhost:1841/sass/src/view/services/DataView.scss:2 */
+.service-tile {
+    width: calc(100% - 10px);
+    min-height: 50px;
+    background-color: #fff;
+    float: left;
+    margin: 5px 5px;
+    padding: 10px 10px;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:11 */
+.x-view-item-focused {
+    outline: 1px solid #5fa2dd !important;
+    outline-offset: -1px;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:16 */
+.dataview-container {
+    padding: 5px 30px 5px 5px;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:22 */
+span.category {
+    float: right;
+    border: 1px solid #2eadf5;
+    border-radius: 2px;
+    background-color: #2eadf5;
+    color: white;
+    padding: 0px 3px;
+    font-size: 0.75em;
+}
 /* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:456 */
 .x-treelist-navigation {
     background-color: #32404e;
@@ -14357,12 +14385,4 @@ em {
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:371 */
 .x-btn-gray-small-mr {
     background-position: right top;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:379 */
-.x-btn-gray-small-tc {
-    background-position: 0 0;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:383 */
-.x-btn-gray-small-bc {
-    background-position: 0 -1px;
 }

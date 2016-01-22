@@ -16,3 +16,13 @@
 .dataview-container {
   padding: 5px 30px 5px 5px;
 }
+
+span.category {
+	float: right;
+	border: 1px solid $color-soft-blue;
+	border-radius: 2px;
+	background-color: $color-soft-blue;
+	color: white;
+	padding: 0px 3px;
+	font-size: 0.75em;
+}

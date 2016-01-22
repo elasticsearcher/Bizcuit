@@ -18,7 +18,8 @@ Ext.define("Bizcuit.view.main.Viewport",{
         'Bizcuit.view.services.Service',
         'Bizcuit.view.search.Results',
         'Bizcuit.view.search.DataView',
-        'Bizcuit.view.categories.Categories'
+        'Bizcuit.view.categories.Categories',
+        'Bizcuit.view.services.DataView'
     ],
 
     controller: "main-viewport",

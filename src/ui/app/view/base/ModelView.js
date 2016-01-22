@@ -1,5 +1,5 @@
 
-Ext.define("Bizcuit.view.base.ModelView",{
+Ext.define("Bizcuit.view.base.ModelView", {
     extend: "Ext.form.Panel",
 
     requires: [

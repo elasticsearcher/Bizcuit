@@ -49,13 +49,13 @@ Ext.define("Bizcuit.view.orders.DataView",{
         '</tpl>',
         {
             getHighlightedValue: function(data, field) {
-             // FIXME: refactor highlighter functions in all dataviews
-            var value = data[field],
-                highlight = data.highlight || {},
-                edgeNGram = Ext.String.format('{0}.edge_ngram', field)
-                highlightedValue = highlight[field] || highlight[edgeNGram];
+                // FIXME: refactor highlighter functions in all dataviews
+                var value = data[field],
+                    highlight = data.highlight || {},
+                    edgeNGram = Ext.String.format('{0}.edge_ngram', field),
+                    highlightedValue = highlight[field] || highlight[edgeNGram];
 
-            return highlightedValue || value;
+                return highlightedValue || value;
             },
 
             formatCurrency: Ext.util.Format.currency,
