@@ -8,5 +8,5 @@ Ext.define('Bizcuit.view.base.ModelNameMixin', {
 
     getModelNamePlural: function() {
         return this.getModelName() + 's';
-    },
+    }
 });

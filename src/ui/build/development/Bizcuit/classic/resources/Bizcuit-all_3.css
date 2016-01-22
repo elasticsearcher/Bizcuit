@@ -1,89 +1,3 @@
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-pressed.x-btn-soft-purple-toolbar-small:before {
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-soft-purple-toolbar-small-pressed-corners.gif), sides:url(images/btn/btn-soft-purple-toolbar-small-pressed-sides.gif)" !important;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-pressed.x-btn-soft-purple-toolbar-small:before {
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-soft-purple-toolbar-small-focus-pressed-corners.gif), sides:url(images/btn/btn-soft-purple-toolbar-small-focus-pressed-sides.gif)" !important;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-disabled.x-btn-soft-purple-toolbar-small:before {
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-soft-purple-toolbar-small-disabled-corners.gif), sides:url(images/btn/btn-soft-purple-toolbar-small-disabled-sides.gif)" !important;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/button/Button.scss:1246 */
-.x-button-soft-purple-toolbar-small-cell > .x-grid-cell-inner {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/button/Button.scss:1251 */
-.x-button-soft-purple-toolbar-small-cell > .x-grid-cell-inner >.x-btn-soft-purple-toolbar-small {
-    vertical-align: top;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:187 */
-.x-btn-gray-small {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    border-radius: 0;
-    padding: 7px 7px 7px 7px;
-    border-width: 1px;
-    border-style: solid;
-    background-color: #949495;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:237 */
-.x-btn-gray-small-mc {
-    background-color: #949495;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:264 */
-.x-nbr .x-btn-gray-small {
-    padding: 0 !important;
-    border-width: 0 !important;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    -ms-border-radius: 0px;
-    border-radius: 0px;
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:281 */
-.x-btn-gray-small-frameInfo {
-    font-family: th-1-1-1-1-1-1-1-1-7-7-7-7;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:347 */
-.x-btn-gray-small-tl {
-    background-position: 0 -2px;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:351 */
-.x-btn-gray-small-tr {
-    background-position: right -3px;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:355 */
-.x-btn-gray-small-bl {
-    background-position: 0 -4px;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:359 */
-.x-btn-gray-small-br {
-    background-position: right -5px;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:363 */
-.x-btn-gray-small-ml {
-    background-position: 0 top;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:371 */
-.x-btn-gray-small-mr {
-    background-position: right top;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:379 */
-.x-btn-gray-small-tc {
-    background-position: 0 0;
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:383 */
-.x-btn-gray-small-bc {
-    background-position: 0 -1px;
-}
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:388 */
 .x-btn-gray-small-tr,
 .x-btn-gray-small-br,
@@ -4144,4 +4058,122 @@
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/button/Button.scss:1251 */
 .x-button-blue-toolbar-small-cell > .x-grid-cell-inner >.x-btn-blue-toolbar-small {
     vertical-align: top;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:3 */
+em {
+    background-color: rgba(255, 255, 0, 0.4);
+    font-style: inherit;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:8 */
+.order-tile {
+    width: calc(100% - 10px);
+    min-height: 50px;
+    background-color: #fff;
+    float: left;
+    margin: 5px 5px;
+    padding: 10px 10px;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:17 */
+.x-view-item-focused {
+    outline: 1px solid #5fa2dd !important;
+    outline-offset: -1px;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:22 */
+.dataview-container {
+    padding: 5px 30px 5px 5px;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:26 */
+.client {
+    font-size: 14px;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:30 */
+.client a {
+    text-decoration: none;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:36 */
+table a:link {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:44 */
+table a:visited {
+    color: #999;
+    font-weight: bold;
+    text-decoration: none;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:52 */
+table a:active,
+table a:hover {
+    color: #bd5a35;
+    text-decoration: underline;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:60 */
+table {
+    color: #666;
+    margin: 0px;
+    border: #ddd 1px solid;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:73 */
+table th {
+    padding: 11px 15px 12px 15px;
+    background: #ededed;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:80 */
+table th:first-child {
+    text-align: left;
+    padding-left: 20px;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:87 */
+table tr {
+    text-align: center;
+    padding-left: 20px;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:94 */
+table td:first-child {
+    text-align: left;
+    padding-left: 20px;
+    border-left: 0;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:102 */
+table td {
+    padding: 10px;
+    background: #fafafa;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:109 */
+table tr.even td {
+    background: #f6f6f6;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:115 */
+table tr:last-child td {
+    border-bottom: 0;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:121 */
+table tr:hover td {
+    background: #f2f2f2;
+}
+/* http://localhost:1841/sass/src/view/orders/DataView.scss:127 */
+td.number {
+    text-align: right;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:2 */
+.service-tile {
+    width: calc(100% - 10px);
+    min-height: 50px;
+    background-color: #fff;
+    float: left;
+    margin: 5px 5px;
+    padding: 10px 10px;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:11 */
+.x-view-item-focused {
+    outline: 1px solid #5fa2dd !important;
+    outline-offset: -1px;
+}
+/* http://localhost:1841/sass/src/view/services/DataView.scss:16 */
+.dataview-container {
+    padding: 5px 30px 5px 5px;
 }

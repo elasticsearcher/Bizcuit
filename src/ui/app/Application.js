@@ -15,6 +15,10 @@ Ext.define('Bizcuit.Application', {
         'ServicesCatalog'
     ],
 
+    models: [
+        'Category'
+    ],
+
     launch: function () {
         // TODO - Launch the application
     },

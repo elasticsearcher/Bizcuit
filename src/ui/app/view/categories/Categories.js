@@ -16,9 +16,4 @@ Ext.define("Bizcuit.view.categories.Categories",{
     getModelNamePlural: function() {
         return 'categories';
     }
-
-    // controller: "categories-categories",
-    // viewModel: {
-    //     type: "categories-categories"
-    // }
 });

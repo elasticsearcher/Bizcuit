@@ -20,8 +20,8 @@ Ext.define('Bizcuit.view.main.ViewportController', {
         'clients/:id': 'onClientId',
         'orders/:id': 'onOrderId',
         'products/:id': 'onProductId',
-        'services/:id': 'onServiceId'
-
+        'services/:id': 'onServiceId',
+        'categories/:id': 'onCategoryId'
     },
 
     setCurrentView: function(hashTag, viewName, config) {
@@ -211,6 +211,29 @@ Ext.define('Bizcuit.view.main.ViewportController', {
             view.loadRecord(record);
         } else {
             Bizcuit.model.Service.load(id, {
+                success: function(record) {
+                    view = me.setCurrentView(viewName, viewName);
+                    view.loadRecord(record);
+                }
+            })
+        }
+    },
+
+    onCategoryId: function(id) {
+        var viewName = 'categories.Category',
+            record = null,
+            me = this,
+            view = null;
+
+        if(id == 'new') {
+            record = Ext.create('Bizcuit.model.Category', {
+                id: id
+            });
+
+            view = this.setCurrentView(viewName, viewName);
+            view.loadRecord(record);
+        } else {
+            Bizcuit.model.Category.load(id, {
                 success: function(record) {
                     view = me.setCurrentView(viewName, viewName);
                     view.loadRecord(record);
