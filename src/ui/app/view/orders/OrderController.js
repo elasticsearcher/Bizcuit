@@ -1,14 +1,10 @@
 Ext.define('Bizcuit.view.orders.OrderController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Bizcuit.view.base.ModelViewController',
     alias: 'controller.orders-order',
 
     requires: [
         'Bizcuit.model.OrderItem'
     ],
-
-    onCancel: function() {
-    	Ext.History.back();
-    },
 
     onSave: function(button) {
     	var form = button.up('form'),

@@ -1,21 +1,8 @@
 
 Ext.define("Bizcuit.view.services.Service",{
-    extend: "Ext.form.Panel",
+    extend: "Bizcuit.view.base.ModelView",
 
-    requires: [
-        "Bizcuit.view.services.ServiceController",
-        "Bizcuit.view.services.ServiceModel",
-        "Ext.layout.container.Form"
-    ],
-
-    controller: "services-service",
-    viewModel: {
-        type: "services-service"
-    },
-
-    title: 'Service',
-
-    layout: 'form',
+    model: 'Bizcuit.model.Service',
 
     items: [
         {
@@ -33,17 +20,5 @@ Ext.define("Bizcuit.view.services.Service",{
             fieldLabel: 'Price',
             name: 'price'
         }
-    ],
-
-    buttons: [
-        {
-            text: 'Cancel',
-            handler: 'onCancel'
-        },
-        {
-            text: 'Save',
-            handler: 'onSave'
-        }
     ]
-
 });

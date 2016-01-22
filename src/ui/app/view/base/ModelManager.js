@@ -12,6 +12,10 @@ Ext.define("Bizcuit.view.base.ModelManager",{
         type: "base-modelmanager"
     },
 
+    mixins: {
+        modelName: 'Bizcuit.view.base.ModelNameMixin'
+    },
+
     layout: {
       type: 'vbox'
     },
@@ -22,17 +26,6 @@ Ext.define("Bizcuit.view.base.ModelManager",{
 
     glyphs: {
         'new': 'xf067@FontAwesome'
-    },
-
-    getModelName: function() {
-        if(!this.modelName) {
-            this.modelName = this.model.substring(this.model.lastIndexOf('.') + 1).toLowerCase();
-        }
-        return this.modelName;
-    },
-
-    getModelNamePlural: function() {
-        return this.getModelName() + 's';
     },
 
     getStoreName: function() {

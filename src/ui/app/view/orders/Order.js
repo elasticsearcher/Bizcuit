@@ -1,6 +1,6 @@
 
 Ext.define("Bizcuit.view.orders.Order",{
-    extend: "Ext.form.Panel",
+    extend: "Bizcuit.view.base.ModelView",
 
     requires: [
         "Bizcuit.view.orders.OrderController",
@@ -15,7 +15,7 @@ Ext.define("Bizcuit.view.orders.Order",{
         type: "orders-order"
     },
 
-    title: 'Order',
+    model: 'Bizcuit.model.Order',
 
     config: {
         order: null
@@ -181,17 +181,6 @@ Ext.define("Bizcuit.view.orders.Order",{
             ]
         })
 
-        this.callParent();
-    },
-
-    buttons: [
-        {
-            text: 'Cancel',
-            handler: 'onCancel'
-        },
-        {
-            text: 'Save',
-            handler: 'onSave'
-        }
-    ]
+        this.callParent(arguments);
+    }
 });

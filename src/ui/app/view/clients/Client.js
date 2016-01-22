@@ -1,22 +1,8 @@
 
-Ext.define("Bizcuit.view.clients.Client",{
-    extend: "Ext.form.Panel",
+Ext.define("Bizcuit.view.clients.Client", {
+    extend: "Bizcuit.view.base.ModelView",
 
-    requires: [
-        "Bizcuit.view.clients.ClientController",
-        "Bizcuit.view.clients.ClientModel"
-    ],
-
-    controller: "clients-client",
-    viewModel: {
-        type: "clients-client"
-    },
-
-    title: 'Client',
-
-    layout: 'form',
-
-    defaultType: 'textfield',
+    model: 'Bizcuit.model.Client',
 
     items: [
         {
@@ -63,17 +49,6 @@ Ext.define("Bizcuit.view.clients.Client",{
         {
             fieldLabel: 'Country',
             name: 'address_country'
-        }
-    ],
-
-    buttons: [
-        {
-            text: 'Cancel',
-            handler: 'onCancel'
-        },
-        {
-            text: 'Save',
-            handler: 'onSave'
         }
     ]
 });
