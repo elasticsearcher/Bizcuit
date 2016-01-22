@@ -125,6 +125,19 @@ module.exports = function(settings) {
                         ]
                     }
 
+                ],
+
+                category: [
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y08',
+                        name: 'Home Improvement',
+                        description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.'
+                    },
+                    {
+                        id: 'BVHaZbTo1RmTTqkzSdf2',
+                        name: 'Miscellaneous',
+                        description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.'
+                    }
                 ]
             };
 
@@ -135,7 +148,7 @@ module.exports = function(settings) {
                     delete d.id;
                     restler.put(util.format('%s/%s/%s', INDEX_URL, mapping, id), { data: JSON.stringify(d)})
                         .on('complete', function(result, response) {
-                            console.log(util.format('PUT %s %s %s', mapping, util.inspect(result, false, null), response));
+                            console.log(util.format('PUT %s %s %s', result._type, util.inspect(result, false, null), response));
                         })
                 });
             }

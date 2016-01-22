@@ -2,10 +2,6 @@ module.exports = {
     "mappings": {
         "client": {
             "properties": {
-                "updated": {
-                    "index": "not_analyzed",
-                    "type": "date"
-                },
                 "phone": {
                     "index": "analyzed",
                     "type": "string",
@@ -52,6 +48,10 @@ module.exports = {
                     "analyzer": "bizcuit_standard"
                 },
                 "created": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                },
+                "updated": {
                     "index": "not_analyzed",
                     "type": "date"
                 },
@@ -162,10 +162,6 @@ module.exports = {
         },
         "service": {
             "properties": {
-                "updated": {
-                    "index": "not_analyzed",
-                    "type": "date"
-                },
                 "name": {
                     "index": "analyzed",
                     "fields": {
@@ -198,11 +194,19 @@ module.exports = {
                     "type": "string",
                     "analyzer": "bizcuit_standard"
                 },
+                "category_id": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
                 "price": {
                     "index": "not_analyzed",
                     "type": "double"
                 },
                 "created": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                },
+                "updated": {
                     "index": "not_analyzed",
                     "type": "date"
                 }
@@ -211,10 +215,6 @@ module.exports = {
         },
         "order": {
             "properties": {
-                "updated": {
-                    "index": "not_analyzed",
-                    "type": "date"
-                },
                 "client_id": {
                     "index": "not_analyzed",
                     "type": "string"
@@ -261,6 +261,55 @@ module.exports = {
                     }
                 },
                 "created": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                },
+                "updated": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                }
+            },
+            "dynamic": "strict"
+        },
+        "category": {
+            "properties": {
+                "name": {
+                    "index": "analyzed",
+                    "fields": {
+                        "edge_ngram": {
+                            "index_analyzer": "bizcuit_edge_ngram",
+                            "search_analyzer": "bizcuit_standard",
+                            "type": "string"
+                        },
+                        "language_stemmer": {
+                            "type": "string",
+                            "analyzer": "bizcuit_language_stemmer"
+                        }
+                    },
+                    "type": "string",
+                    "analyzer": "bizcuit_standard"
+                },
+                "description": {
+                    "index": "analyzed",
+                    "fields": {
+                        "edge_ngram": {
+                            "index_analyzer": "bizcuit_edge_ngram",
+                            "search_analyzer": "bizcuit_standard",
+                            "type": "string"
+                        },
+                        "language_stemmer": {
+                            "type": "string",
+                            "analyzer": "bizcuit_language_stemmer"
+                        }
+                    },
+                    "type": "string",
+                    "analyzer": "bizcuit_standard"
+                },
+                "created": {
+                    "index": "not_analyzed",
+                    "type": "date"
+                },
+                "updated": {
                     "index": "not_analyzed",
                     "type": "date"
                 }

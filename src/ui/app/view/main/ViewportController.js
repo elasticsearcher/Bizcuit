@@ -179,23 +179,6 @@ Ext.define('Bizcuit.view.main.ViewportController', {
             me = this,
             view = null;
 
-        function setAddressValues(form, record) {
-            // FIXME: find a better way to set mapped values
-            var address = record.get('address');
-            if(!address) {
-                return;
-            }
-            var values = {
-                'address_address1': address.address1,
-                'address_address2': address.address2,
-                'address_city': address.city,
-                'address_postal_code': address.postal_code,
-                'address_province': address.province,
-                'address_country': address.country
-            };
-            form.setValues(values);
-        }
-
         if(id == 'new') {
             record = Ext.create('Bizcuit.model.Client', {
                 id: id
@@ -208,9 +191,6 @@ Ext.define('Bizcuit.view.main.ViewportController', {
                 success: function(record) {
                     view = me.setCurrentView(viewName, viewName);
                     view.loadRecord(record);
-                    //view.originalRecord = record;
-                    //view.getForm().setValues(record.getData());
-                    //setAddressValues(view.getForm(), record);
                 }
             })
         }

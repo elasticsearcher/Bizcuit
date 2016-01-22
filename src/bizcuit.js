@@ -60,6 +60,7 @@ var admin = require('./routes/admin')(app),
     clients = require('./routes/clients')(app),
     services = require('./routes/services')(app),
     orders = require('./routes/orders')(app),
+    categories = require('./routes/categories')(app),
     search = require('./routes/search')(app),
     pages = require('./routes/pages')(app);
 

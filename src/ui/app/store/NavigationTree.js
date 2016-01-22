@@ -41,21 +41,20 @@ Ext.define('Bizcuit.store.NavigationTree', {
                 iconCls: 'x-fa fa-edit',
                 routeId:'orders'
             },
-            // {
-            //     text: 'Products & Services',
-            //     expanded: true,
-            //     selectable: false,
-            //     iconCls: 'x-fa fa-leanpub',
-            //     routeId : 'products-services',
-            //     id:       'products-services',
-            //     children: [
-                    // {
-                    //     text: 'Categories',
-                    //     view: 'categories.Categories',
-                    //     leaf: true,
-                    //     iconCls: 'x-fa fa-tag',
-                    //     routeId:'categories'
-                    // },
+            {
+                text: 'Inventory',
+                expanded: true,
+                selectable: false,
+                iconCls: 'x-fa fa-leanpub',
+                id:       'inventory',
+                children: [
+                    {
+                        text: 'Categories',
+                        view: 'categories.Categories',
+                        leaf: true,
+                        iconCls: 'x-fa fa-folder-o',
+                        routeId:'categories'
+                    },
                     // {
                     //     text: 'Products',
                     //     view: 'products.Products',
@@ -70,8 +69,8 @@ Ext.define('Bizcuit.store.NavigationTree', {
                         iconCls: 'x-fa fa-wrench',
                         routeId:'services'
                     }
-            //     ]
-            // }
+                ]
+            }
         ]
     },
     fields: [

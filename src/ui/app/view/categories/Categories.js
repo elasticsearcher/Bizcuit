@@ -1,16 +1,24 @@
 
 Ext.define("Bizcuit.view.categories.Categories",{
-    extend: "Ext.panel.Panel",
+    extend: "Bizcuit.view.base.ModelManager",
 
     requires: [
         "Bizcuit.view.categories.CategoriesController",
         "Bizcuit.view.categories.CategoriesModel"
     ],
 
-    controller: "categories-categories",
-    viewModel: {
-        type: "categories-categories"
+    model: 'Bizcuit.model.Category',
+
+    glyphs: {
+        'new': 'xf114@FontAwesome'
     },
 
-    html: "<h1>Categories</h1>"
+    getModelNamePlural: function() {
+        return 'categories';
+    }
+
+    // controller: "categories-categories",
+    // viewModel: {
+    //     type: "categories-categories"
+    // }
 });
