@@ -51,13 +51,13 @@ function setLang(req, res, lang) {
 
     app.get('/en', function(req, res) {
         setLang(req, res, 'en-CA').then(function(result) {
-            res.redirect(res.get('referrer') || '/');
+            res.redirect(req.get('referrer') || '/');
         });
     });
 
     app.get('/fr', function(req, res) {
         setLang(req, res, 'fr-CA').then(function(result) {
-            res.redirect(res.get('referrer') || '/');
+            res.redirect(req.get('referrer') || '/');
         });
     });
 
