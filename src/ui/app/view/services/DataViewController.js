@@ -7,9 +7,19 @@ Ext.define('Bizcuit.view.services.DataViewController', {
     	store.reload();
     },
 
+    onCategoryUpdated: function(record) {
+        var me = this;
+        me.getViewModel().getStore('Categories').reload({
+            callback: function() {
+                me.onServiceUpdated();
+            }
+        });
+    },
+
     listen: {
         global: {
-            'serviceUpdated': 'onServiceUpdated'
+            'serviceUpdated': 'onServiceUpdated',
+            'categoryUpdated': 'onCategoryUpdated'
         }
     }
     

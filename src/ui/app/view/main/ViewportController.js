@@ -203,9 +203,7 @@ Ext.define('Bizcuit.view.main.ViewportController', {
             view = null;
 
         if(id == 'new') {
-            record = Ext.create('Bizcuit.model.Service', {
-                id: id
-            });
+            record = Ext.create('Bizcuit.model.Service');
 
             view = this.setCurrentView(viewName, viewName);
             view.loadRecord(record);
@@ -226,9 +224,7 @@ Ext.define('Bizcuit.view.main.ViewportController', {
             view = null;
 
         if(id == 'new') {
-            record = Ext.create('Bizcuit.model.Category', {
-                id: id
-            });
+            record = Ext.create('Bizcuit.model.Category');
 
             view = this.setCurrentView(viewName, viewName);
             view.loadRecord(record);

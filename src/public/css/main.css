@@ -3,13 +3,13 @@ body {
 }
 
 div.lang-selector {
-	background-color: #E8E8E8;
 	position: fixed;
 	top: 0;
 	right: 0;
 	padding-right: 0;
 	width: 100%;
 	padding: 1px 5px;
+	background-color: white;
 }
 
 .navbar {

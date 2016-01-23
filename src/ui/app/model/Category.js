@@ -21,6 +21,10 @@ Ext.define('Bizcuit.model.Category', {
           update: '/api/categories'
         },
         actionMethods: {
+            create: 'POST',
+            read: 'GET',
+            update: 'PUT',
+            destroy: 'DELETE'
         },
         reader: {
           type: 'json'

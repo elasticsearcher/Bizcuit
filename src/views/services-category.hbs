@@ -1,0 +1,18 @@
+<div class='page-header'>
+	<h1>{{category.name}}</h1>
+	<p class='lead'>
+		{{category.description}}
+	</p>
+</div>
+
+<section>
+	<div id='services' class='col-xs-6'>
+		<ul class='list-group'>
+			{{#each services}}
+				<li class='list-group-item'>
+					<a href='.'>{{name}}</a>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+</section>

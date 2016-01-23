@@ -24,6 +24,10 @@ Ext.define('Bizcuit.model.Service', {
           update: '/api/services'
         },
         actionMethods: {
+            create: 'POST',
+            read: 'GET',
+            update: 'PUT',
+            destroy: 'DELETE'
         },
         reader: {
           type: 'json'

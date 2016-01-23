@@ -1,1 +1,21 @@
-<h2>Services</h2>
+<div class='page-header'>
+	<h1>Services</h1>
+	<p class='lead'>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet finibus eros. Phasellus congue risus vel enim hendrerit malesuada. Sed id tristique odio. Fusce imperdiet ullamcorper aliquet. Cras porttitor efficitur sagittis. Integer commodo augue sit amet velit egestas, vel congue nulla imperdiet. Sed mauris nibh, maximus in tincidunt sit amet, gravida sit amet arcu.
+	</p>
+</div>
+
+<section>
+	<div id='services' class='col-xs-6'>
+		{{#each categories}}
+			<h2><a href='/services/{{id}}'>{{name}}</a></h2>
+			<ul class='list-group'>
+			{{#each (lookup ../services id)}}
+				<li class='list-group-item'>
+					<a href='.'>{{name}}</a>
+				</li>
+			{{/each}}
+			</ul>
+		{{/each}}
+	</div>
+</section>

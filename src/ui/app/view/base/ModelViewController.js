@@ -15,6 +15,11 @@ Ext.define('Bizcuit.view.base.ModelViewController', {
 
     	record.set(form.getValues());
 
+        // If this is a new record, make sure the ID is set to 'new'
+        if(record.phantom) {
+            record.set('id', 'new');
+        }
+
     	record.save({
     		success: function(record) {
     			me.redirectTo(view.getModelNamePlural());

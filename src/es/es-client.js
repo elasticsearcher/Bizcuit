@@ -171,11 +171,23 @@ module.exports = function(settings) {
             });
         },
 
-        postDocument: function(mapping, doc) {
-            doc.updated = Date.now();
+        createDocument: function(mapping, doc) {
+            doc.created = doc.updated = Date.now();
 
             var promise = new Promise(function(resolve, reject) {
                 var req = restler.post(util.format('%s/%s?refresh=true', INDEX_URL, mapping), { data: JSON.stringify(doc)});
+                addPromiseCallbacks(req, resolve, reject);
+            });
+
+            return promise;
+        },
+
+        createDocumentWithId: function(mapping, id, doc) {
+            doc.created = doc.updated = Date.now();
+
+            var promise = new Promise(function(resolve, reject) {
+                var req = restler.post(util.format('%s/%s/%s/_create?refresh=true', INDEX_URL, mapping, id),
+                                       { data: JSON.stringify(doc)});
                 addPromiseCallbacks(req, resolve, reject);
             });
 
@@ -209,20 +221,26 @@ module.exports = function(settings) {
             return promise;
         },
 
-        searchDocuments: function(mapping) {
+        searchDocuments: function(mapping, query) {
             var promise = new Promise(function(resolve, reject) {
+                var data = {
+                    // TODO: get from/size from the query string
+                    from: 0,
+                    size: 10000,
+                    sort: {
+                        'updated': {
+                            order: 'desc'
+                        }
+                    }
+                };
+
+                if(query) {
+                    data.query = query.query;
+                }
+
                 var req = restler.post(util.format('%s/%s/_search', INDEX_URL, mapping), 
                 {
-                    data: JSON.stringify({
-                        // TODO: get from/size from the query string
-                        from: 0,
-                        size: 10000,
-                        sort: {
-                            'updated': {
-                                order: 'desc'
-                            }
-                        }
-                    })
+                    data: JSON.stringify(data)
                 });
 
                 addPromiseCallbacks(req, resolve, reject);
