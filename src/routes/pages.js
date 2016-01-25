@@ -27,8 +27,8 @@ function mapEsHit(hit) {
 	return hit._source;
 }
 
-function pageTitle(locals, entityName) {
-	return locals.title + ' | ' + locals.l20n.values[entityName];
+function pageTitle(locals, entityName, extra) {
+	return [locals.title, locals.l20n.values[entityName], extra].join(' | ');
 }
 
 module.exports = function(app) {
@@ -51,16 +51,19 @@ module.exports = function(app) {
 	});
 
 	app.get('/', function(req, res) {
-		var categoriesPromise = categories.get(req),
-			servicesPromise = services.get(req);
-
+		var categoryId = req.params.categoryId,
+			categoriesPromise = categories.search(),
+			servicesPromise = services.search();
+		
 		Promise.all([categoriesPromise, servicesPromise]).then(function(results) {
-
 			res.render('home', {
 				categories: mapEsHits(results[0]),
-		    	services: mapEsHits(results[1]),
+				services: mapEsHitsByKey(results[1], 'category_id'),
 		    	pageTitle: pageTitle(res.locals, 'navHome')
-		    });
+			});
+		}).catch(function(failures) {
+			console.log(failures);
+			next();
 		});
 	});
 
@@ -82,24 +85,21 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/services/:categoryId', function(req, res, next) {
-		var categoryId = req.params.categoryId,
-			categoryPromise = categories.getById(categoryId),
-			servicesPromise = services.search({
-				query: {
-					term: {
-						category_id: categoryId
-					}
-				}
-			});
+	app.get('/services/:categorySeoId', function(req, res, next) {
+		var categorySeoId = req.params.categorySeoId,
+			categoryPromise = categories.searchExact('seo_id', categorySeoId),
+			category = null;
 
-		
-		Promise.all([categoryPromise, servicesPromise]).then(function(results) {
+		categoryPromise.then(mapEsHits).then(function(results) {
+			category = results[0];
+			console.log(category);
+			return services.searchExact('category_id', category.id);
+		}).then(function(results) {
 			res.render('services-category', {
-				category: mapEsHit(results[0]),
-				services: mapEsHits(results[1]),
-		    	pageTitle: pageTitle(res.locals, 'navServices')
-			});
+				category: category,
+				services: mapEsHits(results),
+		    	pageTitle: pageTitle(res.locals, 'navServices', category.name)
+		    });
 		}).catch(function(failures) {
 			console.log(failures);
 			next();

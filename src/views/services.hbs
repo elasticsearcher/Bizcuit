@@ -5,17 +5,19 @@
 	</p>
 </div>
 
-<section>
-	<div id='services' class='col-xs-6'>
-		{{#each categories}}
-			<h2><a href='/services/{{id}}'>{{name}}</a></h2>
-			<ul class='list-group'>
-			{{#each (lookup ../services id)}}
-				<li class='list-group-item'>
-					<a href='.'>{{name}}</a>
-				</li>
-			{{/each}}
-			</ul>
-		{{/each}}
-	</div>
-</section>
+<div id='services'>
+	{{#each categories}}
+		{{#if (lookup ../services id)}}
+			<div class='col-sm-6 col-md-4'>
+				<h3><a href='/services/{{seo_id}}'>{{name}}</a></h3>
+				<ul class='list-group'>
+					{{#each (lookup ../../services id)}}
+						<li class='list-group-item'>
+							<a href='.'>{{name}}</a>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+		{{/if}}
+	{{/each}}
+</div>

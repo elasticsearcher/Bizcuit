@@ -194,6 +194,10 @@ module.exports = {
                     "type": "string",
                     "analyzer": "bizcuit_standard"
                 },
+                "seo_id": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
                 "category_id": {
                     "index": "not_analyzed",
                     "type": "string"
@@ -304,6 +308,10 @@ module.exports = {
                     },
                     "type": "string",
                     "analyzer": "bizcuit_standard"
+                },
+                "seo_id": {
+                    "index": "not_analyzed",
+                    "type": "string"
                 },
                 "created": {
                     "index": "not_analyzed",

@@ -61,21 +61,6 @@ module.exports = function(mapping) {
 			return get(id);
 		},
 
-		insertWithId: function(req, res, id) {
-			var data = req.body,
-				promise = null;
-
-			delete data.id;
-
-			promise = esClient.createDocumentWithId(mapping, id, data);
-			return addPromiseHandlers(promise, res);
-		},
-
-		insertWithSeoId: function(req, res) {
-	    	var id = me.generateIdFromName(req.body);
-	    	me.insertWithId(req, res, id);
-	    },
-
 		upsert: function(req, res) {
 			var data = req.body,
 				id = data.id,
@@ -83,6 +68,12 @@ module.exports = function(mapping) {
 
 			// Delete ID as Elasticsearch stores it in a special field (_id)
 		    delete data.id;
+
+		    // Generate an SEO ID for the document
+		    var seoId = me.generateSeoId(req.body);
+		    if(seoId) {
+		    	data.seo_id = seoId;
+		    }
 
 		    if(id == 'new') {
 		        promise = esClient.createDocument(mapping, data);
@@ -93,7 +84,7 @@ module.exports = function(mapping) {
 		    return addPromiseHandlers(promise, res);
 		},
 
-		searchExact: function(req, res, field, value) {
+		searchExact: function(field, value) {
 			var query = {
 				term: {
 				}
@@ -101,7 +92,7 @@ module.exports = function(mapping) {
 			query.term[field] = value;
 
 			var promise = esClient.searchDocuments(mapping, { query: query });
-			return addPromiseHandlers(promise, res);
+			return addPromiseHandlers(promise);
 
 		},
 
@@ -115,7 +106,7 @@ module.exports = function(mapping) {
 			return addPromiseHandlers(promise);
 		},
 
-		generateIdFromName: function(doc) {
+		generateSeoId: function(doc) {
 			// Some IDs, such as service and category IDs are created directly from their names
 			// in order to make URLs human-friendly and in addition facilitate SEO. A human-readable
 			// ID makes it possible to use them directly in URL paths with sematic
@@ -123,6 +114,12 @@ module.exports = function(mapping) {
 			// and the resources.
 			// E.g. a route like /services/:categoryId/:serviceId would result in a human-readable
 			// path like /services/painting/walls-and-ceiling
+
+			// If a doc doesn't have a name, can't generate a human-friendly ID
+			if(!doc.name) {
+				return null;
+			}
+
 			var name = doc.name,
 			// To generate an ID from a name, we simply use a regex to extract all words from a name
 			// and then join them with a hyphen:

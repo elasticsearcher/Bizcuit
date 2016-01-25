@@ -89,13 +89,36 @@ module.exports = function(settings) {
                 service: [
                     {
                         id: 'AVHaZbTo1RmTTqkz6Y07',
+                        category_id: 'plumbing',
                         name: 'Service 1',
                         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
                         price: 100
                     },
                     {
                         id: 'AVHaZbTo1RmTTqkz6Y08',
+                        category_id: 'plumbing',
                         name: 'Service 2',
+                        description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
+                        price: 200
+                    },
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y09',
+                        category_id: 'electrical-wiring',
+                        name: 'Service 3',
+                        description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
+                        price: 200
+                    },
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y10',
+                        category_id: 'electrical-wiring',
+                        name: 'Service 4',
+                        description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
+                        price: 200
+                    },
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y11',
+                        category_id: 'painting',
+                        name: 'Service 5',
                         description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
                         price: 200
                     }
@@ -129,14 +152,22 @@ module.exports = function(settings) {
 
                 category: [
                     {
-                        id: 'AVHaZbTo1RmTTqkz6Y08',
-                        name: 'Home Improvement',
-                        description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.'
+                        id: 'painting',
+                        seo_id: 'painting',
+                        name: 'Painting',
+                        description: 'Anything from painting a single wall, ceiling, to the interior and exterior of an entire house. Windows, doors, furniture, fences, and more.'
                     },
                     {
-                        id: 'BVHaZbTo1RmTTqkzSdf2',
-                        name: 'Miscellaneous',
-                        description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.'
+                        id: 'plumbing',
+                        seo_id: 'plumbing',
+                        name: 'Plumbing',
+                        description: 'Critical plumbing services, like Garbage Disposal Replacement, Faucet Replacement, and Clogged Drain Repair are included in our catalog to help you keep your home safe from water damage and your life free from inconvenience.'
+                    },
+                    {
+                        id: 'electrical-wiring',
+                        seo_id: 'electrical-wiring',
+                        name: 'Electrical & Wiring',
+                        description: '21st century upgrades like USB Wall Outlet Replacement, Electrical Toilet Seat Installation, Towel Warmer Installation, and Home Surveillance Camera Installation, as well as basic services like Bathroom Fan Installation, Electric Wall Heater Installation, and Light Fixture Replacement.'
                     }
                 ]
             };
