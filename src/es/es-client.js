@@ -10,6 +10,32 @@ function addPromiseCallbacks(restlerReq, resolve, reject) {
     });
 }
 
+function request(method, url, data) {
+    method = method.toUpperCase();
+    var req = null;
+
+    switch(method) {
+        case 'GET':
+            req = restler.get(url);
+            break;
+        case 'POST':
+            req = restler.postJson(url, data);
+            break;
+        case 'PUT':
+            req = restler.putJson(url, data);
+            break;
+        case 'DELETE':
+            req = restler.del(url);
+            break;
+        default:
+            throw { error: 'Unknown method: ' + method }
+    }
+
+    return new Promise(function(resolve, reject) {
+        addPromiseCallbacks(req, resolve, reject);
+    });
+}
+
 module.exports = function(settings) {
     var ES_URL = settings.url,
         INDEX = settings.index,
@@ -34,25 +60,23 @@ module.exports = function(settings) {
 
     return {
         deleteIndex: function() {
-            console.log(util.format('DELETE index %s', INDEX));
-            return restler.del(INDEX_URL);
+            return request('DELETE', INDEX_URL);
         },
 
         putIndex: function() {
-            console.log(util.format('PUT index %s', INDEX));
-            return restler.put(INDEX_URL, { data: JSON.stringify(ES_SCHEMA_SETTINGS.settings) });
+            return request('PUT', INDEX_URL, ES_SCHEMA_SETTINGS.settings);
         },
 
         putMappings: function() {
-            var last = null;
+            var promises = [];
 
             for(var name in MAPPINGS) {
-                var mapping = MAPPINGS[name];
-                console.log(mapping);
-                last = restler.put(util.format('%s/_mapping/%s', INDEX_URL, name), { data: JSON.stringify(mapping) });
+                var mapping = MAPPINGS[name],
+                    url = util.format('%s/_mapping/%s', INDEX_URL, name);
+                promises.push(request('PUT', url, mapping));
             }
 
-            return last;
+            return Promise.all(promises);
         },
 
         populateTestData: function() {
@@ -171,35 +195,31 @@ module.exports = function(settings) {
                     }
                 ]
             };
+            
+            var promises = [];
 
             for(mapping in testData) {
                 var data = testData[mapping];
                 data.forEach(function(d) {
-                    var id = d.id;
+                    var id = d.id,
+                        url = util.format('%s/%s/%s', INDEX_URL, mapping, id);
                     delete d.id;
-                    restler.put(util.format('%s/%s/%s', INDEX_URL, mapping, id), { data: JSON.stringify(d)})
-                        .on('complete', function(result, response) {
-                            console.log(util.format('PUT %s %s %s', result._type, util.inspect(result, false, null), response));
-                        })
+                    promises.push(request('PUT', url, d));
                 });
             }
+
+            return Promise.all(promises);
         },
 
         reset: function() {
             var me = this;
-            me.deleteIndex().on('success', function() {
-                me.putIndex().on('success', function() {
-                    me.putMappings().on('success', function() {
-                        // FIXME: restler doesn't provide a functionality that
-                        // lets you "gather results" of several concurrently
-                        // executing requests before firing another request, so
-                        // we have to resort to an ugly arbitrary wait period to
-                        // "try" to make sure that all mappings get set up before
-                        // any data gets committed.
-                        setTimeout(me.populateTestData, 3000);
-                    })
+            return me.deleteIndex()
+                .then(me.putIndex, me.putIndex)
+                .then(me.putMappings)
+                .then(me.populateTestData)
+                .catch(function(errors) {
+                    console.log(errors);
                 });
-            });
         },
 
         createDocument: function(mapping, doc) {

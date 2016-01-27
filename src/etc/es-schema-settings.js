@@ -1,6 +1,9 @@
 module.exports = {
     "mappings": {
         "client": {
+            "_meta": {
+                "localizable": false
+            },
             "properties": {
                 "phone": {
                     "index": "analyzed",
@@ -161,6 +164,14 @@ module.exports = {
             "dynamic": "strict"
         },
         "service": {
+            "_meta": {
+                "localizable": true,
+                "localized_fields": {
+                    "name": {},
+                    "description": {},
+                    "seo_id": {}
+                }
+            },
             "properties": {
                 "name": {
                     "index": "analyzed",
@@ -218,6 +229,9 @@ module.exports = {
             "dynamic": "strict"
         },
         "order": {
+            "_meta": {
+                "localizable": false
+            },
             "properties": {
                 "client_id": {
                     "index": "not_analyzed",
@@ -276,6 +290,14 @@ module.exports = {
             "dynamic": "strict"
         },
         "category": {
+            "_meta": {
+                "localizable": true,
+                "localized_fields": {
+                    "name": {},
+                    "description": {},
+                    "seo_id": {}
+                }
+            },
             "properties": {
                 "name": {
                     "index": "analyzed",

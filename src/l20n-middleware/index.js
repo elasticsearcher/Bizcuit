@@ -43,7 +43,6 @@ function setLang(req, res, lang) {
             result.forEach(function(v, i) {
                 values[entitiesToTranslate[i]] = v;
             });
-            console.log(session.l20n);
         });
 }
 
