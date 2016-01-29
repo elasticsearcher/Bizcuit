@@ -6,7 +6,7 @@ module.exports = function(mapping) {
 	mapping = mapping || '';
 
 	function addPromiseHandlers(promise, res) {
-		return promise.then(function(result) {
+	    return promise.then(function (result) {
 			var restlerResp = result[1],
 				result = result[0];
 
@@ -45,7 +45,7 @@ module.exports = function(mapping) {
 			promise = esClient.getDocumentById(mapping, id);
 		// Otherwise, retrieve documents based on other parameters if any
 		} else {
-			promise = esClient.searchDocuments(mapping);
+			promise = esClient.searchDocuments('fr-CA', mapping);
 		}
 
 		return addPromiseHandlers(promise, res);
@@ -75,10 +75,11 @@ module.exports = function(mapping) {
 		    	data.seo_id = seoId;
 		    }
 
-		    if(id == 'new') {
-		        promise = esClient.createDocument(mapping, data);
+		    if (id == 'new') {
+                // FIXME: locale should be dynamically retrieved
+		        promise = esClient.createDocument('en-CA', mapping, null, data);
 		    } else {
-		        promise = esClient.updateDocument(mapping, id, data);
+		        promise = esClient.updateDocument('en-CA', mapping, id, data);
 		    }
 
 		    return addPromiseHandlers(promise, res);
@@ -91,7 +92,7 @@ module.exports = function(mapping) {
 			};
 			query.term[field] = value;
 
-			var promise = esClient.searchDocuments(mapping, { query: query });
+			var promise = esClient.searchDocuments('en-CA', mapping, { query: query });
 			return addPromiseHandlers(promise);
 
 		},
@@ -102,7 +103,7 @@ module.exports = function(mapping) {
 		},
 
 		search: function(query) {
-			var promise = esClient.searchDocuments(mapping, query);
+			var promise = esClient.searchDocuments('en-CA', mapping, query);
 			return addPromiseHandlers(promise);
 		},
 

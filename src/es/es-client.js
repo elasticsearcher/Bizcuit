@@ -17,20 +17,28 @@ function request(method, url, data) {
 
     switch (method) {
         case 'GET':
-            req = restler.get(url);
+            if (data) {
+                if (typeof (data) === 'object') {
+                    req = restler.json(url, data);
+                } else {
+                    req = restler.get(url, { data: data });
+                }
+            } else {
+                req = restler.get(url);
+            }
             break;
         case 'POST':
             if (typeof (data) === 'object') {
                 req = restler.postJson(url, data);
             } else {
-                req = restler.post(url, {data: data})
+                req = restler.post(url, { data: data });
             }
             break;
         case 'PUT':
             if (typeof (data) === 'object') {
                 req = restler.putJson(url, data);
             } else {
-                req = restler.put(url, { data: data })
+                req = restler.put(url, { data: data });
             }
             break;
         case 'DELETE':
@@ -121,7 +129,7 @@ module.exports = function (settings, locales) {
             return Promise.all(promises);
         },
 
-        putIndexes: function () {
+        createIndexes: function () {
             console.log('Creating indexes.');
             var promises = [],
                 indexUrl = null,
@@ -141,7 +149,7 @@ module.exports = function (settings, locales) {
             return Promise.all(promises);
         },
 
-        putMappings: function () {
+        createMappings: function () {
             console.log('Creating mappings.');
             var promises = [],
                 mappings = {};
@@ -293,7 +301,7 @@ module.exports = function (settings, locales) {
                     data.forEach(function (d) {
                         var id = d.id;
                         delete d.id;
-                        promises.push(me.createDocumentWithId(locale, mapping, id, d));
+                        promises.push(me.createDocument(locale, mapping, id, d));
                     });
                 }
             });
@@ -304,40 +312,89 @@ module.exports = function (settings, locales) {
         reset: function () {
             var me = this;
             return me.deleteIndexes()
-                .then(me.putIndexes, me.putIndexes)
-                .then(me.putMappings)
+                .then(me.createIndexes, me.createIndexes)
+                .then(me.createMappings)
                 .then(me.populateTestData)
-                .catch(function (errors) {
-                    console.log(errors);
+                .catch(function (error) {
+                    console.log(error, error.stack);
                 });
         },
 
-        createDocument: function (mapping, doc) {
+        createDocument: function (locale, mapping, id, doc) {
             doc.created = doc.updated = Date.now();
-
-            var promise = new Promise(function (resolve, reject) {
-                var req = restler.post(util.format('%s/%s?refresh=true', INDEX_URL, mapping), { data: JSON.stringify(doc) });
-                addPromiseCallbacks(req, resolve, reject);
-            });
-
-            return promise;
-        },
-
-        createDocumentWithId: function (locale, mapping, id, doc) {
-            doc.created = doc.updated = Date.now();
-
-            var urlTpl = '%s/%s/%s/_create?refresh=true',
-                url = util.format(urlTpl, INDEX_URL, mapping, id),
-                localizedIndex = makeLocalizedIndexName(INDEX, locale),
-                localizedIndexUrl = util.format(INDEX_URL_TPL, localizedIndex),
-                localizedUrl = util.format(urlTpl, localizedIndexUrl, mapping, id);
             
             var docSplit = i18nSplitDoc(ES_SCHEMA_SETTINGS, mapping, doc),
                 localizedDoc = docSplit[0],
                 mainDoc = docSplit[1];
 
-            var bulkPayload = [{
-                    create: {
+            // First push the main doc, so we can obtain its ID,
+            // then insert all the localized versions using the same ID into
+            // the corresponding localization indexes
+
+            // If an ID was provided, use it
+            var url = null;
+            if (id) {
+                url = util.format('%s/%s/%s/_create?refresh=true', INDEX_URL, mapping, id);
+            } else {
+                // Otherwise, insert it with no ID to obtain a auto ID
+                url = util.format('%s/%s?refresh=true', INDEX_URL, mapping);
+            }
+
+            var promise = request('POST', url, mainDoc);
+
+            // If this is a localizable doc, insert the localized portion;
+            // it must be created for all locales.
+            if (localizedDoc) {
+                promise = promise.then(function (result) {
+                    var bulkPayload = [],
+                        id = result[0]._id;
+
+                    locales.forEach(function (l) {
+                        var doc = null;
+                        if (l == locale) {
+                            // Store the localized data in the index corresponding to the passed locale
+                            doc = localizedDoc;
+                        } else {
+                            // Store an empty doc for all the other locales
+                            doc = {};
+                        }
+                        bulkPayload.push({
+                            create: {
+                                _index: makeLocalizedIndexName(INDEX, l),
+                                _type: mapping,
+                                _id: id
+                            }
+                        });
+                        bulkPayload.push(doc);
+                    })
+
+                    bulkPayload = bulkPayload.map(function (obj) {
+                        return JSON.stringify(obj);
+                    });
+
+                    // Bulk payloads must terminate with an empty line, so we append an extra empty string
+                    bulkPayload.push('');
+                    // Join everything with a new line
+                    bulkPayload = bulkPayload.join('\n');
+
+                    return request('POST', util.format('%s/_bulk?refresh=true', ES_URL), bulkPayload);
+                });
+            }
+
+            return promise;
+        },
+
+        updateDocument: function (locale, mapping, id, doc) {
+            doc.updated = Date.now();
+            removeOmittedFields(doc);
+
+            var docSplit = i18nSplitDoc(ES_SCHEMA_SETTINGS, mapping, doc),
+                localizedDoc = docSplit[0],
+                mainDoc = docSplit[1];
+
+            var bulkPayload = [
+                {
+                    update: {
                         _index: INDEX,
                         _type: mapping,
                         _id: id
@@ -346,50 +403,25 @@ module.exports = function (settings, locales) {
                 mainDoc
             ];
 
-            // When creating a doc, it must be created for all locales.
             if (localizedDoc) {
-                locales.forEach(function (l) {
-                    var doc = null;
-                    if (l == locale) {
-                        // Store the localized data in the index corresponding to the passed locale
-                        doc = localizedDoc;
-                    } else {
-                        // Store an empty doc for all the other locales
-                        doc = {};
+                var localizedIndex = makeLocalizedIndexName(INDEX, locale);
+                bulkPayload.push({
+                    update: {
+                        _index: localizedIndex,
+                        _type: mapping,
+                        _id: id
                     }
-                    bulkPayload.push({
-                        create: {
-                            _index: makeLocalizedIndexName(INDEX, l),
-                            _type: mapping,
-                            _id: id
-                        }
-                    });
-                    bulkPayload.push(doc);
-                })
+                });
+
+                bulkPayload.push(localizedDoc);
             }
 
-            bulkPayload = bulkPayload.map(function (obj) {
-                return JSON.stringify(obj);
-            });
-
-            // Bulk payloads must turminate with an empty line, so we append an extra empty string
+            // Bulk payloads must terminate with an empty line, so we append an extra empty string
             bulkPayload.push('');
             // Join everything with a new line
             bulkPayload = bulkPayload.join('\n');
 
-            return request('POST', util.format('%s/_bulk', ES_URL), bulkPayload);
-        },
-
-        updateDocument: function (mapping, id, doc) {
-            doc.updated = Date.now();
-            removeOmittedFields(doc);
-
-            var promise = new Promise(function (resolve, reject) {
-                var req = restler.put(util.format('%s/%s/%s?refresh=true', INDEX_URL, mapping, id), { data: JSON.stringify(doc) });
-                addPromiseCallbacks(req, resolve, reject);
-            });
-
-            return promise;
+            return request('POST', util.format('%s/_bulk?refresh=true', ES_URL), bulkPayload);
         },
 
         searchIndex: function (query) {
@@ -407,31 +439,62 @@ module.exports = function (settings, locales) {
             return promise;
         },
 
-        searchDocuments: function (mapping, query) {
-            var promise = new Promise(function (resolve, reject) {
-                var data = {
-                    // TODO: get from/size from the query string
-                    from: 0,
-                    size: 10000,
-                    sort: {
-                        'updated': {
-                            order: 'desc'
+        searchDocuments: function (locale, mapping, query) {
+            var data = {
+                // TODO: get from/size from the query string
+                from: 0,
+                size: 10000
+            };
+
+            if (query) {
+                data.query = query.query;
+            }
+
+            var promise = null;
+
+            if (MAPPINGS[mapping]._meta.localizable) {
+                // Perform a search on localized data
+                var localizedIndex = makeLocalizedIndexName(INDEX, locale),
+                    localizedIndexUrl = util.format(INDEX_URL_TPL, localizedIndex);
+                
+                promise = request('POST', util.format('%s/%s/_search', localizedIndexUrl, mapping), data);
+
+                var localizedHits = {};
+                return promise.then(function (results) {
+                    // Get corresponding non-localized data
+                    var ids = [];
+                    results[0].hits.hits.map(function (hit) {
+                        ids.push(hit._id);
+                        localizedHits[hit._id] = hit._source;
+                    });
+
+                    return request('GET', util.format('%s/%s/_mget', INDEX_URL, mapping), {
+                        ids: ids,
+                        sort: {
+                            'updated': {
+                                order: 'desc'
+                            }
                         }
-                    }
-                };
+                    });
+                }).then(function (result) {
+                    var results = result[0].docs,
+                        mergedResults = {
+                            hits: {
+                                hits: results.map(function (doc) {
+                                    _.extend(doc._source, localizedHits[doc._id]);
+                                    return doc;
+                                })
+                            }
+                        };
 
-                if (query) {
-                    data.query = query.query;
-                }
-
-                var req = restler.post(util.format('%s/%s/_search', INDEX_URL, mapping),
-                {
-                    data: JSON.stringify(data)
-                });
-
-                addPromiseCallbacks(req, resolve, reject);
-            });
-
+                    return [mergedResults, result[1]];
+                }).catch(function (e) {
+                    console.log(e, e.stack);
+                });;
+            } else {
+                promise = request('POST', util.format('%s/%s/_search', INDEX_URL, mapping), data);
+            }
+            
             return promise;
         },
 
