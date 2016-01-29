@@ -1,5 +1,5 @@
 var settings = require('../../etc/settings'),
-    esClient = require('../../es/es-client')(settings.elasticsearch);
+    esClient = require('../../es/es-client')(settings.elasticsearch, settings.locales);
 
 module.exports = function(mapping) {
 	// Empty mapping means perform the operations on all mappings

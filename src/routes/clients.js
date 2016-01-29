@@ -1,6 +1,5 @@
 
 var settings = require('../etc/settings'),
-    esClient = require('../es/es-client')(settings.elasticsearch),
     esReq = require('./helpers/es-request')('client');
 
 function upsertClient(req, res) {

@@ -18,7 +18,7 @@
     "cms"
   ],
   "author": "Andrew Pak",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/elasticsearcher/Bizcuit/issues"
   },
@@ -36,6 +36,7 @@
     "passport-google-oauth": "^0.2.0",
     "restler": "^3.4.0",
     "string.prototype.endswith": "^0.2.0",
-    "string.prototype.startswith": "^0.2.0"
+    "string.prototype.startswith": "^0.2.0",
+    "underscore": "^1.8.3"
   }
 }

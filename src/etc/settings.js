@@ -30,7 +30,12 @@ var defaultSettings = {
             clientSercret: '',
             authorizedUsers: []
         }
-    }
+    },
+
+    locales: [
+        'en-CA',
+        'fr-CA'
+    ]
 },
 settings = defaultSettings;
 

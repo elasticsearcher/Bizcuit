@@ -1,6 +1,6 @@
 
 var settings = require('../etc/settings'),
-    client = require('../es/es-client')(settings.elasticsearch);
+    client = require('../es/es-client')(settings.elasticsearch, settings.locales);
 
 function postReset(req, res) {
     client.reset().then(function() {
