@@ -9,7 +9,7 @@
 	{{#each categories}}
 		{{#if (lookup ../services id)}}
 			<div class='col-sm-6 col-md-4'>
-				<h3><a href='/services/{{seo_id}}'>{{name}}</a></h3>
+				<h3><a href='/{{../../locale}}/services/{{seo_id}}'>{{name}}</a></h3>
 				<ul class='list-group'>
 					{{#each (lookup ../../services id)}}
 						<li class='list-group-item'>

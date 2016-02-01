@@ -37,5 +37,5 @@ Ext.define("Bizcuit.view.services.Service",{
             fieldLabel: 'Price',
             name: 'price'
         }
-    ],
+    ]
 });

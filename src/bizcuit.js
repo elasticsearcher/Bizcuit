@@ -31,9 +31,6 @@ app.use(require('express-session')({
     }
 }));
 
-// Set up l20n
-app.use(require('./l20n-middleware')(app));
-
 // Logging
 app.use(require('morgan')('dev'));
 
@@ -61,8 +58,7 @@ var admin = require('./routes/admin')(app),
     services = require('./routes/services')(app),
     orders = require('./routes/orders')(app),
     categories = require('./routes/categories')(app),
-    search = require('./routes/search')(app),
-    pages = require('./routes/pages')(app);
+    search = require('./routes/search')(app);
 
 // Set handlebars as the view engine
 app.engine('hbs', handlebars.engine);
@@ -135,6 +131,8 @@ if(settings.auth.enabled) {
     });
 }
 
+// Set up l20n
+require('./l20n-middleware')(app);
 
 var env = app.get('env'),
     buildDir;
@@ -154,19 +152,19 @@ switch(env) {
         break;
 }
 
-
-app.get('/bizcuit', function(req, res) {
+app.get('/:locale/bizcuit', function(req, res) {
     // Bizcuit the "app" is mounted at /bizcuit and not at the root,
     // because the root is reserved for a client-facing site, whose
     // content is managed by Bizcuit
     res.type('text/html');
     res.status(200);
-    res.sendFile(buildDir + '/index.html');
+    res.sendFile(buildDir + '/app.html');
 });
 
+// Set up pages
+var pages = require('./routes/pages')(app);
 
-app.use(express.static(buildDir));
-
+app.use('/:locale', express.static(buildDir));
 
 // 404 page
 app.use(function(req, res) {

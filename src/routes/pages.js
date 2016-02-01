@@ -50,10 +50,19 @@ module.exports = function(app) {
 	    })
 	});
 
-	app.get('/', function(req, res) {
-	    var categoryId = req.params.categoryId,
-            locale = req.session.locale,
-			categoriesPromise = categories.search(locale),
+	app.get('/:locale', function(req, res, next) {
+	    var locale = req.params.locale;
+
+	    // If the provided locale param isn't an actual locale, we skip this route,
+	    // because otherwise any previously unhandled path will simply map to it.
+	    // Instead, unhandled routes should fall through to the 404 page as usual.
+	    // This is a special case that needs to be handled because everything
+	    // unhandled inherently ends up here.
+	    if (settings.locales.indexOf(locale) === -1) {
+	        return next();
+	    }
+
+        var categoriesPromise = categories.search(locale),
 			servicesPromise = services.search(locale);
 		
 		Promise.all([categoriesPromise, servicesPromise]).then(function(results) {
@@ -68,12 +77,11 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/services', function(req, res) {
+	app.get('/:locale/services', function (req, res) {
 	    var categoryId = req.params.categoryId,
             locale = req.session.locale,
 			categoriesPromise = categories.search(locale),
 			servicesPromise = services.search(locale);
-
 		
 		Promise.all([categoriesPromise, servicesPromise]).then(function(results) {
 			res.render('services', {
@@ -87,7 +95,7 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/services/:categorySeoId', function(req, res, next) {
+	app.get('/:locale/services/:categorySeoId', function (req, res, next) {
 	    var categorySeoId = req.params.categorySeoId,
             locale = req.session.locale,
 			categoryPromise = categories.searchExact(locale, 'seo_id', categorySeoId),
@@ -109,13 +117,13 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/faq', function(req, res) {
+	app.get('/:locale/faq', function (req, res) {
 	    res.render('faq', {
 	    	pageTitle: pageTitle(res.locals, 'navFaq')
 	    });
 	});
 
-	app.get('/contact', function(req, res) {
+	app.get('/:locale/contact', function (req, res) {
 		services.get(req).then(function(result) {
 			res.render('contact', {
 		    	services: mapEsHits(result),
@@ -124,14 +132,14 @@ module.exports = function(app) {
 		});
 	});
 
-	app.post('/contact', function(req, res) {
+	app.post('/:locale/contact', function (req, res) {
 		console.log('Contact form submitted with', req.body);
 	    res.render('contact', {
 	    	pageTitle: pageTitle(res.locals, 'navContact')
 	    });
 	});
 
-	app.get('/about', function(req, res) {
+	app.get('/:locale/about', function (req, res) {
 	    res.render('about', {
 	    	pageTitle: pageTitle(res.locals, 'navAbout')
 	    });

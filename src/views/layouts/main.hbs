@@ -21,7 +21,7 @@
 				{{#if l20n.is.enCA}}
 					<span><img src='/img/flags/Canada.png' /> English</span>
 				{{else}}
-					<a href='/en'><img src='/img/flags/Canada.png' /> English</a>
+					<a href='/en-CA'><img src='/img/flags/Canada.png' /> English</a>
 				{{/if}}
 			</li>
 			|
@@ -29,7 +29,7 @@
 				{{#if l20n.is.frCA}}
 					<span><img src='/img/flags/Canada.png' /> Français</span>
 				{{else}}
-					<a href='/fr'><img src='/img/flags/Canada.png' /> Français</a>
+					<a href='/fr-CA'><img src='/img/flags/Canada.png' /> Français</a>
 				{{/if}}
 			</li>
 		</ul>
@@ -48,25 +48,25 @@
 		                <span class='icon-bar'></span>
 		                <span class='icon-bar'></span>
 		            </button>
-		            <a class='navbar-brand' href='/'>{{brandName}}</a>
+		            <a class='navbar-brand' href='/{{locale}}'>{{brandName}}</a>
 		        </div>
 		        <div class='collapse navbar-collapse' id='navbar-collapse'>
 		            <ul class='nav navbar-nav navbar-right'>
-		                <li class='{{ navClass "/" }}'><a href='/'>{{l20n.values.navHome}}</a></li>
+		                <li class='{{ navClass "/" }}'><a href='/{{locale}}'>{{l20n.values.navHome}}</a></li>
 		                <li class='{{ navClass "/services" }} dropdown'>
-	                		<a href='/services' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	                		<a href='/{{locale}}/services' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 	                		{{l20n.values.navServices}}
 	                		<span class="caret"></span>
                 			</a>
                 			<ul class="dropdown-menu" aria-labelledby="servicesDropdownMenu">
                 				{{#each serviceCategories}}
-							    	<li><a href="/services/{{seo_id}}">{{name}}</a></li>
+							    	<li><a href="/{{../locale}}/services/{{seo_id}}">{{name}}</a></li>
 							    {{/each}}
 							</ul>
 		                </li>
-		                <li class='{{ navClass "/contact" }}'><a href='/contact'>{{l20n.values.navContact}}</a></li>
-		                <li class='{{ navClass "/faq" }}'><a href='/faq'>{{l20n.values.navFaq}}</a></li>
-		                <li class='{{ navClass "/about" }}'><a href='/about'>{{l20n.values.navAbout}}</a></li>
+		                <li class='{{ navClass "/contact" }}'><a href='/{{locale}}/contact'>{{l20n.values.navContact}}</a></li>
+		                <li class='{{ navClass "/faq" }}'><a href='/{{locale}}/faq'>{{l20n.values.navFaq}}</a></li>
+		                <li class='{{ navClass "/about" }}'><a href='/{{locale}}/about'>{{l20n.values.navAbout}}</a></li>
 		            </ul>
 		        </div>
 		    </div>
