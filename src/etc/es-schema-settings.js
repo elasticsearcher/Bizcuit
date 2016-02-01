@@ -1,5 +1,7 @@
 
-var _ = require('underscore');
+var _ = require('underscore'),
+    utils = require('./utils'),
+    localizeName = utils.localizeName;
 
 var commonStemmerFilters = ["standard", "lowercase", "word_delimiter", "asciifolding"];
 
@@ -34,53 +36,43 @@ function generateStemmers(settings, locales) {
     return settings;
 }
 
-function generateLocalizedMappings(baseSettings, locales) {
-    var baseMappings = baseSettings.mappings,
-        localizedMappings = baseSettings.localized_mappings,
-        localizedMappingNames = _.keys(baseMappings).filter(function (name) {
+function generateLocalizedFields(baseSettings, locales) {
+    var mappings = baseSettings.mappings,
+        localizedMappingNames = _.keys(mappings).filter(function (name) {
             // Only select those mappings that are localizable
-            return baseMappings[name]._meta.localizable;
+            return mappings[name]._meta.localizable;
         });
 
-    locales.forEach(function (locale) {
-        localizedMappings[locale] = {};
-        localizedMappingNames.forEach(function (name) {
-            var baseMapping = baseMappings[name],
-                // Localized mapping will contain only those properties from the base mapping
-                // that are explicitly specified to be localized in the _meta field
-                localizedMapping = {
-                    dynamic: baseMapping.dynamic,
-                    _meta: {
-                        locale: locale
-                    },
-                    properties: {}
-                };
+    localizedMappingNames.forEach(function (name) {
+        var mapping = mappings[name];
 
-            _.each(baseMapping.properties, function (options, propertyName) {
-                if (baseMapping._meta.localized_fields[propertyName]) {
-                    var properties = localizedMapping.properties,
-                        property = deepCopy(baseMapping.properties[propertyName]);
-
+        _.each(mapping.properties, function (options, propertyName) {
+            if (mapping._meta.localized_fields[propertyName]) {
+                // Create a localized field for each supported locale
+                locales.forEach(function (locale) {
+                    // Deep copy the property definition so we don't modify the original one
+                    var property = deepCopy(mapping.properties[propertyName]);
                     // If the property has a language stemmer field, then set it to the correct locale
+                    // to make sure that the field's analyzer is configured for the correct language
                     var languageStemmer = property.fields && property.fields.language_stemmer;
                     if (languageStemmer) {
                         languageStemmer.analyzer = baseSettings.i18n.stemmers[locale] + '_stemmer';
                     }
 
-                    properties[propertyName] = property;
-                }
-            });
-
-            localizedMappings[locale][name] = localizedMapping;
-        })
+                    // Add the localized field to the mapping
+                    var localizedPropertyName = localizeName(locale, propertyName);
+                    mapping.properties[localizedPropertyName] = property;
+                });
+            }
+        });
     });
 
     return baseSettings;
 }
 
-function generateSettings(baseSettings, locales) {
-    var settings = generateStemmers(baseSettings, locales);
-    settings = generateLocalizedMappings(settings, locales);
+function generateSettings(settings, locales) {
+    settings = generateStemmers(settings, locales);
+    settings = generateLocalizedFields(settings, locales);
     return settings;
 }
 
@@ -438,10 +430,6 @@ var baseSettings = {
             },
             "dynamic": "strict"
         }
-    },
-    "localized_mappings": {
-        // These mappings are based on the mappings specified above except that their
-        // language settings (e.g. language field analyzers) are set to the appropriate language
     },
     "settings": {
         "index": {

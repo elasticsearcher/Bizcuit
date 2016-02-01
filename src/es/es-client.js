@@ -1,90 +1,21 @@
-var restler = require('restler'),
-    util = require('util'),
-    _ = require('underscore');
+﻿var util = require('util'),
+    _ = require('underscore'),
+    request = require('../http').request,
+    localizeName = require('../etc/utils').localizeName;
 
-function addPromiseCallbacks(restlerReq, resolve, reject) {
-    restlerReq.on('success', function (result, response) {
-        resolve([result, response]);
-    })
-    .on('fail', function (result, response) {
-        reject([result, response]);
-    });
-}
-
-function request(method, url, data) {
-    method = method.toUpperCase();
-    var req = null;
-
-    switch (method) {
-        case 'GET':
-            if (data) {
-                if (typeof (data) === 'object') {
-                    req = restler.json(url, data);
-                } else {
-                    req = restler.get(url, { data: data });
-                }
-            } else {
-                req = restler.get(url);
-            }
-            break;
-        case 'POST':
-            if (typeof (data) === 'object') {
-                req = restler.postJson(url, data);
-            } else {
-                req = restler.post(url, { data: data });
-            }
-            break;
-        case 'PUT':
-            if (typeof (data) === 'object') {
-                req = restler.putJson(url, data);
-            } else {
-                req = restler.put(url, { data: data });
-            }
-            break;
-        case 'DELETE':
-            req = restler.del(url);
-            break;
-        default:
-            throw { error: 'Unknown method: ' + method }
-    }
-
-    return new Promise(function (resolve, reject) {
-        addPromiseCallbacks(req, resolve, reject);
-    });
-}
+var omittedFields = [
+        '_source',
+        '_index',
+        '_id',
+        '_type',
+        '_version',
+        'found'
+];
 
 function removeOmittedFields(doc) {
     omittedFields.forEach(function (field) {
         delete doc[field];
     });
-}
-
-function i18nSplitDoc(settings, mappingName, doc) {
-    var localizedDoc = {},
-        mainDoc = {},
-        mapping = settings.mappings[mappingName],
-        meta = mapping._meta;
-
-    // If the mapping has no localizations, return it as-is
-    if (!meta.localizable) {
-        return [null, doc];
-    }
-
-    // Otherwise, split it into localized fields and core fields
-    for (property in mapping.properties) {
-        if (property in meta.localized_fields) {
-            localizedDoc[property] = doc[property];
-        } else {
-            mainDoc[property] = doc[property];
-        }
-    }
-
-    return [localizedDoc, mainDoc];
-}
-
-function makeLocalizedIndexName(name, locale) {
-    // Note: index names must be lower-case
-    return util.format('%s_%s', name, locale.toLowerCase());
 }
 
 module.exports = function (settings, locales) {
@@ -93,243 +24,263 @@ module.exports = function (settings, locales) {
         INDEX_URL_TPL = util.format('%s/%s', ES_URL),
         INDEX_URL = util.format(INDEX_URL_TPL, INDEX),
         ES_SCHEMA_SETTINGS = require('../etc/es-schema-settings')(locales),
+        DEFAULT_LOCALE = locales[0],
+        INDEX_SETTINGS = ES_SCHEMA_SETTINGS.settings,
         MAPPINGS = ES_SCHEMA_SETTINGS.mappings;
 
-    var omittedFields = [
-        '_source',
-        '_index',
-        '_id',
-        '_type',
-        '_version',
-        'found'
-    ];
+    /*
+     * This function copies localized values from localized fields into the
+     * corresponding localization-agnostic fields. E.g. name_fr gets copied
+     * to name. This is done in order to remove the indirection of figuring
+     * out which localized field to use each time a value needs to be read.
+     * This way, the user of the data just needs to know there is a field
+     * with a certain name and the localization is handled implicitly.
+     */
+    function mapLocalizedFields(locale, mapping, doc) {
+        var meta = MAPPINGS[mapping]._meta;
 
-    function localizedIndexUrl(locale, index) {
-        var localizedIndex = makeLocalizedIndexName(index, locale);
-        return util.format(INDEX_URL_TPL, localizedIndex);
+        // Return early if the mapping doesn't have any localized fields
+        if (!meta.localizable) {
+            return doc;
+        }
+
+        for (field in meta.localized_fields) {
+            var localizedField = localizeName(locale, field);
+            doc[field] = doc[localizedField];
+        }
+
+        return doc;
+    }
+
+    function unmapLocalizedFields(locale, mapping, doc) {
+        var meta = MAPPINGS[mapping]._meta;
+
+        // Return early if the mapping doesn't have any localized fields
+        if (!meta.localizable) {
+            return doc;
+        }
+
+        for (field in meta.localized_fields) {
+            var localizedField = localizeName(locale, field),
+                defaultLocaleField = localizeName(DEFAULT_LOCALE, field);
+
+            doc[localizedField] = doc[field];
+            // Set the localization-agnostic field to the value of the default locale
+            doc[field] = doc[defaultLocaleField];
+        }
+
+        return doc;
+    }
+
+    function processSearchResults(locale, result) {
+        var content = result.content;
+        content.hits.hits.forEach(function (doc) {
+            var source = doc._source,
+                mapping = doc._type;
+            mapLocalizedFields(locale, mapping, source);
+        });
+
+        return result;
     }
 
     var me = {
-        deleteIndexes: function () {
-            console.log('Deleting indexes.');
-            var promises = [],
-                indexUrl = null,
-                indexSettings = ES_SCHEMA_SETTINGS.settings;
-
-            // Delete the main index
-            indexUrl = INDEX_URL
-            promises.push(request('DELETE', INDEX_URL));
-
-            // Delete indexes that will store localized data
-            locales.forEach(function (locale) {
-                indexUrl = util.format(INDEX_URL_TPL, makeLocalizedIndexName(INDEX, locale));
-                promises.push(request('DELETE', indexUrl));
-            });
-
-            return Promise.all(promises);
+        deleteIndex: function () {
+            console.log('Deleting index.');
+            return request('DELETE', INDEX_URL);
         },
 
-        createIndexes: function () {
-            console.log('Creating indexes.');
-            var promises = [],
-                indexUrl = null,
-                indexSettings = ES_SCHEMA_SETTINGS.settings;
-
-            // Create the main index
-            indexUrl = INDEX_URL
-            promises.push(request('PUT', INDEX_URL, indexSettings));
-
-            // Create indexes that will store localized data
-            locales.forEach(function (locale) {
-                // Note: index names must be lower-case
-                indexUrl = util.format(INDEX_URL_TPL, makeLocalizedIndexName(INDEX, locale));
-                promises.push(request('PUT', indexUrl, indexSettings));
-            });
-
-            return Promise.all(promises);
+        createIndex: function () {
+            console.log('Creating index.');
+            return request('PUT', INDEX_URL, INDEX_SETTINGS);
         },
 
         createMappings: function () {
             console.log('Creating mappings.');
-            var promises = [],
-                mappings = {};
-            // Add the main mappings
-            mappings[''] = MAPPINGS;
-            // Add the localized mappings
-            _.extend(mappings, ES_SCHEMA_SETTINGS.localized_mappings);
+            var promises = [];
 
-            // Put all mappings into their respective index
-            _.each(mappings, function (mappings, locale) {
-                var indexName = locale ? makeLocalizedIndexName(INDEX, locale) : INDEX,
-                    indexUrl = util.format(INDEX_URL_TPL, indexName);
-
-                for (var name in mappings) {
-                    var mapping = mappings[name],
-                        url = util.format('%s/_mapping/%s', indexUrl, name);
-                    promises.push(request('PUT', url, mapping));
-                }
+            // Create each mapping with its settings
+            _.each(MAPPINGS, function (mappingSettings, mappingName) {
+                var url = util.format('%s/_mapping/%s', INDEX_URL, mappingName);
+                promises.push(request('PUT', url, mappingSettings));
             });
 
             return Promise.all(promises);
         },
 
-        populateTestData: function () {
+        populateSampleData: function () {
             console.log('Creating test data.');
             var testData = {
-                'en-CA': {
-                    client: [{
-                        'id': 'AVHcoyET0BQ7Qcq9ISBP',
-                        'first_name': 'John',
-                        'last_name': 'Doe',
-                        'email': 'john.doe@bizcuit.com',
-                        'phone': '555-555-5555',
-                        'note': 'Return customer.',
-                        'address': {
-                            'address1': '100 Anonymous St.',
-                            'address2': 'Suite 1',
-                            'city': 'Metropolis',
-                            'province': 'XX'
-                        }
+                client: [{
+                    'id': 'AVHcoyET0BQ7Qcq9ISBP',
+                    'first_name': 'John',
+                    'last_name': 'Doe',
+                    'email': 'john.doe@bizcuit.com',
+                    'phone': '555-555-5555',
+                    'note': 'Return customer.',
+                    'address': {
+                        'address1': '100 Anonymous St.',
+                        'address2': 'Suite 1',
+                        'city': 'Metropolis',
+                        'province': 'XX'
+                    }
+                },
+                {
+                    'id': 'AVHaZbTo1RmTTqkz6Y08',
+                    'first_name': 'Jane',
+                    'last_name': 'Doe',
+                    'email': 'jane.doe@bizcuit.com',
+                    'phone': '555-555-5555',
+                    'note': 'Return customer.',
+                    'address': {
+                        'address1': '100 Anonymous St.',
+                        'address2': 'Suite 1',
+                        'city': 'Metropolis',
+                        'province': 'XX'
+                    }
+                }],
+
+                service: [
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y07',
+                        category_id: 'plumbing',
+                        'name': 'Service One',
+                        'name_fr-CA': 'Service Un',
+                        'seo_id': 'service-one',
+                        'seo_id_fr-CA': 'service-un',
+                        'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        price: 100
                     },
                     {
-                        'id': 'AVHaZbTo1RmTTqkz6Y08',
-                        'first_name': 'Jane',
-                        'last_name': 'Doe',
-                        'email': 'jane.doe@bizcuit.com',
-                        'phone': '555-555-5555',
-                        'note': 'Return customer.',
-                        'address': {
-                            'address1': '100 Anonymous St.',
-                            'address2': 'Suite 1',
-                            'city': 'Metropolis',
-                            'province': 'XX'
-                        }
-                    }],
+                        id: 'AVHaZbTo1RmTTqkz6Y08',
+                        category_id: 'plumbing',
+                        'name': 'Service Two',
+                        'name_fr-CA': 'Service Deux',
+                        'seo_id': 'service-two',
+                        'seo_id_fr-CA': 'service-deux',
+                        'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        price: 200
+                    },
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y09',
+                        category_id: 'electrical-wiring',
+                        'name': 'Service Three',
+                        'name_fr-CA': 'Service Trois',
+                        'seo_id': 'service-three',
+                        'seo_id_fr-CA': 'service-trois',
+                        'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        price: 200
+                    },
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y10',
+                        category_id: 'electrical-wiring',
+                        'name': 'Service Four',
+                        'name_fr-CA': 'Service Quatre',
+                        'seo_id': 'service-four',
+                        'seo_id_fr-CA': 'service-quatre',
+                        'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        price: 200
+                    },
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y11',
+                        category_id: 'painting',
+                        'name': 'Service Five',
+                        'name_fr-CA': 'Service Cinq',
+                        'seo_id': 'service-five',
+                        'seo_id_fr-CA': 'service-cinq',
+                        'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        price: 200
+                    }
+                ],
 
-                    service: [
-                        {
-                            id: 'AVHaZbTo1RmTTqkz6Y07',
-                            category_id: 'plumbing',
-                            name: 'Service 1',
-                            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
-                            price: 100
-                        },
-                        {
-                            id: 'AVHaZbTo1RmTTqkz6Y08',
-                            category_id: 'plumbing',
-                            name: 'Service 2',
-                            description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
-                            price: 200
-                        },
-                        {
-                            id: 'AVHaZbTo1RmTTqkz6Y09',
-                            category_id: 'electrical-wiring',
-                            name: 'Service 3',
-                            description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
-                            price: 200
-                        },
-                        {
-                            id: 'AVHaZbTo1RmTTqkz6Y10',
-                            category_id: 'electrical-wiring',
-                            name: 'Service 4',
-                            description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
-                            price: 200
-                        },
-                        {
-                            id: 'AVHaZbTo1RmTTqkz6Y11',
-                            category_id: 'painting',
-                            name: 'Service 5',
-                            description: 'Aenean non odio dignissim nulla convallis volutpat sed non lectus. Nam vitae dui nec massa molestie dapibus et nec nisl. Nullam sit amet neque nisi. Aliquam facilisis dictum nunc in interdum. In hac habitasse platea dictumst. Etiam ultrices consectetur arcu, non porta urna lacinia et. Etiam gravida lectus sem. Vivamus turpis arcu, porttitor at feugiat et, ultrices eget justo.',
-                            price: 200
-                        }
-                    ],
+                order: [
+                    {
+                        id: 'AVHaZbTo1RmTTqkz6Y08',
+                        client_id: 'AVHcoyET0BQ7Qcq9ISBP',
+                        note: 'Delivery date to be confirmed.',
+                        created: '2015-12-25',
+                        items: [
+                            {
+                                sku_type: 'service',
+                                sku_id: 'AVHaZbTo1RmTTqkz6Y07',
+                                quantity: 1,
+                                unit_price: 77,
+                                scheduled_delivery_date: '2016-01-10'
+                            },
+                            {
+                                sku_type: 'service',
+                                sku_id: 'AVHaZbTo1RmTTqkz6Y08',
+                                quantity: 2,
+                                unit_price: 88,
+                                scheduled_delivery_date: '2016-01-12'
+                            }
+                        ]
+                    }
 
-                    order: [
-                        {
-                            id: 'AVHaZbTo1RmTTqkz6Y08',
-                            client_id: 'AVHcoyET0BQ7Qcq9ISBP',
-                            note: 'Delivery date to be confirmed.',
-                            created: '2015-12-25',
-                            items: [
-                                {
-                                    sku_type: 'service',
-                                    sku_id: 'AVHaZbTo1RmTTqkz6Y07',
-                                    quantity: 1,
-                                    unit_price: 77,
-                                    scheduled_delivery_date: '2016-01-10'
-                                },
-                                {
-                                    sku_type: 'service',
-                                    sku_id: 'AVHaZbTo1RmTTqkz6Y08',
-                                    quantity: 2,
-                                    unit_price: 88,
-                                    scheduled_delivery_date: '2016-01-12'
-                                }
-                            ]
-                        }
+                ],
 
-                    ],
-
-                    category: [
-                        {
-                            id: 'painting',
-                            seo_id: 'painting',
-                            name: 'Painting',
-                            description: 'Anything from painting a single wall, ceiling, to the interior and exterior of an entire house. Windows, doors, furniture, fences, and more.'
-                        },
-                        {
-                            id: 'plumbing',
-                            seo_id: 'plumbing',
-                            name: 'Plumbing',
-                            description: 'Critical plumbing services, like Garbage Disposal Replacement, Faucet Replacement, and Clogged Drain Repair are included in our catalog to help you keep your home safe from water damage and your life free from inconvenience.'
-                        },
-                        {
-                            id: 'electrical-wiring',
-                            seo_id: 'electrical-wiring',
-                            name: 'Electrical & Wiring',
-                            description: '21st century upgrades like USB Wall Outlet Replacement, Electrical Toilet Seat Installation, Towel Warmer Installation, and Home Surveillance Camera Installation, as well as basic services like Bathroom Fan Installation, Electric Wall Heater Installation, and Light Fixture Replacement.'
-                        }
-                    ]
-                }
+                category: [
+                    {
+                        id: 'painting',
+                        'name': 'Painting',
+                        'name_fr-CA': 'Peinture',
+                        'seo_id': 'painting',
+                        'seo_id_fr-CA': 'peinture',
+                        'description': 'Anything from painting a single wall, ceiling, to the interior and exterior of an entire house. Windows, doors, furniture, fences, and more.',
+                        'description_fr-CA': "Peinturer un seul mur, un plafond, ou l'intérieur et extérieur d'une maison entière. Fenêtres, portes, meubles, clôtures et plus."
+                    },
+                    {
+                        id: 'plumbing',
+                        'name': 'Plumbing',
+                        'name_fr-CA': 'Plomberie',
+                        'seo_id': 'plumbing',
+                        'seo_id_fr-CA': 'plomberie',
+                        'description': 'Critical plumbing services, like Garbage Disposal Replacement, Faucet Replacement, and Clogged Drain Repair are included in our catalog to help you keep your home safe from water damage and your life free from inconvenience.',
+                        'description_fr-CA': "Services de plomberie critiques: remplacement d'élimination d'ordures, remplacement de robinets, réparation de bouche d'égouts."
+                    },
+                    {
+                        id: 'electrical-wiring',
+                        'name': 'Electrical & Wiring',
+                        'name_fr-CA': 'Installations électriques',
+                        'seo_id': 'electrical-wiring',
+                        'seo_id_fr-CA': 'installations-électriques',
+                        'description': '21st century upgrades like USB Wall Outlet Replacement, Electrical Toilet Seat Installation, Towel Warmer Installation, and Home Surveillance Camera Installation, as well as basic services like Bathroom Fan Installation, Electric Wall Heater Installation, and Light Fixture Replacement.',
+                        'description_fr-CA': '21st century upgrades like USB Wall Outlet Replacement, Electrical Toilet Seat Installation, Towel Warmer Installation, and Home Surveillance Camera Installation, as well as basic services like Bathroom Fan Installation, Electric Wall Heater Installation, and Light Fixture Replacement.'
+                    }
+                ]
             };
 
             var promises = [];
-
-            _.each(testData, function (mappings, locale) {
-                for (mapping in mappings) {
-                    var data = mappings[mapping];
-                    data.forEach(function (d) {
-                        var id = d.id;
-                        delete d.id;
-                        promises.push(me.createDocument(locale, mapping, id, d));
-                    });
-                }
-            });
+            for (mapping in testData) {
+                var data = testData[mapping];
+                data.forEach(function (d) {
+                    var id = d.id;
+                    delete d.id;
+                    promises.push(me.createDocument(DEFAULT_LOCALE, mapping, id, d));
+                });
+            }
 
             return Promise.all(promises);
         },
 
         reset: function () {
             var me = this;
-            return me.deleteIndexes()
-                .then(me.createIndexes, me.createIndexes)
+            return me.deleteIndex()
+                .then(me.createIndex, me.createIndex)
                 .then(me.createMappings)
-                .then(me.populateTestData)
+                .then(me.populateSampleData)
                 .catch(function (error) {
                     console.log(error, error.stack);
+                    return Promise.reject({ statusCode: 500 });
                 });
         },
 
         createDocument: function (locale, mapping, id, doc) {
             doc.created = doc.updated = Date.now();
-            
-            var docSplit = i18nSplitDoc(ES_SCHEMA_SETTINGS, mapping, doc),
-                localizedDoc = docSplit[0],
-                mainDoc = docSplit[1];
-
-            // First push the main doc, so we can obtain its ID,
-            // then insert all the localized versions using the same ID into
-            // the corresponding localization indexes
 
             // If an ID was provided, use it
             var url = null;
@@ -340,171 +291,48 @@ module.exports = function (settings, locales) {
                 url = util.format('%s/%s?refresh=true', INDEX_URL, mapping);
             }
 
-            var promise = request('POST', url, mainDoc);
-
-            // If this is a localizable doc, insert the localized portion;
-            // it must be created for all locales.
-            if (localizedDoc) {
-                promise = promise.then(function (result) {
-                    var bulkPayload = [],
-                        id = result[0]._id;
-
-                    locales.forEach(function (l) {
-                        var doc = null;
-                        if (l == locale) {
-                            // Store the localized data in the index corresponding to the passed locale
-                            doc = localizedDoc;
-                        } else {
-                            // Store an empty doc for all the other locales
-                            doc = {};
-                        }
-                        bulkPayload.push({
-                            create: {
-                                _index: makeLocalizedIndexName(INDEX, l),
-                                _type: mapping,
-                                _id: id
-                            }
-                        });
-                        bulkPayload.push(doc);
-                    })
-
-                    bulkPayload = bulkPayload.map(function (obj) {
-                        return JSON.stringify(obj);
-                    });
-
-                    // Bulk payloads must terminate with an empty line, so we append an extra empty string
-                    bulkPayload.push('');
-                    // Join everything with a new line
-                    bulkPayload = bulkPayload.join('\n');
-
-                    return request('POST', util.format('%s/_bulk?refresh=true', ES_URL), bulkPayload);
-                });
-            }
-
-            return promise;
+            return request('POST', url, unmapLocalizedFields(locale, mapping, doc));
         },
 
         updateDocument: function (locale, mapping, id, doc) {
             doc.updated = Date.now();
             removeOmittedFields(doc);
-
-            var docSplit = i18nSplitDoc(ES_SCHEMA_SETTINGS, mapping, doc),
-                localizedDoc = docSplit[0],
-                mainDoc = docSplit[1];
-
-            var bulkPayload = [
-                {
-                    update: {
-                        _index: INDEX,
-                        _type: mapping,
-                        _id: id
-                    }
-                },
-                mainDoc
-            ];
-
-            if (localizedDoc) {
-                var localizedIndex = makeLocalizedIndexName(INDEX, locale);
-                bulkPayload.push({
-                    update: {
-                        _index: localizedIndex,
-                        _type: mapping,
-                        _id: id
-                    }
-                });
-
-                bulkPayload.push(localizedDoc);
-            }
-
-            // Bulk payloads must terminate with an empty line, so we append an extra empty string
-            bulkPayload.push('');
-            // Join everything with a new line
-            bulkPayload = bulkPayload.join('\n');
-
-            return request('POST', util.format('%s/_bulk?refresh=true', ES_URL), bulkPayload);
+            return request('PUT', util.format('%s/%s/%s?refresh=true', INDEX_URL, mapping, id), unmapLocalizedFields(locale, mapping, doc));
         },
 
-        searchIndex: function (query) {
+        searchIndex: function (locale, query) {
+            query = query || {};
             query.from = 0;
             query.size = 10000;
-
-            var promise = new Promise(function (resolve, reject) {
-                var req = restler.post(util.format('%s/_search', INDEX_URL),
-                    {
-                        data: JSON.stringify(query)
-                    });
-                addPromiseCallbacks(req, resolve, reject);
-            });
-
-            return promise;
+            return request('POST', util.format('%s/_search', INDEX_URL), query)
+                .then(processSearchResults.bind(me, locale));
         },
 
         searchDocuments: function (locale, mapping, query) {
-            var data = {
-                // TODO: get from/size from the query string
-                from: 0,
-                size: 10000
-            };
+            query = query || {};
 
-            if (query) {
-                data.query = query.query;
-            }
-
-            var promise = null;
-
-            if (MAPPINGS[mapping]._meta.localizable) {
-                // Perform a search on localized data
-                var localizedIndex = makeLocalizedIndexName(INDEX, locale),
-                    localizedIndexUrl = util.format(INDEX_URL_TPL, localizedIndex);
-                
-                promise = request('POST', util.format('%s/%s/_search', localizedIndexUrl, mapping), data);
-
-                var localizedHits = {};
-                return promise.then(function (results) {
-                    // Get corresponding non-localized data
-                    var ids = [];
-                    results[0].hits.hits.map(function (hit) {
-                        ids.push(hit._id);
-                        localizedHits[hit._id] = hit._source;
-                    });
-
-                    return request('GET', util.format('%s/%s/_mget', INDEX_URL, mapping), {
-                        ids: ids,
-                        sort: {
-                            'updated': {
-                                order: 'desc'
-                            }
-                        }
-                    });
-                }).then(function (result) {
-                    var results = result[0].docs,
-                        mergedResults = {
-                            hits: {
-                                hits: results.map(function (doc) {
-                                    _.extend(doc._source, localizedHits[doc._id]);
-                                    return doc;
-                                })
-                            }
-                        };
-
-                    return [mergedResults, result[1]];
-                }).catch(function (e) {
-                    console.log(e, e.stack);
-                });;
-            } else {
-                promise = request('POST', util.format('%s/%s/_search', INDEX_URL, mapping), data);
-            }
-            
-            return promise;
+            // TODO: get from/size from the query string
+            query.from = 0;
+            query.size = 10000;
+            return request('POST', util.format('%s/%s/_search', INDEX_URL, mapping), query)
+                .then(processSearchResults.bind(me, locale));
         },
 
-        getDocumentById: function (mapping, id) {
-            var promise = new Promise(function (resolve, reject) {
-                var req = restler.get(util.format('%s/%s/%s', INDEX_URL, mapping, id));
-                addPromiseCallbacks(req, resolve, reject);
-            });
+        getDocumentById: function (locale, mapping, id) {
+            return request('GET', util.format('%s/%s/%s', INDEX_URL, mapping, id))
+                .then(function (result) {
+                    mapLocalizedFields(locale, result.content._type, result.content._source);
+                    return result;
+                });
+        },
 
-            return promise;
+        localizeField: function (locale, mapping, field) {
+            var meta = MAPPINGS[mapping]._meta;
+
+            if (meta.localizable && field in meta.localized_fields) {
+                return localizeName(locale, field);
+            }
+            return field;
         }
     };
 

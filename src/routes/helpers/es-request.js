@@ -7,23 +7,17 @@ module.exports = function(mapping) {
 
 	function addPromiseHandlers(promise, res) {
 	    return promise.then(function (result) {
-			var restlerResp = result[1],
-				result = result[0];
-
 			// If a response object is provided, write the JSON to it
-			if(res) {
-				// result.success = true;
-	        	res.status(restlerResp.statusCode).json(result);
+	        if (res) {
+	        	res.status(result.statusCode).json(result.content);
 			} else {
-				return result;
+				return result.content;
 			}
 	    }).catch(function(result) {
-	    	var restlerResp = result[1],
-				result = { error: result[0] };
 	    	if(res) {
-		        res.status(restlerResp.statusCode).json(result);
+		        res.status(result.statusCode).json(result.content);
 		    } else {
-		    	return Promise.reject(result);
+		    	return Promise.reject(result.content);
 		    }
 	    });
 	}
@@ -36,16 +30,17 @@ module.exports = function(mapping) {
 	 * :param res: (optional) response object where retrieevd document(s) will
 	 * be automatically sent.
 	 */
-	function get(id, res) {
-		var promise = null;
+	function get(id, req, res) {
+	    var promise = null,
+	        locale = req.session.locale;
 		
 		// If an ID was provided as a parameter, then get the document from
 		// Elasticsearch directly
 		if(id) {
-			promise = esClient.getDocumentById(mapping, id);
+			promise = esClient.getDocumentById(locale, mapping, id);
 		// Otherwise, retrieve documents based on other parameters if any
 		} else {
-			promise = esClient.searchDocuments('fr-CA', mapping);
+		    promise = esClient.searchDocuments(locale, mapping);
 		}
 
 		return addPromiseHandlers(promise, res);
@@ -54,17 +49,14 @@ module.exports = function(mapping) {
 	var me = {
 		get: function(req, res) {
 			var id = req.params && req.params.id;
-			return get(id, res);
-		},
-
-		getById: function(id) {
-			return get(id);
+			return get(id, req, res);
 		},
 
 		upsert: function(req, res) {
 			var data = req.body,
 				id = data.id,
-				promise = null;
+				promise = null,
+				locale = req.session.locale;
 
 			// Delete ID as Elasticsearch stores it in a special field (_id)
 		    delete data.id;
@@ -77,33 +69,34 @@ module.exports = function(mapping) {
 
 		    if (id == 'new') {
                 // FIXME: locale should be dynamically retrieved
-		        promise = esClient.createDocument('en-CA', mapping, null, data);
+		        promise = esClient.createDocument(locale, mapping, null, data);
 		    } else {
-		        promise = esClient.updateDocument('en-CA', mapping, id, data);
+		        promise = esClient.updateDocument(locale, mapping, id, data);
 		    }
 
 		    return addPromiseHandlers(promise, res);
 		},
 
-		searchExact: function(field, value) {
+		searchExact: function (locale, field, value) {
+		    field = esClient.localizeField(locale, mapping, field);
 			var query = {
-				term: {
-				}
-			};
-			query.term[field] = value;
+				    match: {
+				    }
+			    };
+			query.match[field] = value;
 
-			var promise = esClient.searchDocuments('en-CA', mapping, { query: query });
+			var promise = esClient.searchDocuments(locale, mapping, { query: query });
 			return addPromiseHandlers(promise);
 
 		},
 
-		searchGlobal: function(req, res) {
-			var promise = esClient.searchIndex(req.body);
+		searchGlobal: function(locale, query, res) {
+		    var promise = esClient.searchIndex(locale, query);
 			return addPromiseHandlers(promise, res);
 		},
 
-		search: function(query) {
-			var promise = esClient.searchDocuments('en-CA', mapping, query);
+		search: function(locale, query) {
+		    var promise = esClient.searchDocuments(locale, mapping, query);
 			return addPromiseHandlers(promise);
 		},
 

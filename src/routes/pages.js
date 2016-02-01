@@ -51,9 +51,10 @@ module.exports = function(app) {
 	});
 
 	app.get('/', function(req, res) {
-		var categoryId = req.params.categoryId,
-			categoriesPromise = categories.search(),
-			servicesPromise = services.search();
+	    var categoryId = req.params.categoryId,
+            locale = req.session.locale,
+			categoriesPromise = categories.search(locale),
+			servicesPromise = services.search(locale);
 		
 		Promise.all([categoriesPromise, servicesPromise]).then(function(results) {
 			res.render('home', {
@@ -68,9 +69,10 @@ module.exports = function(app) {
 	});
 
 	app.get('/services', function(req, res) {
-		var categoryId = req.params.categoryId,
-			categoriesPromise = categories.search(),
-			servicesPromise = services.search();
+	    var categoryId = req.params.categoryId,
+            locale = req.session.locale,
+			categoriesPromise = categories.search(locale),
+			servicesPromise = services.search(locale);
 
 		
 		Promise.all([categoriesPromise, servicesPromise]).then(function(results) {
@@ -86,22 +88,23 @@ module.exports = function(app) {
 	});
 
 	app.get('/services/:categorySeoId', function(req, res, next) {
-		var categorySeoId = req.params.categorySeoId,
-			categoryPromise = categories.searchExact('seo_id', categorySeoId),
+	    var categorySeoId = req.params.categorySeoId,
+            locale = req.session.locale,
+			categoryPromise = categories.searchExact(locale, 'seo_id', categorySeoId),
 			category = null;
 
 		categoryPromise.then(mapEsHits).then(function(results) {
 			category = results[0];
 			console.log(category);
-			return services.searchExact('category_id', category.id);
+			return services.searchExact(locale, 'category_id', category.id);
 		}).then(function(results) {
 			res.render('services-category', {
 				category: category,
 				services: mapEsHits(results),
 		    	pageTitle: pageTitle(res.locals, 'navServices', category.name)
 		    });
-		}).catch(function(failures) {
-			console.log(failures);
+		}).catch(function(error) {
+		    console.log(error, error.stack);
 			next();
 		});
 	});

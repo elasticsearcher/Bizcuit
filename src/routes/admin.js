@@ -6,7 +6,7 @@ function postReset(req, res) {
     client.reset().then(function() {
     	res.status(200).json({ success: true });
     }).catch(function(error) {
-    	res.status(500).json({ error: error });
+    	res.status(error.statusCode).json({ error: error });
     });
     
 }

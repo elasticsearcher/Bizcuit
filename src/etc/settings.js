@@ -32,6 +32,7 @@ var defaultSettings = {
         }
     },
 
+    // The first locale is used as the default
     locales: [
         'en-CA',
         'fr-CA'

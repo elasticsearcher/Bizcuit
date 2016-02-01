@@ -1,14 +1,14 @@
 var l20n = require('l20n'),
     l20nEnv = new l20n.Env(l20n.fetchResource);
 
-function setLang(req, res, lang) {
+function setLocale(req, res, locale) {
     var session = req.session,
         langs = [];
 
-    if(lang) {
-        langs.push({ code: lang })
+    if (locale) {
+        langs.push({ code: locale })
     } else {
-        lang = 'en-CA'
+        locale = 'en-CA'
     }
 
     // Fallback language
@@ -20,12 +20,13 @@ function setLang(req, res, lang) {
         ctx: ctx,
         values: {},
         is: {
-            enCA: lang === 'en-CA',
-            frCA: lang === 'fr-CA'
+            // TODO: these flags should be created automatically for all locales in the settings
+            enCA: locale === 'en-CA',
+            frCA: locale === 'fr-CA'
         }
     };
 
-    session.lang = lang;
+    session.locale = locale;
 
     var entitiesToTranslate = [
         'navHome',
@@ -49,13 +50,13 @@ function setLang(req, res, lang) {
  module.exports = function(app) {
 
     app.get('/en', function(req, res) {
-        setLang(req, res, 'en-CA').then(function(result) {
+        setLocale(req, res, 'en-CA').then(function (result) {
             res.redirect(req.get('referrer') || '/');
         });
     });
 
     app.get('/fr', function(req, res) {
-        setLang(req, res, 'fr-CA').then(function(result) {
+        setLocale(req, res, 'fr-CA').then(function (result) {
             res.redirect(req.get('referrer') || '/');
         });
     });
@@ -65,11 +66,11 @@ function setLang(req, res, lang) {
             promise = null;
 
         // If the language has already been set, we're done
-        if(session.lang) {
+        if(session.locale) {
             promise = Promise.resolve();
         // Otherwise, set the default language
         } else {
-            promise = setLang(req, res)
+            promise = setLocale(req, res)
         }
 
         promise.then(function() {
