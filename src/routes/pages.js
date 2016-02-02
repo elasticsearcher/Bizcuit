@@ -103,7 +103,6 @@ module.exports = function(app) {
 
 		categoryPromise.then(mapEsHits).then(function(results) {
 			category = results[0];
-			console.log(category);
 			return services.searchExact(locale, 'category_id', category.id);
 		}).then(function(results) {
 			res.render('services-category', {

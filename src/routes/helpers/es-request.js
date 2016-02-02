@@ -115,9 +115,9 @@ module.exports = function(mapping) {
 			}
 
 			var name = doc.name,
-			// To generate an ID from a name, we simply use a regex to extract all words from a name
+			// To generate an ID from a name, we simply use a regex to extract all words
 			// and then join them with a hyphen:
-				id = name.match(/(\w)+/g).join('-').toLowerCase();
+				id = name.match(/([\u00C0-\u1FFF\u2C00-\uD7FF\w])+/g).join('-').toLowerCase();
 
 			return id;
 		}

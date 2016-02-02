@@ -31,11 +31,11 @@ app.use(require('express-session')({
     }
 }));
 
-// Logging
-app.use(require('morgan')('dev'));
-
 // body-parser
 app.use(require('body-parser')());
+
+// Set up l20n
+require('./l20n-middleware')(app);
 
 var users = {};
 
@@ -130,9 +130,6 @@ if(settings.auth.enabled) {
         }
     });
 }
-
-// Set up l20n
-require('./l20n-middleware')(app);
 
 var env = app.get('env'),
     buildDir;

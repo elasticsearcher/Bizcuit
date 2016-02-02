@@ -297,7 +297,9 @@ module.exports = function (settings, locales) {
         updateDocument: function (locale, mapping, id, doc) {
             doc.updated = Date.now();
             removeOmittedFields(doc);
-            return request('PUT', util.format('%s/%s/%s?refresh=true', INDEX_URL, mapping, id), unmapLocalizedFields(locale, mapping, doc));
+            return request('POST',
+                           util.format('%s/%s/%s/_update?refresh=true', INDEX_URL, mapping, id),
+                           { doc: unmapLocalizedFields(locale, mapping, doc) });
         },
 
         searchIndex: function (locale, query) {

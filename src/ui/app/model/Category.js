@@ -8,8 +8,10 @@ Ext.define('Bizcuit.model.Category', {
     ],
 
     proxy: {
-        extraParams: {},
-        paramsAsJson: true,
+        extraParams: {
+            locale: gLocale
+        },
+        paramsAsJson: false,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',

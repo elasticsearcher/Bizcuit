@@ -8,19 +8,21 @@ Ext.define('Bizcuit.store.Categories', {
     autoSync: true,
 
     proxy: {
-      extraParams: {},
-      paramsAsJson: true,
-      limitParam: 'size',
-      pageParam: undefined,
-      startParam: 'from',
-      type: 'rest',
-      noCache: false,
-      api: {
-        read: '/api/categories'
-      },
-      reader: {
+        extraParams: {
+            locale: gLocale
+        },
+        paramsAsJson: false,
+        limitParam: 'size',
+        pageParam: undefined,
+        startParam: 'from',
+        type: 'rest',
+        noCache: false,
+        api: {
+            read: '/api/categories'
+        },
+        reader: {
         type: 'json',
-        rootProperty: 'hits.hits'
-      }
+            rootProperty: 'hits.hits'
+        }
     }
 });

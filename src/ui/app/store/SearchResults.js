@@ -7,22 +7,24 @@ Ext.define('Bizcuit.store.SearchResults', {
     autoSync: true,
 
     proxy: {
-      extraParams: {},
-      paramsAsJson: true,
-      limitParam: 'size',
-      pageParam: undefined,
-      startParam: 'from',
-      type: 'rest',
-      noCache: false,
-      api: {
-        read: '/api/search'
-      },
-      actionMethods: {
-        read: 'POST'
-      },
-      reader: {
-        type: 'json',
-        rootProperty: 'hits.hits'
-      }
+        extraParams: {
+            locale: gLocale
+        },
+        paramsAsJson: false,
+        limitParam: 'size',
+        pageParam: undefined,
+        startParam: 'from',
+        type: 'rest',
+        noCache: false,
+        api: {
+            read: '/api/search'
+        },
+        actionMethods: {
+            read: 'POST'
+        },
+        reader: {
+            type: 'json',
+            rootProperty: 'hits.hits'
+        }
     }
 });

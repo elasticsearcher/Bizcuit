@@ -59,52 +59,29 @@ function setLocale(req, res, locale) {
 }
 
  module.exports = function(app) {
-
-    //app.get('/en', function(req, res) {
-    //    setLocale(req, res, 'en-CA').then(function (result) {
-    //        res.redirect(req.get('referrer') || '/');
-    //    });
-    //});
-
-    //app.get('/fr', function(req, res) {
-    //    setLocale(req, res, 'fr-CA').then(function (result) {
-    //        res.redirect(req.get('referrer') || '/');
-    //    });
-    //});
-
-    app.get('/', function (req, res, next) {
-        res.redirect('/' + settings.locales[0]);
+     app.get('/', function (req, res, next) {
+         // TODO: this needs a test
+        var locale = req.session.locale || settings.locales[0];
+        res.redirect('/' + locale);
     });
 
-    app.get('/:locale*', function (req, res, next) {
+     // TODO: need a test to check that the locale gets correctly set
+     // no matter which method is used (POST/GET/PUT/DELETE)
+    app.all('/:locale*', function (req, res, next) {
         var locale = req.params.locale;
-
-        // If the locale param is not a valid locale, then set it to
-        // undefined, so that the default locale is selected
-        if (settings.locales.indexOf(locale) === -1) {
-            locale = undefined;
+        // If the locale param is not a valid locale, check the query string
+        var locales = settings.locales;
+        if (locales.indexOf(locale) === -1) {
+            // If the locale isn't specified in the query string, fall through
+            // TODO: this needs a test
+            locale = req.query.locale;
+            if (locales.indexOf(locale) === -1) {
+                return next();
+            }
         }
 
         setLocale(req, res, locale).then(function () {
             next();
         });
     });
-
-    //return function(req, res, next) {
-    //    var session = req.session,
-    //        promise = null;
-
-    //    // If the language has already been set, we're done
-    //    if(session.locale) {
-    //        promise = Promise.resolve();
-    //    // Otherwise, set the default language
-    //    } else {
-    //        promise = setLocale(req, res)
-    //    }
-
-    //    promise.then(function() {
-    //        res.locals.l20n = session.l20n;
-    //        next();
-    //    })
-    //}
  }

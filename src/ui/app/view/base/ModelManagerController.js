@@ -14,8 +14,10 @@ Ext.define('Bizcuit.view.base.ModelManagerController', {
 	        autoLoad: true,
 	        autoSync: true,
 	        proxy: {
-	          	extraParams: {},
-	          	paramsAsJson: true,
+	            extraParams: {
+	                locale: gLocale
+	            },
+	            paramsAsJson: false,
 	          	limitParam: 'size',
 	          	pageParam: undefined,
 	          	startParam: 'from',

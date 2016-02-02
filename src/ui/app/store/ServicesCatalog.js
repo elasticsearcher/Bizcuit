@@ -8,19 +8,21 @@ Ext.define('Bizcuit.store.ServicesCatalog', {
     autoSync: true,
 
     proxy: {
-      extraParams: {},
-      paramsAsJson: true,
-      limitParam: 'size',
-      pageParam: undefined,
-      startParam: 'from',
-      type: 'rest',
-      noCache: false,
-      api: {
-        read: '/api/services'
-      },
-      reader: {
-        type: 'json',
-        rootProperty: 'hits.hits'
-      }
+        extraParams: {
+            locale: gLocale
+        },
+        paramsAsJson: false,
+        limitParam: 'size',
+        pageParam: undefined,
+        startParam: 'from',
+        type: 'rest',
+        noCache: false,
+        api: {
+            read: '/api/services'
+        },
+        reader: {
+            type: 'json',
+            rootProperty: 'hits.hits'
+        }
     }
 });

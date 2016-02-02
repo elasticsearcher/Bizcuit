@@ -5,3 +5,5 @@ src/certs
 *.pem
 *.crt
 src/etc/overrides.js
+src/ui/build/development
+src/ui/build/temp

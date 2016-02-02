@@ -10,8 +10,10 @@ Ext.define('Bizcuit.model.Order', {
     ],
 
     proxy: {
-        extraParams: {},
-        paramsAsJson: true,
+        extraParams: {
+            locale: gLocale
+        },
+        paramsAsJson: false,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',

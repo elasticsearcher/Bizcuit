@@ -11,8 +11,10 @@ Ext.define('Bizcuit.model.Service', {
     ],
 
     proxy: {
-        extraParams: {},
-        paramsAsJson: true,
+        extraParams: {
+            locale: gLocale
+        },
+        paramsAsJson: false,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',

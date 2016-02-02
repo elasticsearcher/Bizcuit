@@ -13,22 +13,24 @@ Ext.define('Bizcuit.store.ClientsDirectory', {
     autoSync: true,
 
     proxy: {
-      extraParams: {},
-      paramsAsJson: true,
-      limitParam: 'size',
-      pageParam: undefined,
-      startParam: 'from',
-      type: 'rest',
-      noCache: false,
-      api: {
-        read: '/api/clients'
-      },
-      actionMethods: {
-        //read: 'POST'
-      },
-      reader: {
-        type: 'json',
-        rootProperty: 'hits.hits'
-      }
+        extraParams: {
+            locale: gLocale
+        },
+        paramsAsJson: false,
+        limitParam: 'size',
+        pageParam: undefined,
+        startParam: 'from',
+        type: 'rest',
+        noCache: false,
+        api: {
+            read: '/api/clients'
+        },
+        actionMethods: {
+            //read: 'POST'
+        },
+        reader: {
+            type: 'json',
+            rootProperty: 'hits.hits'
+        }
     }
 });
