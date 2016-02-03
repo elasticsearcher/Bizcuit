@@ -1,7 +1,7 @@
 
 var _ = require('underscore'),
-    utils = require('./utils'),
-    localizeName = utils.localizeName;
+    localizeName = require('./utils').localizeName,
+    util = require('util');
 
 var commonStemmerFilters = ["standard", "lowercase", "word_delimiter", "asciifolding"];
 
@@ -473,6 +473,53 @@ var baseSettings = {
     }
 };
 
+function collectFields(locale, allFields, mapping, curProperties, path) {
+    // Fetch the properties of the mapping
+    if(curProperties === undefined) {
+        curProperties = mapping.properties;
+    }
+    
+    _.each(curProperties, function(property, propertyName) {
+        // If this property is of type nested or object (i.e. has properties of its own), recurse
+        if('properties' in property) {
+            path = path || '';
+            path += propertyName + '.';
+            
+            collectFields(locale, allFields, mapping, property.properties, path);
+        } else {
+            if(mapping._meta.localizable && propertyName in mapping._meta.localized_fields) {
+                propertyName = localizeName(locale, propertyName);
+            }
+            
+            if(path) {
+                propertyName = path + propertyName;
+            }
+            
+            allFields.push(propertyName);
+            // If this property has multi-fields, add them as well
+            if('fields' in property) {
+                _.each(property.fields, function(field, fieldName) {
+                    allFields.push(util.format('%s.%s', propertyName, fieldName));
+                });
+            }
+        }
+    });
+}
+
 module.exports = function (locales) {
-    return generateSettings(baseSettings, locales);
+    // This list contains all fields in the base mapping grouped by locale and
+    // includes multi-fields prefixed by their parent field 
+    // It is used when a query needs to search and highlight all fields
+    var allFields = {};
+    locales.forEach(function(locale) {
+        allFields[locale] = [];
+        _.each(baseSettings.mappings, function(mapping, name) {
+            collectFields(locale, allFields[locale], mapping);
+        });
+    });
+    
+    return {
+        settings: generateSettings(baseSettings, locales),
+        fields: allFields
+    };
 };

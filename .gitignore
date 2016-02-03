@@ -7,3 +7,6 @@ src/certs
 src/etc/overrides.js
 src/ui/build/development
 src/ui/build/temp
+src/typings
+.vscode
+

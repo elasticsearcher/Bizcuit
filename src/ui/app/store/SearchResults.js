@@ -8,16 +8,16 @@ Ext.define('Bizcuit.store.SearchResults', {
 
     proxy: {
         extraParams: {
-            locale: gLocale
         },
-        paramsAsJson: false,
+        paramsAsJson: true,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',
         type: 'rest',
         noCache: false,
         api: {
-            read: '/api/search'
+            // For some reason, extraParams don't get sent when actionMethods are overriden
+            read: '/api/search?' + 'locale=' + gLocale
         },
         actionMethods: {
             read: 'POST'

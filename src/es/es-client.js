@@ -1,7 +1,8 @@
 ﻿var util = require('util'),
     _ = require('underscore'),
     request = require('../http').request,
-    localizeName = require('../etc/utils').localizeName;
+    localizeName = require('../etc/utils').localizeName,
+    queries = require('./queries');
 
 var omittedFields = [
         '_source',
@@ -23,7 +24,7 @@ module.exports = function (settings, locales) {
         INDEX = settings.index,
         INDEX_URL_TPL = util.format('%s/%s', ES_URL),
         INDEX_URL = util.format(INDEX_URL_TPL, INDEX),
-        ES_SCHEMA_SETTINGS = require('../etc/es-schema-settings')(locales),
+        ES_SCHEMA_SETTINGS = require('../etc/es-schema-settings')(locales).settings,
         DEFAULT_LOCALE = locales[0],
         INDEX_SETTINGS = ES_SCHEMA_SETTINGS.settings,
         MAPPINGS = ES_SCHEMA_SETTINGS.mappings;
@@ -36,7 +37,7 @@ module.exports = function (settings, locales) {
      * This way, the user of the data just needs to know there is a field
      * with a certain name and the localization is handled implicitly.
      */
-    function mapLocalizedFields(locale, mapping, doc) {
+    function mapLocalizedFields(locale, mapping, doc, highlight) {
         var meta = MAPPINGS[mapping]._meta;
 
         // Return early if the mapping doesn't have any localized fields
@@ -44,9 +45,22 @@ module.exports = function (settings, locales) {
             return doc;
         }
 
-        for (field in meta.localized_fields) {
+        for (var field in meta.localized_fields) {
             var localizedField = localizeName(locale, field);
             doc[field] = doc[localizedField];
+        }
+        
+        // Map highlights
+        if(highlight) {
+            var localeSuffix = localizeName(locale, '');
+            _.each(highlight, function(highlights, name) {
+                if(name.indexOf(localeSuffix) !== -1) {
+                    var mappedName = name.replace(localeSuffix, '');
+                    highlight[mappedName] = highlights;
+                    delete highlight[name];
+                }
+                
+            });
         }
 
         return doc;
@@ -60,7 +74,7 @@ module.exports = function (settings, locales) {
             return doc;
         }
 
-        for (field in meta.localized_fields) {
+        for (var field in meta.localized_fields) {
             var localizedField = localizeName(locale, field),
                 defaultLocaleField = localizeName(DEFAULT_LOCALE, field);
 
@@ -77,7 +91,7 @@ module.exports = function (settings, locales) {
         content.hits.hits.forEach(function (doc) {
             var source = doc._source,
                 mapping = doc._type;
-            mapLocalizedFields(locale, mapping, source);
+            mapLocalizedFields(locale, mapping, source, doc.highlight);
         });
 
         return result;
@@ -303,10 +317,10 @@ module.exports = function (settings, locales) {
         },
 
         searchIndex: function (locale, query) {
-            query = query || {};
-            query.from = 0;
-            query.size = 10000;
-            return request('POST', util.format('%s/_search', INDEX_URL), query)
+            query = query || '';
+            
+            var searchQuery = queries.search(locale, query, null, { from: 0, size: 10000});
+            return request('POST', util.format('%s/_search', INDEX_URL), searchQuery)
                 .then(processSearchResults.bind(me, locale));
         },
 
