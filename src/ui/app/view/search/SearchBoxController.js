@@ -5,11 +5,13 @@ Ext.define('Bizcuit.view.search.SearchBoxController', {
     onSearchTextFieldKeydown: function(textfield, e, eOpts) {
       if(e.getKey() == e.ENTER) {
         var query = textfield.getValue(),
-            params = { query: query.trim() },
             store = Ext.getStore('SearchResults'),
-            proxy = store.getProxy();
+            proxy = store.getProxy(),
+            params = proxy.getExtraParams();
             
+        params.query = query.trim();
         proxy.setExtraParams(params);
+        
         store.load();
         this.redirectTo('#search');
       }

@@ -1,5 +1,5 @@
 Ext.define('Bizcuit.model.Client', {
-    extend: 'Ext.data.Model',
+    extend: 'Bizcuit.model.Base',
 
     fields: [
         { name: 'id', type: 'string', mapping: '_id' },
@@ -20,10 +20,6 @@ Ext.define('Bizcuit.model.Client', {
     ],
 
     proxy: {
-        extraParams: {
-            locale: gLocale
-        },
-        paramsAsJson: false,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',

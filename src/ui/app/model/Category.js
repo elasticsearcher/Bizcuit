@@ -1,17 +1,13 @@
 Ext.define('Bizcuit.model.Category', {
-    extend: 'Ext.data.Model',
+    extend: 'Bizcuit.model.Base',
     
     fields: [
         { name: 'id', type: 'string', mapping: '_id' },
         { name: 'name', type: 'string', mapping: '_source.name' },
         { name: 'description', type: 'string', mapping: '_source.description' }
     ],
-
+    
     proxy: {
-        extraParams: {
-            locale: gLocale
-        },
-        paramsAsJson: false,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',

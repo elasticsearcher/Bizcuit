@@ -5,13 +5,16 @@ Ext.define("Bizcuit.view.main.Viewport",{
     xtype: 'mainviewport',
 
     requires: [
+        'Bizcuit.view.main.MainContainerWrap',
         "Bizcuit.view.main.ViewportController",
         "Bizcuit.view.main.ViewportModel",
         'Ext.list.Tree',
         'Bizcuit.view.search.SearchBox',
         'Bizcuit.store.ServicesCatalog',
-        'Bizcuit.view.orders.Order',
-        'Bizcuit.view.orders.Orders',
+        'Bizcuit.view.categories.Category',
+        'Bizcuit.view.invoices.Invoices',
+        'Bizcuit.view.invoices.DataView',
+        'Bizcuit.view.invoices.Invoice',
         'Bizcuit.view.clients.Clients',
         'Bizcuit.view.clients.Client',
         'Bizcuit.view.services.Services',

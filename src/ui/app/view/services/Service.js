@@ -4,9 +4,16 @@ Ext.define("Bizcuit.view.services.Service",{
 
     model: 'Bizcuit.model.Service',
 
+    requires: [
+        'Bizcuit.view.services.ServiceModel',
+        'Bizcuit.view.services.ServiceController'
+    ],
+
     viewModel: {
         type: "services-service"
     },
+    
+    controller: 'services-service',
 
     items: [
         {

@@ -56,7 +56,7 @@ var passOptions = {
 var admin = require('./routes/admin')(app),
     clients = require('./routes/clients')(app),
     services = require('./routes/services')(app),
-    orders = require('./routes/orders')(app),
+    invoices = require('./routes/invoices')(app),
     categories = require('./routes/categories')(app),
     search = require('./routes/search')(app);
 

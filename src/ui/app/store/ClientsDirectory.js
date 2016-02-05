@@ -5,7 +5,7 @@
  * to be filtered or used for searching, but rather as a local cache of all available clients.
  */
 Ext.define('Bizcuit.store.ClientsDirectory', {
-    extend: 'Ext.data.Store',
+    extend: 'Bizcuit.store.Base',
 
     storeId: 'ClientsDirectory',
     model: 'Bizcuit.model.Client',
@@ -13,10 +13,6 @@ Ext.define('Bizcuit.store.ClientsDirectory', {
     autoSync: true,
 
     proxy: {
-        extraParams: {
-            locale: gLocale
-        },
-        paramsAsJson: false,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',

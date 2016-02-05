@@ -1,6 +1,6 @@
 
 Ext.define('Bizcuit.store.ServicesCatalog', {
-    extend: 'Ext.data.Store',
+    extend: 'Bizcuit.store.Base',
 
     storeId: 'ServicesCatalog',
     model: 'Bizcuit.model.Service',
@@ -8,10 +8,6 @@ Ext.define('Bizcuit.store.ServicesCatalog', {
     autoSync: true,
 
     proxy: {
-        extraParams: {
-            locale: gLocale
-        },
-        paramsAsJson: false,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',

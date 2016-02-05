@@ -23,6 +23,153 @@
 .x-menu-item-active .x-menu-item-text {
     font-weight: 400;
 }
+/* http://localhost:1841/sass/src/view/categories/DataView.scss:1 */
+em {
+    background-color: rgba(255, 255, 0, 0.4);
+    font-style: inherit;
+}
+/* http://localhost:1841/sass/src/view/categories/DataView.scss:6 */
+.category-tile {
+    width: calc(100% - 10px);
+    min-height: 50px;
+    background-color: #fff;
+    float: left;
+    margin: 5px 5px;
+    padding: 10px 10px;
+}
+/* http://localhost:1841/sass/src/view/categories/DataView.scss:15 */
+.x-view-item-focused {
+    outline: 1px solid #5fa2dd !important;
+    outline-offset: -1px;
+}
+/* http://localhost:1841/sass/src/view/categories/DataView.scss:20 */
+.dataview-container {
+    padding: 5px 30px 5px 5px;
+}
+/* http://localhost:1841/sass/src/view/clients/DataView.scss:1 */
+em {
+    background-color: rgba(255, 255, 0, 0.4);
+    font-style: inherit;
+}
+/* http://localhost:1841/sass/src/view/clients/DataView.scss:6 */
+.client-tile {
+    width: 300px;
+    height: 225px;
+    background-color: #fff;
+    float: left;
+    margin: 5px 5px;
+    padding: 10px 10px;
+    overflow-y: auto;
+}
+/* http://localhost:1841/sass/src/view/clients/DataView.scss:16 */
+.x-view-item-focused {
+    outline: 1px solid #5fa2dd !important;
+    outline-offset: -1px;
+}
+/* http://localhost:1841/sass/src/view/clients/DataView.scss:21 */
+.dataview-container {
+    padding: 5px 30px 5px 5px;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:3 */
+em {
+    background-color: rgba(255, 255, 0, 0.4);
+    font-style: inherit;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:8 */
+.invoice-tile {
+    width: calc(100% - 10px);
+    min-height: 50px;
+    background-color: #fff;
+    float: left;
+    margin: 5px 5px;
+    padding: 10px 10px;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:17 */
+.x-view-item-focused {
+    outline: 1px solid #5fa2dd !important;
+    outline-offset: -1px;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:22 */
+.dataview-container {
+    padding: 5px 30px 5px 5px;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:26 */
+.client {
+    font-size: 14px;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:30 */
+.client a {
+    text-decoration: none;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:36 */
+table a:link {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:44 */
+table a:visited {
+    color: #999;
+    font-weight: bold;
+    text-decoration: none;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:52 */
+table a:active,
+table a:hover {
+    color: #bd5a35;
+    text-decoration: underline;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:60 */
+table {
+    color: #666;
+    margin: 0px;
+    border: #ddd 1px solid;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:73 */
+table th {
+    padding: 11px 15px 12px 15px;
+    background: #ededed;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:80 */
+table th:first-child {
+    text-align: left;
+    padding-left: 20px;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:87 */
+table tr {
+    text-align: center;
+    padding-left: 20px;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:94 */
+table td:first-child {
+    text-align: left;
+    padding-left: 20px;
+    border-left: 0;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:102 */
+table td {
+    padding: 10px;
+    background: #fafafa;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:109 */
+table tr.even td {
+    background: #f6f6f6;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:115 */
+table tr:last-child td {
+    border-bottom: 0;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:121 */
+table tr:hover td {
+    background: #f2f2f2;
+}
+/* http://localhost:1841/sass/src/view/invoices/DataView.scss:127 */
+td.number {
+    text-align: right;
+}
 /* http://localhost:1841/sass/src/view/services/DataView.scss:2 */
 .service-tile {
     width: calc(100% - 10px);

@@ -312,7 +312,7 @@ var baseSettings = {
             },
             "dynamic": "strict"
         },
-        "order": {
+        "invoice": {
             "_meta": {
                 "localizable": false
             },

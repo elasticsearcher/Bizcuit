@@ -1,5 +1,5 @@
 Ext.define('Bizcuit.store.SearchResults', {
-    extend: 'Ext.data.Store',
+    extend: 'Bizcuit.store.Base',
 
     storeId: 'SearchResults',
     //model: 'Bizcuit.model.SearchResult',
@@ -8,19 +8,17 @@ Ext.define('Bizcuit.store.SearchResults', {
 
     proxy: {
         extraParams: {
+            query: ''
         },
-        paramsAsJson: true,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',
         type: 'rest',
         noCache: false,
         api: {
-            // For some reason, extraParams don't get sent when actionMethods are overriden
-            read: '/api/search?' + 'locale=' + gLocale
+            read: '/api/search'
         },
         actionMethods: {
-            read: 'POST'
         },
         reader: {
             type: 'json',

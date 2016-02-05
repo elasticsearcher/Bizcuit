@@ -8,10 +8,5 @@ Ext.define('Bizcuit.view.services.DataViewModel', {
 
     data: {
         name: 'Bizcuit'
-    },
-
-    stores: {
-    	Categories: Ext.create('Bizcuit.store.Categories')
     }
-
 });

@@ -1,7 +1,9 @@
 Ext.define('Bizcuit.view.base.ModelManagerController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.base-modelmanager',
-
+    
+    requires: [ 'Bizcuit.util.I18n' ],
+    
     initViewModel: function(viewModel) {
     	var view = this.getView(),
     		modelNamePlural = view.getModelNamePlural(),
@@ -13,10 +15,10 @@ Ext.define('Bizcuit.view.base.ModelManagerController', {
 	        model: model,
 	        autoLoad: true,
 	        autoSync: true,
-	        proxy: {
-	            extraParams: {
-	                locale: gLocale
-	            },
+            proxy: {
+                extraParams: {
+                    locale: Bizcuit.util.I18n.getLocale()
+                },
 	            paramsAsJson: false,
 	          	limitParam: 'size',
 	          	pageParam: undefined,

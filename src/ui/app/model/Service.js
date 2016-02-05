@@ -1,5 +1,5 @@
 Ext.define('Bizcuit.model.Service', {
-    extend: 'Ext.data.Model',
+    extend: 'Bizcuit.model.Base',
 
     fields: [
         { name: 'id', type: 'string', mapping: '_id' },
@@ -10,11 +10,9 @@ Ext.define('Bizcuit.model.Service', {
         { name: 'created', type: 'date', mapping: '_source.created' }
     ],
 
+    requires: [ 'Bizcuit.util.I18n' ],
+
     proxy: {
-        extraParams: {
-            locale: gLocale
-        },
-        paramsAsJson: false,
         limitParam: 'size',
         pageParam: undefined,
         startParam: 'from',

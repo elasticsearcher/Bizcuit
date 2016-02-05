@@ -18,7 +18,7 @@ Ext.define('Bizcuit.view.main.ViewportController', {
     routes: {
         ':node': 'onRouteChange',
         'clients/:id': 'onClientId',
-        'orders/:id': 'onOrderId',
+        'invoices/:id': 'onInvoiceId',
         'products/:id': 'onProductId',
         'services/:id': 'onServiceId',
         'categories/:id': 'onCategoryId'
@@ -148,7 +148,7 @@ Ext.define('Bizcuit.view.main.ViewportController', {
 
     onMainViewRender:function() {
         if (!window.location.hash) {
-            this.redirectTo("orders");
+            this.redirectTo("invoices");
         }
     },
 
@@ -262,28 +262,28 @@ Ext.define('Bizcuit.view.main.ViewportController', {
         });
     },
 
-    onOrderId: function(id) {
+    onInvoiceId: function(id) {
         function onStoresLoaded() {
-            var viewName = 'orders.Order',
+            var viewName = 'invoices.Invoice',
                 record = null,
                 me = this,
                 view = null;
 
             if(id == 'new') {
-                record = Ext.create('Bizcuit.model.Order', {
+                record = Ext.create('Bizcuit.model.Invoice', {
                     id: id
                 });
 
                 view = this.setCurrentView(viewName, viewName);
                 view.loadRecord(record);
-                view.setOrder(record);
+                view.setInvoice(record);
                 Ext.getBody().unmask();
             } else {
-                Bizcuit.model.Order.load(id, {
+                Bizcuit.model.Invoice.load(id, {
                     success: function(record) {
                         view = me.setCurrentView(viewName, viewName);
                         view.loadRecord(record);
-                        view.setOrder(record);
+                        view.setInvoice(record);
                         Ext.getBody().unmask();
                     }
                 })

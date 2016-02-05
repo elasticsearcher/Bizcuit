@@ -8,15 +8,20 @@ Ext.define('Bizcuit.Application', {
 
     name: 'Bizcuit',
 
+    requires: ['Bizcuit.util.I18n'],
+
     stores: [
         'NavigationTree',
         'SearchResults',
         'ClientsDirectory',
-        'ServicesCatalog'
+        'ServicesCatalog',
+        'Categories'
     ],
 
     models: [
-        'Category'
+        'Category',
+        'Invoice',
+        'InvoiceItem'
     ],
 
     launch: function () {

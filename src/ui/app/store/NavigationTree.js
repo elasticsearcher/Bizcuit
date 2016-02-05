@@ -35,11 +35,11 @@ Ext.define('Bizcuit.store.NavigationTree', {
                 routeId:'clients'
             },
             {
-                text:   'Orders',
-                view:   'orders.Orders',
+                text:   'Invoices',
+                view:   'invoices.Invoices',
                 leaf:   true,
                 iconCls: 'x-fa fa-edit',
-                routeId:'orders'
+                routeId:'invoices'
             },
             {
                 text: 'Inventory',

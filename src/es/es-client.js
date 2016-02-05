@@ -211,7 +211,7 @@ module.exports = function (settings, locales) {
                     }
                 ],
 
-                order: [
+                invoice: [
                     {
                         id: 'AVHaZbTo1RmTTqkz6Y08',
                         client_id: 'AVHcoyET0BQ7Qcq9ISBP',
