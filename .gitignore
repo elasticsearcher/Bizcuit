@@ -9,4 +9,4 @@ src/ui/build/development
 src/ui/build/temp
 src/typings
 .vscode
-
+*.map

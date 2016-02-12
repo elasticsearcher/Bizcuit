@@ -21,8 +21,12 @@ var express = require('express'),
 app.disable('x-powered-by');
 
 app.use(require('cookie-parser')(settings.session.cookieSecret));
+
 app.use(require('express-session')({
     key: 'bizcuit.sid',
+    secret: settings.session.cookieSecret,
+    resave: true,
+    saveUninitialized: false,
     cookie: {
         secure: settings.https.enabled,
         httpOnly: true,
@@ -32,7 +36,9 @@ app.use(require('express-session')({
 }));
 
 // body-parser
-app.use(require('body-parser')());
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Set up l20n
 require('./l20n-middleware')(app);

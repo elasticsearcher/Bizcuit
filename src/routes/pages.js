@@ -28,7 +28,13 @@ function mapEsHit(hit) {
 }
 
 function pageTitle(locals, entityName, extra) {
-	return [locals.title, locals.l20n.values[entityName], extra].join(' | ');
+    var parts = [locals.title, locals.l20n.values[entityName]];
+    
+    if(extra) {
+        parts.push(extra);
+    }
+    
+	return parts.join(' | ');
 }
 
 module.exports = function(app) {

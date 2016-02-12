@@ -38,5 +38,11 @@
     "string.prototype.endswith": "^0.2.0",
     "string.prototype.startswith": "^0.2.0",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.6",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0"
   }
 }
