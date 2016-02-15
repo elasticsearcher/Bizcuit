@@ -9,7 +9,16 @@ var express = require('express'),
             extname: '.hbs',
             helpers: {
               navClass: function(navPath) {
-                  return this.req.path == navPath ? 'active' : '';
+                  // If we are home, return active right away 
+                  if(navPath === '/') {
+                      if(this.req.path === '/' + this.locale) {
+                          return 'active';
+                      }
+                      return '';
+                  }
+                  
+                  var localizedPath = '/' + this.locale + navPath;
+                  return this.req.path == localizedPath ? 'active' : '';
               }
           }
         }),
