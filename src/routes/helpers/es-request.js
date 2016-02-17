@@ -40,7 +40,18 @@ module.exports = function(mapping) {
 			promise = esClient.getDocumentById(locale, mapping, id);
 		// Otherwise, retrieve documents based on other parameters if any
 		} else {
-		    promise = esClient.searchDocuments(locale, mapping);
+            var nameSort = {};
+            
+            nameSort[esClient.localizeField(locale, mapping, 'name')] = {
+                unmapped_type: 'string',
+                order: 'asc'
+            };
+            
+		    promise = esClient.searchDocuments(locale, mapping, {
+                sort: [
+                    nameSort
+                ]
+            });
 		}
 
 		return addPromiseHandlers(promise, res);
@@ -96,6 +107,16 @@ module.exports = function(mapping) {
 		},
 
 		search: function(locale, query) {
+            var query = query || {},
+                nameSort = {};
+            
+            nameSort[esClient.localizeField(locale, mapping, 'name')] = {
+                unmapped_type: 'string',
+                order: 'asc'
+            };
+            
+            query.sort = [ nameSort ];
+            
 		    var promise = esClient.searchDocuments(locale, mapping, query);
 			return addPromiseHandlers(promise);
 		},
