@@ -113,6 +113,10 @@ var baseSettings = {
                 "last_name": {
                     "index": "analyzed",
                     "fields": {
+                        "raw": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
                         "edge_ngram": {
                             "index_analyzer": "bizcuit_edge_ngram",
                             "search_analyzer": "bizcuit_standard",
@@ -145,6 +149,10 @@ var baseSettings = {
                 "first_name": {
                     "index": "analyzed",
                     "fields": {
+                        "raw": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
                         "edge_ngram": {
                             "index": "analyzed",
                             "index_analyzer": "bizcuit_edge_ngram",
@@ -260,6 +268,10 @@ var baseSettings = {
                 "name": {
                     "index": "analyzed",
                     "fields": {
+                        "raw": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
                         "edge_ngram": {
                             "index_analyzer": "bizcuit_edge_ngram",
                             "search_analyzer": "bizcuit_standard",
@@ -386,6 +398,10 @@ var baseSettings = {
                 "name": {
                     "index": "analyzed",
                     "fields": {
+                        "raw": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        },
                         "edge_ngram": {
                             "index_analyzer": "bizcuit_edge_ngram",
                             "search_analyzer": "bizcuit_standard",

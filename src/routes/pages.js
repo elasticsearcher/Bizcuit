@@ -83,7 +83,7 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/:locale/services', function (req, res) {
+	app.get('/:locale/services', function (req, res, next) {
 	    var categoryId = req.params.categoryId,
             locale = req.session.locale,
 			categoriesPromise = categories.search(locale),

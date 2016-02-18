@@ -42,7 +42,7 @@ module.exports = function(mapping) {
 		} else {
             var nameSort = {};
             
-            nameSort[esClient.localizeField(locale, mapping, 'name')] = {
+            nameSort[esClient.localizeField(locale, mapping, 'name') + '.raw'] = {
                 unmapped_type: 'string',
                 order: 'asc'
             };
@@ -109,8 +109,7 @@ module.exports = function(mapping) {
 		search: function(locale, query) {
             var query = query || {},
                 nameSort = {};
-            
-            nameSort[esClient.localizeField(locale, mapping, 'name')] = {
+            nameSort[esClient.localizeField(locale, mapping, 'name') + '.raw'] = {
                 unmapped_type: 'string',
                 order: 'asc'
             };
