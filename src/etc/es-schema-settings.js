@@ -320,6 +320,11 @@ var baseSettings = {
                 "updated": {
                     "index": "not_analyzed",
                     "type": "date"
+                },
+                "appearance": {
+                    "dynamic": true,
+                    "type": "object",
+                    "index": "not_analyzed"
                 }
             },
             "dynamic": "strict"
