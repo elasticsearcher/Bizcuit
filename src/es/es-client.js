@@ -163,7 +163,27 @@ module.exports = function (settings, locales) {
                         'seo_id_fr-CA': 'service-un',
                         'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
                         'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
-                        price: 100
+                        price: 100,
+                        html_template_name: 'service',
+                        html_content: ''
+                            + '<h2>Hello</h2>'
+                            + '<ol>'
+                            + '    <li>This</li>'
+                            + '    <li>is</li>'
+                            + '    <li>a</li>'
+                            + '    <li>service</li>'
+                            + '    <li>page.</li>'
+                            + '<ol>',
+                        'html_content_fr-CA': ''
+                            + '<h2>Bonjour</h2>'
+                            + '<ol>'
+                            + '    <li>Ceci</li>'
+                            + '    <li>est</li>'
+                            + '    <li>une</li>'
+                            + '    <li>page</li>'
+                            + '    <li>de</li>'
+                            + '    <li>service.</li>'
+                            + '<ol>'
                     },
                     {
                         id: 'AVHaZbTo1RmTTqkz6Y08',
@@ -174,7 +194,27 @@ module.exports = function (settings, locales) {
                         'seo_id_fr-CA': 'service-deux',
                         'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
                         'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
-                        price: 200
+                        price: 200,
+                        html_template_name: 'service',
+                        html_content: ''
+                            + '<h2>Hello</h2>'
+                            + '<ol>'
+                            + '    <li>This</li>'
+                            + '    <li>is</li>'
+                            + '    <li>a</li>'
+                            + '    <li>service</li>'
+                            + '    <li>page.</li>'
+                            + '<ol>',
+                        'html_content_fr-CA': ''
+                            + '<h2>Bonjour</h2>'
+                            + '<ol>'
+                            + '    <li>Ceci</li>'
+                            + '    <li>est</li>'
+                            + '    <li>une</li>'
+                            + '    <li>page</li>'
+                            + '    <li>de</li>'
+                            + '    <li>service.</li>'
+                            + '<ol>'
                     },
                     {
                         id: 'AVHaZbTo1RmTTqkz6Y09',
@@ -185,7 +225,27 @@ module.exports = function (settings, locales) {
                         'seo_id_fr-CA': 'service-trois',
                         'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
                         'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
-                        price: 200
+                        price: 200,
+                        html_template_name: 'service',
+                        html_content: ''
+                            + '<h2>Hello</h2>'
+                            + '<ol>'
+                            + '    <li>This</li>'
+                            + '    <li>is</li>'
+                            + '    <li>a</li>'
+                            + '    <li>service</li>'
+                            + '    <li>page.</li>'
+                            + '<ol>',
+                        'html_content_fr-CA': ''
+                            + '<h2>Bonjour</h2>'
+                            + '<ol>'
+                            + '    <li>Ceci</li>'
+                            + '    <li>est</li>'
+                            + '    <li>une</li>'
+                            + '    <li>page</li>'
+                            + '    <li>de</li>'
+                            + '    <li>service.</li>'
+                            + '<ol>'
                     },
                     {
                         id: 'AVHaZbTo1RmTTqkz6Y10',
@@ -196,7 +256,27 @@ module.exports = function (settings, locales) {
                         'seo_id_fr-CA': 'service-quatre',
                         'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
                         'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
-                        price: 200
+                        price: 200,
+                        html_template_name: 'service',
+                        html_content: ''
+                            + '<h2>Hello</h2>'
+                            + '<ol>'
+                            + '    <li>This</li>'
+                            + '    <li>is</li>'
+                            + '    <li>a</li>'
+                            + '    <li>service</li>'
+                            + '    <li>page.</li>'
+                            + '<ol>',
+                        'html_content_fr-CA': ''
+                            + '<h2>Bonjour</h2>'
+                            + '<ol>'
+                            + '    <li>Ceci</li>'
+                            + '    <li>est</li>'
+                            + '    <li>une</li>'
+                            + '    <li>page</li>'
+                            + '    <li>de</li>'
+                            + '    <li>service.</li>'
+                            + '<ol>'
                     },
                     {
                         id: 'AVHaZbTo1RmTTqkz6Y11',
@@ -207,6 +287,26 @@ module.exports = function (settings, locales) {
                         'seo_id_fr-CA': 'service-cinq',
                         'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
                         'description_fr-CA': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis justo ante, eu molestie velit ultricies in. Donec eget ultricies ligula. Quisque auctor nisi et lacus mollis, quis varius urna ornare. Nulla pharetra, dolor non varius condimentum, enim ante congue ipsum, sed ultricies odio ligula eget neque.',
+                        html_template_name: 'service',
+                        html_content: ''
+                            + '<h2>Hello</h2>'
+                            + '<ol>'
+                            + '    <li>This</li>'
+                            + '    <li>is</li>'
+                            + '    <li>a</li>'
+                            + '    <li>service</li>'
+                            + '    <li>page.</li>'
+                            + '<ol>',
+                        'html_content_fr-CA': ''
+                            + '<h2>Bonjour</h2>'
+                            + '<ol>'
+                            + '    <li>Ceci</li>'
+                            + '    <li>est</li>'
+                            + '    <li>une</li>'
+                            + '    <li>page</li>'
+                            + '    <li>de</li>'
+                            + '    <li>service.</li>'
+                            + '<ol>',
                         price: 200
                     }
                 ],
@@ -269,7 +369,7 @@ module.exports = function (settings, locales) {
             };
 
             var promises = [];
-            for (mapping in testData) {
+            for (var mapping in testData) {
                 var data = testData[mapping];
                 data.forEach(function (d) {
                     var id = d.id;

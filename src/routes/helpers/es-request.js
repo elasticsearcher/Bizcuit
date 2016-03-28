@@ -1,5 +1,6 @@
 var settings = require('../../etc/settings'),
-    esClient = require('../../es/es-client')(settings.elasticsearch, settings.locales);
+    esClient = require('../../es/es-client')(settings.elasticsearch, settings.locales),
+    _ = require('underscore');
 
 module.exports = function(mapping) {
 	// Empty mapping means perform the operations on all mappings
@@ -88,13 +89,24 @@ module.exports = function(mapping) {
 		    return addPromiseHandlers(promise, res);
 		},
 
-		searchExact: function (locale, field, value) {
-		    field = esClient.localizeField(locale, mapping, field);
-			var query = {
-				    match: {
-				    }
-			    };
-			query.match[field] = value;
+		searchExact: function (locale, dict) {
+            var field = null,
+                matchClause = null,
+                query = {
+                    bool: {
+                        must: []
+                    }
+                },
+                must = query.bool.must;
+            
+            _.each(dict, function(val, field) {
+                field = esClient.localizeField(locale, mapping, field);
+                matchClause = {
+                    match: {}
+                };
+                matchClause.match[field] = val;
+                must.push(matchClause); 
+            });
 
 			var promise = esClient.searchDocuments(locale, mapping, { query: query });
 			return addPromiseHandlers(promise);

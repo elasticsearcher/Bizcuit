@@ -261,7 +261,8 @@ var baseSettings = {
                 "localized_fields": {
                     "name": {},
                     "description": {},
-                    "seo_id": {}
+                    "seo_id": {},
+                    "html_content": {}
                 }
             },
             "properties": {
@@ -320,6 +321,15 @@ var baseSettings = {
                 "updated": {
                     "index": "not_analyzed",
                     "type": "date"
+                },
+                "html_template_name": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "html_content": {
+                    "index": "analyzed",
+                    "type": "string",
+                    "analyzer": "bizcuit_standard"
                 },
                 "appearance": {
                     "dynamic": true,

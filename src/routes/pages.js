@@ -102,14 +102,15 @@ module.exports = function(app) {
 	});
 
 	app.get('/:locale/services/:categorySeoId', function (req, res, next) {
-	    var categorySeoId = req.params.categorySeoId,
-            locale = req.session.locale,
-			categoryPromise = categories.searchExact(locale, 'seo_id', categorySeoId),
+	    var params = req.params,
+            categorySeoId = params.categorySeoId,
+            locale = params.locale,
+			categoryPromise = categories.searchExact(locale, { 'seo_id': categorySeoId }),
 			category = null;
 
 		categoryPromise.then(mapEsHits).then(function(results) {
 			category = results[0];
-			return services.searchExact(locale, 'category_id', category.id);
+			return services.searchExact(locale, { 'category_id': category.id });
 		}).then(function(results) {
 			res.render('services-category', {
 				category: category,
@@ -121,6 +122,35 @@ module.exports = function(app) {
 			next();
 		});
 	});
+    
+    app.get('/:locale/services/:categorySeoId/:serviceSeoId', function(req, res, next) {
+        var params = req.params,
+            locale = params.locale,
+            categorySeoId = params.categorySeoId,
+            serviceSeoId = params.serviceSeoId,
+            categoryPromise = categories.searchExact(locale, { 'seo_id': categorySeoId }),
+            servicePromise = null,
+            category = null,
+            service = null;
+            
+            categoryPromise.then(mapEsHits).then(function(results) {
+                category = results[0];
+                return services.searchExact(locale, {
+                    category_id: category.id,
+                    seo_id: serviceSeoId
+                });
+            }).then(mapEsHits).then(function(results) {
+                service = results[0];
+                res.render(service.html_template_name, {
+                    category: category,
+                    service: service,
+                    pageTitle: pageTitle(res.locals, 'navServices', service.name)
+                });
+            }).catch(function(error) {
+                console.log(error, error.stack);
+                next();
+            });
+    });
 
 	app.get('/:locale/faq', function (req, res) {
 	    res.render('faq', {

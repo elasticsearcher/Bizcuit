@@ -43,6 +43,16 @@ Ext.define("Bizcuit.view.services.Service",{
             xtype: 'numberfield',
             fieldLabel: 'Price',
             name: 'price'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'HTML Template',
+            name: 'html_template_name'
+        },
+        {
+            xtype: 'textareafield',
+            fieldLabel: 'HTML Content',
+            name: 'html_content'
         }
     ]
 });
