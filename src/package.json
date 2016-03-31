@@ -32,12 +32,14 @@
     "express-session": "^1.12.1",
     "l20n": "^3.5.0",
     "morgan": "^1.6.1",
+    "nodemailer": "^2.3.0",
     "passport": "^0.3.2",
     "passport-google-oauth": "^0.2.0",
     "restler": "^3.4.0",
     "string.prototype.endswith": "^0.2.0",
     "string.prototype.startswith": "^0.2.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "xoauth2": "^1.1.0"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.6",

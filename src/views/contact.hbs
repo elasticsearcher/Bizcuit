@@ -7,7 +7,7 @@
 </p>
 
 <div>
-	<form class='form-horizontal' method='POST'>
+	<form class='form-horizontal' method='POST''>
 		<div class='form-group'>
 			<label for='firstName' class='control-label col-sm-2'>First Name</label>
 			<div class='col-sm-10'>
@@ -46,7 +46,7 @@
 					   class='form-control'>
 					<option value='' selected>Choose one</option>
 					{{#each services}}
-						<option value='{{id}}'>{{name}}</option>
+						<option value='{{id}}-{{name}}'>{{name}}</option>
 					{{/each}}
 					<option value='other'>Other</option>
 			   	</select>

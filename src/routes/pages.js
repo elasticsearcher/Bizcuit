@@ -1,7 +1,9 @@
 
 var settings = require('../etc/settings'),
 	categories = require('./helpers/es-request')('category'),
-	services = require('./helpers/es-request')('service');
+	services = require('./helpers/es-request')('service'),
+    mail = require('../mail')(settings.mail, 'gmail'),
+    util = require('util');
 
 function mapEsHitsByKey(result, key) {
 	var obj = {};
@@ -169,10 +171,34 @@ module.exports = function(app) {
 
 	app.post('/:locale/contact', function (req, res) {
 		console.log('Contact form submitted with', req.body);
-	    res.render('contact', {
+        var body = req.body,
+            text = util.format('From: %s %s\n'
+                             + 'Email: %s\n'
+                             + 'Message: %s',
+                             body.firstName, body.lastName, body.email, body.message);
+        
+        var mailOptions = {
+            from: settings.mail.gmail.user,
+            to: settings.mail.to,
+            subject: body.subject,
+            text: text
+        };
+         
+        mail.sendMail(mailOptions, function(error, info) {
+            if(error) {
+                return console.log(error);
+            }
+            console.log('Message sent: ' + info.response);
+        });
+        
+        res.redirect(303, '/' + req.params.locale + '/thank-you');
+	});
+    
+    app.get('/:locale/thank-you', function (req, res) {
+        res.render('thank-you', {
 	    	pageTitle: pageTitle(res.locals, 'navContact')
 	    });
-	});
+    });
 
 	app.get('/:locale/about', function (req, res) {
 	    res.render('about', {
