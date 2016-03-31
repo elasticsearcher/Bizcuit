@@ -12,6 +12,7 @@ var defaultSettings = {
     },
 
     session: {
+        cookieKey: 'bizcuit.sid',
         cookieSecret: '',
         maxAge: 60000
     },

@@ -11,6 +11,6 @@ function postReset(req, res) {
     
 }
 
-module.exports = function(app) {
-    app.post('/api/admin/reset', postReset);
+module.exports = function(app, authenticate) {
+    app.post('/api/admin/reset', authenticate , postReset);
 };

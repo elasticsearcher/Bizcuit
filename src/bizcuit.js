@@ -32,7 +32,7 @@ app.disable('x-powered-by');
 app.use(require('cookie-parser')(settings.session.cookieSecret));
 
 app.use(require('express-session')({
-    key: 'bizcuit.sid',
+    key: settings.session.cookieKey,
     secret: settings.session.cookieSecret,
     resave: true,
     saveUninitialized: false,
@@ -62,25 +62,17 @@ passport.deserializeUser(function(id, done) {
     done(null, users[id]);
 });
 
+var defaultLocale = settings.locales[0];
 var passOptions = {
-    successRedirect: '/bizcuit',
-    failureRedirect: '/bizcuit/login'
+    successRedirect: '/' + defaultLocale + '/bizcuit',
+    failureRedirect: '/' + defaultLocale + '/bizcuit/login'
 };
 
-// Routes
-var admin = require('./routes/admin')(app),
-    clients = require('./routes/clients')(app),
-    services = require('./routes/services')(app),
-    invoices = require('./routes/invoices')(app),
-    categories = require('./routes/categories')(app),
-    search = require('./routes/search')(app);
 
-// Set handlebars as the view engine
-app.engine('hbs', handlebars.engine);
-app.engine('html', handlebars.engine);
-app.set('view engine', 'hbs');
-
-app.use(express.static(__dirname + '/public'));
+// Passthrough authentication function by default
+var authenticate = function(req, res, next) {
+    return next();
+}
 
 if(settings.auth.enabled) {
     var auth = {
@@ -131,8 +123,8 @@ if(settings.auth.enabled) {
             layout: null
         });
     });
-
-    app.use(function(req, res, next) {
+    
+    authenticate = function(req, res, next) {
         if(!req.session.passport || !req.session.passport.user) {
             return res.redirect(303, '/bizcuit/login');
         }
@@ -143,8 +135,25 @@ if(settings.auth.enabled) {
             console.log(req.session.passport.user, 'is not authorized.');
             return res.redirect(303, '/bizcuit/login?reason=not_authorized');
         }
-    });
+    }
 }
+
+// Routes
+var admin = require('./routes/admin')(app, authenticate),
+    clients = require('./routes/clients')(app, authenticate),
+    services = require('./routes/services')(app, authenticate),
+    invoices = require('./routes/invoices')(app, authenticate),
+    categories = require('./routes/categories')(app, authenticate),
+    search = require('./routes/search')(app, authenticate);
+
+// Set handlebars as the view engine
+app.engine('hbs', handlebars.engine);
+app.engine('html', handlebars.engine);
+app.set('view engine', 'hbs');
+
+app.use(express.static(__dirname + '/public'));
+
+
 
 var env = app.get('env'),
     buildDir;
@@ -164,7 +173,7 @@ switch(env) {
         break;
 }
 
-app.get('/:locale/bizcuit', function(req, res) {
+app.get('/:locale/bizcuit', authenticate, function(req, res) {
     // Bizcuit the "app" is mounted at /bizcuit and not at the root,
     // because the root is reserved for a client-facing site, whose
     // content is managed by Bizcuit

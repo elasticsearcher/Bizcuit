@@ -24,9 +24,9 @@ function upsertClient(req, res) {
     esReq.upsert(req, res);
 }
 
-module.exports = function(app) {
-    app.post('/api/clients', upsertClient);
-    app.put('/api/clients/:id', upsertClient);
-    app.get('/api/clients', esReq.get);
-    app.get('/api/clients/:id', esReq.get);
+module.exports = function(app, authenticate) {
+    app.post('/api/clients', authenticate, upsertClient);
+    app.put('/api/clients/:id', authenticate, upsertClient);
+    app.get('/api/clients', authenticate, esReq.get);
+    app.get('/api/clients/:id', authenticate, esReq.get);
 };
